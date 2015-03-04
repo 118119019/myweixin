@@ -17,8 +17,9 @@ namespace WebApplication1
             var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
             var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
             var result = new StringBuilder();
+
             result.AppendLine("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】");
-            result.AppendLine("官网<a href=\"http://www.fjlylm.com\">点击</a> 热门岗位查询<a href=\"http://rmb0595.gotoip3.com/cms/Work/WorkList.html\">点击</a>");
+            result.AppendLine("官网\r\n<a href=\"http://www.fjlylm.com\">点击</a>\r\n热门岗位查询\r\n<a href=\"http://rmb0595.gotoip3.com/cms/html/index.html\">点击</a>");
             return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
         }
 

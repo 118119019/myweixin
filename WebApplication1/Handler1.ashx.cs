@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using CommonService.Serilizer;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,12 @@ namespace WebApplication1
                 case "GetDetail":
                     context.Response.Write(LoadDetail(context));
                     break;
+                case "GetNewList":
+                    context.Response.Write(LoadNewlist(context));
+                    break;
+                case "GetNewDetail":
+                    context.Response.Write(LoadNewDetail(context));
+                    break;
                 default:
                     context.Response.Write("Hello World");
                     break;
@@ -40,7 +47,150 @@ namespace WebApplication1
                 return false;
             }
         }
+        private string LoadNewDetail(HttpContext context)
+        {
+            var id = context.Request["id"];
+            if (id == "")
+            {
+                return "";
+            }
+            string url = string.Format(@"http://fjlylm.com/zwxq.asp?id={0}", id);
+            string content = CommonUtility.HttpUtility.Get(url, System.Text.Encoding.Default);
+            //企业信息
+            string tableStr = GetSpiltContent(content,
+                "<table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"762\" class=\"pix9\" bordercolorlight=\"#FFFFFF\" bordercolordark=\"#808000\" height=\"244\">"
+                , "</table>");
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(tableStr);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("<dl><dt>企业信息</dt><dd>");
+            GetDeatailTd(doc, sb);
+            sb.AppendFormat("</dd></dl><dl><dt>招聘信息</dt><dd>");
+            tableStr = GetSpiltContent(content,
+               "<table border=\"1\" cellpadding=\"3\" cellspacing=\"0\" width=\"98%\" class=\"pix9\" bordercolorlight=\"#FFFFFF\" bordercolordark=\"#808000\">"
+               , "</table>");
+            doc = new HtmlDocument();
+            doc.LoadHtml(tableStr);
+            GetDeatailTd(doc, sb);
+            sb.AppendFormat("</dd>");
+            return sb.ToString();
+        }
+        private string LoadNewlist(HttpContext context)
+        {
+            var fbsj = "00";
+            var gzgw = context.Request["work"];
+            var ssldbm = context.Request["place"];
+            var page = context.Request["page"];
+            string url = string.Format(@"http://fjlylm.com/vizpxx.asp?ssldbm={0}&gzgw={1}&fbsj={2}&page={3}", ssldbm, gzgw, fbsj, page);
+            string content = CommonUtility.HttpUtility.Get(url, System.Text.Encoding.Default);
+            int iTableStart = content.IndexOf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"95%\" class=\"pix9\">", 0);
+            if (iTableStart < 1)
+            {
+                return "";
+            }
+            int iTableEnd = content.IndexOf("</table>", iTableStart);
+            if (iTableEnd < 1)
+            {
+                return "";
+            }
+            string strWeb = content.Substring(iTableStart, iTableEnd - iTableStart);
+            #region Tr列表
 
+            //生成HtmlDocument
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(strWeb);
+            List<MyLink> myLinkList = new List<MyLink>();
+            foreach (HtmlNode trNode in doc.DocumentNode.SelectNodes("//tr"))
+            {
+                if (!trNode.InnerHtml.Contains("font"))
+                {
+                    var mylink = new MyLink();
+                    foreach (HtmlNode tdNode in trNode.ChildNodes)
+                    {
+                        HtmlAttribute width = tdNode.Attributes["width"];
+                        if (width == null)
+                        {
+                            continue;
+                        }
+                        HtmlNode node;
+                        switch (width.Value)
+                        {
+                            case "40%":
+                                node = tdNode.ChildNodes.FindFirst("a");
+                                mylink.Url = node.OuterHtml.Replace("zwxq.asp", "detail.html");
+                                break;
+                            case "35%":
+                                node = tdNode.ChildNodes.FindFirst("p");
+                                mylink.Work = node.InnerHtml.Trim();
+                                break;
+                            case "10%":
+                                node = tdNode.ChildNodes.FindFirst("p");
+                                mylink.Num = node.InnerHtml.Trim();
+                                break;
+                            case "12%":
+                                node = tdNode.ChildNodes.FindFirst("p");
+                                mylink.Time = node.InnerHtml.Trim();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    myLinkList.Add(mylink);
+                }
+            }
+            #endregion
+
+            if (myLinkList.Count > 0)
+            {
+                var tableJson = new TableJson()
+                {
+                    myLinkList = myLinkList
+                };
+                //分页
+                int iPageStart = content.IndexOf("<p align='center' vAlign='bottom'>", 0);
+                if (iPageStart < 1)
+                {
+                    return GetJson(tableJson);
+                }
+                int iPageEnd = content.IndexOf("转到：", iPageStart);
+                if (iPageEnd < 1)
+                {
+                    return GetJson(tableJson);
+                }
+                string pageContent = content.Substring(iPageStart, iPageEnd + 3 - iPageStart);
+                HtmlDocument pageDoc = new HtmlDocument();
+                pageDoc.LoadHtml(pageContent);
+                MyPage mypage = new MyPage();
+                var ANodeList = pageDoc.DocumentNode.SelectNodes("//a");
+                if (ANodeList == null)
+                {
+                    return GetJson(tableJson);
+                }
+                foreach (HtmlNode aNode in ANodeList)
+                {
+                    if (aNode.ChildNodes.FindFirst("font").InnerHtml == "上一页")
+                    {
+                        mypage.Previous = GetPageParam(aNode.Attributes["href"].Value);
+                    }
+                    else
+                    {
+                        mypage.Next = GetPageParam(aNode.Attributes["href"].Value);
+                    }
+                }
+                iPageStart = pageContent.IndexOf("]&nbsp;&nbsp;", "]&nbsp;&nbsp;".Length);
+                iPageEnd = pageContent.IndexOf("转到：", iPageStart);
+                mypage.Desc = pageContent.Substring(iPageStart, iPageEnd - iPageStart).Replace("]","");
+                tableJson.mypage = mypage;
+                return GetJson(tableJson);
+            }
+            return "";
+
+        }
+
+        private string GetJson(TableJson tableJson)
+        {
+            return SerilizeService<TableJson>.CreateSerilizer(Serilize_Type.Json).Serilize(tableJson);
+        }
         private string LoadDetail(HttpContext context)
         {
             var id = context.Request["id"];
@@ -76,11 +226,11 @@ namespace WebApplication1
             {
                 if (tdNode.InnerHtml.Contains("<b>"))
                 {
-                    sb.AppendFormat(tdNode.InnerHtml);
+                    sb.AppendFormat("<p>"+ tdNode.InnerHtml.Replace("b", "label"));
                 }
                 else
                 {
-                    sb.Append(tdNode.InnerHtml + "<br>");
+                    sb.Append(tdNode.InnerHtml + "</p>");
                 }
             }
         }
@@ -250,7 +400,11 @@ namespace WebApplication1
         }
     }
 
-
+    public class TableJson
+    {
+        public List<MyLink> myLinkList { get; set; }
+        public MyPage mypage { get; set; }
+    }
     public class MyLink
     {
         public string Company { get; set; }

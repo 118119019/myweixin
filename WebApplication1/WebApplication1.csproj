@@ -187,6 +187,16 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="html\css\style.css" />
+    <Content Include="html\detail.html" />
+    <Content Include="html\images\bullet.gif" />
+    <Content Include="html\images\dot.gif" />
+    <Content Include="html\images\FhHRx.gif" />
+    <Content Include="html\images\slider1.jpg" />
+    <Content Include="html\images\slider2.jpg" />
+    <Content Include="html\index.html" />
+    <Content Include="html\js\swiper.min.js" />
+    <Content Include="html\list.html" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -206,8 +216,13 @@
     <Content Include="packages.config" />
     <Content Include="myweixin.ashx" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="Work\css\style.css" />
+    <Content Include="Work\images\bullet.gif" />
+    <Content Include="Work\images\dot.gif" />
+    <Content Include="Work\images\slider1.jpg" />
+    <Content Include="Work\images\slider2.jpg" />
+    <Content Include="Work\js\swiper.min.js" />
     <Content Include="Work\WorkDetail.html" />
-    <Content Include="Work\WorkList.aspx" />
     <Content Include="Work\WorkList.html" />
     <Content Include="Handler1.ashx" />
     <None Include="Properties\PublishProfiles\111.pubxml" />
@@ -330,13 +345,6 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Work\WorkList.aspx.cs">
-      <DependentUpon>WorkList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Work\WorkList.aspx.designer.cs">
-      <DependentUpon>WorkList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

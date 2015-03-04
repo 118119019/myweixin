@@ -94,7 +94,7 @@
       <publishTime>02/15/2015 09:12:37</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>02/25/2015 16:49:56</publishTime>
+      <publishTime>03/04/2015 14:46:20</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/15/2015 09:12:39</publishTime>
@@ -291,6 +291,36 @@
     <File Include="Handler1.ashx">
       <publishTime>02/16/2015 10:22:52</publishTime>
     </File>
+    <File Include="html/css/style.css">
+      <publishTime>03/04/2015 14:02:48</publishTime>
+    </File>
+    <File Include="html/detail.html">
+      <publishTime>03/04/2015 13:59:13</publishTime>
+    </File>
+    <File Include="html/images/bullet.gif">
+      <publishTime>02/26/2015 15:39:44</publishTime>
+    </File>
+    <File Include="html/images/dot.gif">
+      <publishTime>10/22/2013 17:49:52</publishTime>
+    </File>
+    <File Include="html/images/FhHRx.gif">
+      <publishTime>03/04/2015 11:33:34</publishTime>
+    </File>
+    <File Include="html/images/slider1.jpg">
+      <publishTime>02/26/2015 14:14:08</publishTime>
+    </File>
+    <File Include="html/images/slider2.jpg">
+      <publishTime>02/26/2015 14:15:37</publishTime>
+    </File>
+    <File Include="html/index.html">
+      <publishTime>03/04/2015 13:59:24</publishTime>
+    </File>
+    <File Include="html/js/swiper.min.js">
+      <publishTime>02/26/2015 14:25:55</publishTime>
+    </File>
+    <File Include="html/list.html">
+      <publishTime>02/27/2015 11:19:35</publishTime>
+    </File>
     <File Include="Images/accent.png">
       <publishTime>02/15/2015 09:12:34</publishTime>
     </File>
@@ -361,10 +391,28 @@
       <publishTime>02/15/2015 09:12:39</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/25/2015 15:09:01</publishTime>
+      <publishTime>03/04/2015 13:47:35</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>02/15/2015 16:08:29</publishTime>
+    </File>
+    <File Include="Work/css/style.css">
+      <publishTime>02/27/2015 11:04:35</publishTime>
+    </File>
+    <File Include="Work/images/bullet.gif">
+      <publishTime>02/26/2015 15:39:44</publishTime>
+    </File>
+    <File Include="Work/images/dot.gif">
+      <publishTime>10/22/2013 17:49:52</publishTime>
+    </File>
+    <File Include="Work/images/slider1.jpg">
+      <publishTime>02/26/2015 14:14:08</publishTime>
+    </File>
+    <File Include="Work/images/slider2.jpg">
+      <publishTime>02/26/2015 14:15:37</publishTime>
+    </File>
+    <File Include="Work/js/swiper.min.js">
+      <publishTime>02/26/2015 14:25:55</publishTime>
     </File>
     <File Include="Work/WorkDetail.html">
       <publishTime>02/25/2015 14:35:54</publishTime>
