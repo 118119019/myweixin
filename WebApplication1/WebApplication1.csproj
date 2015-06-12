@@ -54,6 +54,9 @@
     <Reference Include="NLog">
       <HintPath>..\..\..\..\服务端\产品项目底层库\通用DLL\常用DLL\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>F:\ODP.NET_Managed121020\odp.net\managed\common\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="Senparc.Weixin">
       <HintPath>..\packages\Senparc.Weixin.1.6.2\lib\net35\Senparc.Weixin.dll</HintPath>
     </Reference>
@@ -163,6 +166,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\LiteDBService.cs" />
     <Compile Include="App_Code\WebParse.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

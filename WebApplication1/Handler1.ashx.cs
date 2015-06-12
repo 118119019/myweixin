@@ -30,6 +30,7 @@ namespace WebApplication1
                     var ssldbm = context.Request["place"];
                     var page = context.Request["page"];
                     //select * from LYJYGD.AA11 where AAA100='ZPA010'   ---行业分类
+                    // select COUNT(*) from LYJYGD.AA11 where AAA100='ZPB002'
                     //select ZPA001,ZPA002,ZPB003,ZPC002,ZPC004 from LYJYGD.ZP03 where ZPC006=1 and ZPC010=0 order by ZPC004 desc,ZPA002
 
 
