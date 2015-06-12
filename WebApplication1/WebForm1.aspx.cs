@@ -23,27 +23,27 @@ namespace WebApplication1
 
         protected void sendmsg_Click(object sender, EventArgs e)
         {
-            var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["WeixinAppId"],
-               WebConfigurationManager.AppSettings["WeixinAppSecret"]);
-            var openId = Senparc.Weixin.MP.AdvancedAPIs.User.Get(accessToken, "");
-            foreach (var item in openId.data.openid)
-            {
-                List<Article> articles = new List<Article>();
-                Article article = new Article();
-                article.Title = "官网";
-                article.Description = "官网链接";
-                article.PicUrl = "http://fjlylm.com/imagesnews/tb1.gif";
-                article.Url = "http://fjlylm.com";
-                articles.Add(article);
+            //var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["WeixinAppId"],
+            //   WebConfigurationManager.AppSettings["WeixinAppSecret"]);
+            //var openId = Senparc.Weixin.MP.AdvancedAPIs.User.Get(accessToken, "");
+            //foreach (var item in openId.data.openid)
+            //{
+            //    List<Article> articles = new List<Article>();
+            //    Article article = new Article();
+            //    article.Title = "官网";
+            //    article.Description = "官网链接";
+            //    article.PicUrl = "http://fjlylm.com/imagesnews/tb1.gif";
+            //    article.Url = "http://fjlylm.com";
+            //    articles.Add(article);
 
-                article = new Article();
-                article.Title = "手工书套";
-                article.Description = "手工书套";
-                article.PicUrl = "http://imglf0.ph.126.net/6ZvzrNuHfY84M-RykhBaug==/3320560300355692608.jpg";
-                article.Url = "http://echokid.lofter.com/post/cab81_a86556?act=qbweekmagazine_20130609_02";
-                articles.Add(article);
-                var result = Custom.SendNews(accessToken, item, articles);
-            }
+            //    article = new Article();
+            //    article.Title = "手工书套";
+            //    article.Description = "手工书套";
+            //    article.PicUrl = "http://imglf0.ph.126.net/6ZvzrNuHfY84M-RykhBaug==/3320560300355692608.jpg";
+            //    article.Url = "http://echokid.lofter.com/post/cab81_a86556?act=qbweekmagazine_20130609_02";
+            //    articles.Add(article);
+            //    var result = Custom.SendNews(accessToken, item, articles);
+            //}
         }
     }
 }
