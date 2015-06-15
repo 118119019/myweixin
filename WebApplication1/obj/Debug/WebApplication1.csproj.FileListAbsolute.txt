@@ -167,3 +167,4 @@ E:\ly\weixin\WebApplication1\WebApplication1\bin\zh-Hans\Microsoft.AspNet.Friend
 E:\ly\weixin\WebApplication1\WebApplication1\bin\zh-Hans\System.Net.Http.resources.dll
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+E:\ly\weixin\WebApplication1\WebApplication1\bin\Oracle.ManagedDataAccess.dll

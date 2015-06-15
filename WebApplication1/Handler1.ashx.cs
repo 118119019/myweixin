@@ -1,7 +1,9 @@
 ﻿using CommonService.Serilizer;
 using HtmlAgilityPack;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -25,15 +27,24 @@ namespace WebApplication1
                 case "GetNewList":
                     context.Response.Write(webparse.LoadNewlist(context));
                     TableJson tableJson = new TableJson();
-                    var fbsj = "00";
-                    var gzgw = context.Request["work"];
-                    var ssldbm = context.Request["place"];
+                    var industry = context.Request["industry"];
+                    var degree = context.Request["degree"];
+                    var work = context.Request["work"];
+                    var regDate = context.Request["regdate"];
+                    var effectDate = context.Request["effectdate"];
+                    var place = context.Request["place"];
                     var page = context.Request["page"];
+                    
+                //select w.ZPA001,w.ZPA002,w.ZPB003,w.ZPC002,w.ZPC004 from LYJYGD.ZP03 w  inner join
+//  LYJYGD.ZP01 c on w.ZPA001=C.ZPA001
+//where w.ZPC006=1 and w.ZPC010=0 order by w.ZPC004 desc,w.ZPA002
+
+
                     //select * from LYJYGD.AA11 where AAA100='ZPA010'   ---行业分类
                     // select COUNT(*) from LYJYGD.AA11 where AAA100='ZPB002'
                     //select ZPA001,ZPA002,ZPB003,ZPC002,ZPC004 from LYJYGD.ZP03 where ZPC006=1 and ZPC010=0 order by ZPC004 desc,ZPA002
 
-
+                    // 页次：1/2页  共26条信息3164个岗位 22条信息/页  
 
                     break;
                 case "GetNewDetail":
