@@ -168,3 +168,4 @@ E:\ly\weixin\WebApplication1\WebApplication1\bin\zh-Hans\System.Net.Http.resourc
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
 E:\ly\weixin\WebApplication1\WebApplication1\bin\Oracle.ManagedDataAccess.dll
+E:\ly\weixin\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

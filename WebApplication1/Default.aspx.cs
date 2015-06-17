@@ -55,23 +55,21 @@ namespace WebApplication1
                 });
             }
 
+
             string sqlSelect = @"select count(*) from LYJYGD.ZP03 w   inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 
             where w.ZPC006=1 and w.ZPC010=0 {0} ";
-
             string commandText = string.Format(sqlSelect, cmdWhere);
             int count = int.Parse(
-                OracleHelper.ExecuteScalar(OracleHelper.ConnectionString, CommandType.Text, commandText, parmetList.ToArray()).ToString()
+                OracleHelper.ExecuteScalar(OracleHelper.ConnectionString, CommandType.Text, commandText, parmetList).ToString()
             );
             int currentPageIndex = 1;
             int pageSize = 10;
-
-
             sqlSelect = @" select * from (select rownum rn,w.ZPA001,w.ZPA002,w.ZPB003,w.ZPC002,w.ZPC004 from LYJYGD.ZP03 w  
             inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 
             where w.ZPC006=1 and w.ZPC010=0 {0}  order by w.ZPC004 desc,w.ZPA002)
             where rn>{1} and rn<{2}";
             commandText = string.Format(sqlSelect, cmdWhere, (currentPageIndex - 1) * pageSize, currentPageIndex * pageSize + 1);
-            var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, commandText, parmetList.ToArray());
+            var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, commandText, parmetList);
             StringBuilder sb = new StringBuilder();
             while (reader.Read())
             {

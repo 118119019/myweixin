@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
+using WebApplication1.DataAccess;
 
 
 namespace WebApplication1
@@ -25,27 +26,109 @@ namespace WebApplication1
             switch (function)
             {
                 case "GetNewList":
-                    context.Response.Write(webparse.LoadNewlist(context));
-                    TableJson tableJson = new TableJson();
+                
                     var industry = context.Request["industry"];
                     var degree = context.Request["degree"];
                     var work = context.Request["work"];
-                    var regDate = context.Request["regdate"];
-                    var effectDate = context.Request["effectdate"];
+                    var regDate = context.Request["reg"];
+                    var effectDate = context.Request["effect"];
                     var place = context.Request["place"];
-                    var page = context.Request["page"];
-                    
-                //select w.ZPA001,w.ZPA002,w.ZPB003,w.ZPC002,w.ZPC004 from LYJYGD.ZP03 w  inner join
-//  LYJYGD.ZP01 c on w.ZPA001=C.ZPA001
-//where w.ZPC006=1 and w.ZPC010=0 order by w.ZPC004 desc,w.ZPA002
-
-
-                    //select * from LYJYGD.AA11 where AAA100='ZPA010'   ---行业分类
-                    // select COUNT(*) from LYJYGD.AA11 where AAA100='ZPB002'
-                    //select ZPA001,ZPA002,ZPB003,ZPC002,ZPC004 from LYJYGD.ZP03 where ZPC006=1 and ZPC010=0 order by ZPC004 desc,ZPA002
-
-                    // 页次：1/2页  共26条信息3164个岗位 22条信息/页  
-
+                    var page = int.Parse(context.Request["page"]);
+                    string queryPage = string.Format(
+                        "'{0}','{1}','{2}','{3}','{4}','{5}'",
+                        industry, degree, work, regDate, effectDate, place
+                        );
+                    List<WhereParam> whereList = new List<WhereParam>();
+                    if (industry != "00")
+                    {
+                        whereList.Add(new WhereParam()
+                        {
+                            Where = "c.ZPA010=",
+                            ParameterName = "Industry",
+                            Value = industry
+                        });
+                    }
+                    if (degree != "00")
+                    {
+                        whereList.Add(new WhereParam()
+                        {
+                            Where = "w.ZPB005=",
+                            ParameterName = "Degree",
+                            Value = degree
+                        });
+                    }
+                    if (work != "0000000")
+                    {
+                        whereList.Add(new WhereParam()
+                        {
+                            Where = "w.ZPB002=",
+                            ParameterName = "Work",
+                            Value = work
+                        });
+                    }
+                    if (regDate != "")
+                    {
+                        whereList.Add(new WhereParam()
+                        {
+                            Where = "w.ZPC004>=",
+                            ParameterName = "regDate",
+                            Value = regDate
+                        });
+                    }
+                    if (effectDate != "")
+                    {
+                        whereList.Add(new WhereParam()
+                        {
+                            Where = "w.effectDate<=",
+                            ParameterName = "effectDate",
+                            Value = effectDate
+                        });
+                    }
+                    if (effectDate != "")
+                    {
+                        whereList.Add(new WhereParam()
+                        {
+                            Where = "w.effectDate<=",
+                            ParameterName = "effectDate",
+                            Value = effectDate
+                        });
+                    }
+                    if (place != "0")
+                    {
+                        if (place.Contains(','))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string[] strs = place.Split(',');
+                            for (int i = 0; i < strs.Length; i++)
+                            {
+                                if (i != strs.Length - 1)
+                                {
+                                    sb.AppendFormat("'{0}',", strs[i]);
+                                }
+                                else
+                                {
+                                    sb.AppendFormat("'{0}'", strs[i]);
+                                }
+                            }
+                            whereList.Add(new WhereParam()
+                            {
+                                Where = "c.ZPA018 in (",
+                                ParameterName = "place)",
+                                Value = sb.ToString()
+                            });
+                        }
+                        else
+                        {
+                            whereList.Add(new WhereParam()
+                            {
+                                Where = "c.ZPA018=",
+                                ParameterName = "place",
+                                Value = place
+                            });
+                        }
+                    }
+                    var service = new DataAccessSerive();
+                    context.Response.Write(GetJson(service.LoadEntities(queryPage, page, whereList)));
                     break;
                 case "GetNewDetail":
                     context.Response.Write(webparse.LoadNewDetail(context));

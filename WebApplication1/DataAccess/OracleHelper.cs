@@ -223,13 +223,13 @@ namespace WebApplication1
         /// <param name="commandText">the stored procedure name or PL/SQL command</param>
         /// <param name="commandParameters">an array of OracleParamters used to execute the command</param>
         /// <returns></returns>
-        public static OracleDataReader ExecuteReader(string connectionString, CommandType commandType, string commandText, params OracleParameter[] commandParameters)
+        public static OracleDataReader ExecuteReader(string connectionString, CommandType commandType, string commandText, List<OracleParameter> commandParameters)
         {
             OracleCommand cmd = new OracleCommand();
             OracleConnection conn = new OracleConnection(connectionString);
             try
             {
-                PrepareCommand(cmd, conn, null, commandType, commandText, commandParameters);
+                PrepareCommandByList(cmd, conn, null, commandType, commandText, commandParameters);
                 OracleDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return rdr;
@@ -277,12 +277,12 @@ namespace WebApplication1
         /// <param name="commandText">the stored procedure name or PL/SQL command</param>
         /// <param name="commandParameters">an array of OracleParamters used to execute the command</param>
         /// <returns>An object that should be converted to the expected type using Convert.To{Type}</returns>
-        public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText, params OracleParameter[] commandParameters)
+        public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText, List<OracleParameter> commandParameters)
         {
             OracleCommand cmd = new OracleCommand();
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
-                PrepareCommand(cmd, conn, null, commandType, commandText, commandParameters);
+                PrepareCommandByList(cmd, conn, null, commandType, commandText, commandParameters);
                 object val = cmd.ExecuteScalar();
                 cmd.Parameters.Clear();
                 return val;
@@ -370,7 +370,21 @@ namespace WebApplication1
                 return val;
             }
         }
-
+        private static void PrepareCommandByList(OracleCommand cmd, OracleConnection conn, OracleTransaction trans, CommandType commandType, string commandText, List<OracleParameter> commandParameters)
+        {
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = commandText;
+            cmd.CommandType = commandType;
+            if (trans != null)
+                cmd.Transaction = trans;
+            if (commandParameters != null)
+            {
+                foreach (OracleParameter parm in commandParameters)
+                    cmd.Parameters.Add(parm);
+            }
+        }
         /// <summary>
         /// Internal function to prepare a command for execution by the database
         /// </summary>
@@ -394,7 +408,7 @@ namespace WebApplication1
                 foreach (OracleParameter parm in commandParameters)
                     cmd.Parameters.Add(parm);
             }
-        }       
+        }
 
         /// <summary>
         /// 执行存储过程
@@ -1184,9 +1198,9 @@ namespace WebApplication1
 
         }
 
-       
 
-   
+
+
 
         /// <summary>
         /// 执行查询语句，返回DataSet
