@@ -21,8 +21,6 @@
         <asp:TextBox ID="txtRegDate" Text="" runat="server"></asp:TextBox>
         截止日期
         <asp:TextBox ID="txtEffectDate" Text="" runat="server"></asp:TextBox>
-        地方
-        <asp:TextBox ID="txtPlace" Text="35080100" runat="server"></asp:TextBox>        
         <asp:Button ID="btnQuery" Text="查询" runat="server" OnClick="btnQuery_Click" />
     </form>
 </body>

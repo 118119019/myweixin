@@ -57,11 +57,13 @@
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>F:\ODP.NET_Managed121020\odp.net\managed\common\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin">
-      <HintPath>..\packages\Senparc.Weixin.1.6.2\lib\net35\Senparc.Weixin.dll</HintPath>
+    <Reference Include="Senparc.Weixin, Version=3.3.7.28851, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Senparc.Weixin.3.3.7\lib\net40\Senparc.Weixin.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin.MP">
-      <HintPath>..\packages\Senparc.Weixin.MP.9.6.4\lib\net35\Senparc.Weixin.MP.dll</HintPath>
+    <Reference Include="Senparc.Weixin.MP, Version=11.3.4.28851, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Senparc.Weixin.MP.11.3.4\lib\net40\Senparc.Weixin.MP.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

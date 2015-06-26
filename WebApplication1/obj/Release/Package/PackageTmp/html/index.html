@@ -533,29 +533,32 @@
                     <option value="6280000">普通工人</option>
                     <option value="7000000">其它</option>
                 </select>
-                <label>登记日期大于等于</label>
-                <input id="txtRegDate" type="text" />
-                <label>有效截止日期小于等于</label>
-                <input id="txtEffectDate" type="text" />
+                <div style="text-align:left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 20px; font-size: 1.4rem; ">
+                    <label>登记日期>=</label>
+                    <input id="txtRegDate" type="date" />
+                </div>
+                <div style="text-align: left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 20px; font-size: 1.4rem; ">
+                    <label>有效截止日期<=</label>
+                    <input id="txtEffectDate" type="date" />
+                </div>
                 <select name="ddlPlace" id="ddlPlace" class="slt">
-                    <option value="35080000" selected="">所属劳动部门--不限</option>
-                    <option value="35080100">龙岩市劳动就业中心</option>
-                    <option value="35080200">新罗区劳动就业中心</option>
-                    <option value="35082100">长汀县劳动就业中心</option>
-                    <option value="35082200">永定县劳动就业中心</option>
-                    <option value="35082300">上杭县劳动就业中心</option>
-                    <option value="35082400">武平县劳动就业中心</option>
-                    <option value="35082500">连城县劳动就业中心</option>
-                    <option value="35088100">漳平市劳动就业中心</option>
+                    <option value="0" selected="">工作地点--不限</option>
+                    <option value="350801,350802,350813,350898,350816">龙岩中心城市</option>
+                    <option value="350822,350812">永定</option>
+                    <option value="350823,350811">上杭</option>
+                    <option value="350824">武平</option>
+                    <option value="350825">连城</option>
+                    <option value="350821,350814">长汀</option>
+                    <option value="350881,350815">漳平</option>
                 </select>
-                <input type="button" value="搜 索" class="btn_search" onclick="queryPage('','','');">
-                <input type="hidden" id="hidPage" value="1" />
+                <input type="button" value="搜 索" class="btn_search" onclick="queryPage('','','','','','','1');">
+
             </div>
         </div>
         <div class="content">
             <h1>招聘详情</h1>
             <div class="tab_list">
-                <table class="set_tab" width="100%">
+                <table class="set_tab" style="width:100%;">
                     <thead>
                         <tr>
                             <th>企业名称</th>
@@ -614,23 +617,36 @@
             }
             deleteMask();
         }
-        function queryPage(place, work, page) {
-            if (place == "") {
-                place = $('#ddlPlace').val();
+        function queryPage(industry, degree, work, reg, effect, place, page) {
+            if (industry == "") {
+                industry = $('#ddlIndustry').val();
+            }
+            if (degree == "") {
+                degree = $('#ddlDegree').val();
             }
             if (work == "") {
                 work = $('#ddlWork').val();
             }
-            if (page == "") {
-                page = $('#hidPage').val();
+            if (reg == "") {
+                reg = $('#txtRegDate').val();
+            }
+            if (effect == "") {
+                effect = $('#txtEffectDate').val();
+            }
+            if (place == "") {
+                place = $('#ddlPlace').val();
             }
             addMask();
             $.ajax({
                 url: "../Handler1.ashx",
                 data: {
                     funct: 'GetNewList',
-                    place: place,
+                    industry: industry,
+                    degree: degree,
                     work: work,
+                    reg: reg,
+                    effect: effect,
+                    place: place,
                     page: page
                 },
                 type: "POST",

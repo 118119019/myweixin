@@ -10,9 +10,12 @@ namespace WebApplication1.DataAccess
 {
     public class WhereParam
     {
+       
         public string Where { get; set; }
         public string ParameterName { get; set; }
         public string Value { get; set; }
+
+     
     }
     public class DataAccessSerive
     {
@@ -22,7 +25,7 @@ namespace WebApplication1.DataAccess
             List<OracleParameter> parameters = new List<OracleParameter>();
             whereList.ForEach(p =>
             {
-                cmdWhere += string.Format(" and {0}:{1}", p.Where, p.ParameterName);
+                cmdWhere += string.Format(p.Where, p.ParameterName);
                 parameters.Add(new OracleParameter()
             {
                 ParameterName = p.ParameterName,
@@ -32,10 +35,20 @@ namespace WebApplication1.DataAccess
             string sqlSelect = @"select count(*) from LYJYGD.ZP03 w   inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 
             where w.ZPC006=1 and w.ZPC010=0 {0} ";
             string commandText = string.Format(sqlSelect, cmdWhere);
-            int count = int.Parse(
-                OracleHelper.ExecuteScalar(OracleHelper.ConnectionString, CommandType.Text, commandText, parameters).ToString()
-            );
-          
+            int count = 0;
+            try
+            {
+                count = int.Parse(
+            OracleHelper.ExecuteScalar(OracleHelper.ConnectionString, CommandType.Text, commandText, parameters).ToString()
+        );
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
             int pageSize = 10;
             sqlSelect = @"select * from (select rownum rn,w.ZPC001,w.ZPA001,w.ZPA002,w.ZPB003,w.ZPC002,w.ZPC004 from LYJYGD.ZP03 w  
             inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 

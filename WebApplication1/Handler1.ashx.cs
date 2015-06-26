@@ -26,7 +26,6 @@ namespace WebApplication1
             switch (function)
             {
                 case "GetNewList":
-                
                     var industry = context.Request["industry"];
                     var degree = context.Request["degree"];
                     var work = context.Request["work"];
@@ -43,7 +42,7 @@ namespace WebApplication1
                     {
                         whereList.Add(new WhereParam()
                         {
-                            Where = "c.ZPA010=",
+                            Where = " and c.ZPA010=:{0}",
                             ParameterName = "Industry",
                             Value = industry
                         });
@@ -52,7 +51,7 @@ namespace WebApplication1
                     {
                         whereList.Add(new WhereParam()
                         {
-                            Where = "w.ZPB005=",
+                            Where = " and w.ZPB005=:{0}",
                             ParameterName = "Degree",
                             Value = degree
                         });
@@ -61,7 +60,7 @@ namespace WebApplication1
                     {
                         whereList.Add(new WhereParam()
                         {
-                            Where = "w.ZPB002=",
+                            Where = " and w.ZPB002=:{0}",
                             ParameterName = "Work",
                             Value = work
                         });
@@ -70,7 +69,7 @@ namespace WebApplication1
                     {
                         whereList.Add(new WhereParam()
                         {
-                            Where = "w.ZPC004>=",
+                            Where = " and w.ZPC004>=to_date(:{0}, 'yyyy-mm-dd')",
                             ParameterName = "regDate",
                             Value = regDate
                         });
@@ -79,16 +78,7 @@ namespace WebApplication1
                     {
                         whereList.Add(new WhereParam()
                         {
-                            Where = "w.effectDate<=",
-                            ParameterName = "effectDate",
-                            Value = effectDate
-                        });
-                    }
-                    if (effectDate != "")
-                    {
-                        whereList.Add(new WhereParam()
-                        {
-                            Where = "w.effectDate<=",
+                            Where = " and w.ZPC005<=to_date(:{0}, 'yyyy-mm-dd')",
                             ParameterName = "effectDate",
                             Value = effectDate
                         });
@@ -97,31 +87,35 @@ namespace WebApplication1
                     {
                         if (place.Contains(','))
                         {
-                            StringBuilder sb = new StringBuilder();
                             string[] strs = place.Split(',');
+                            var str = "";
                             for (int i = 0; i < strs.Length; i++)
                             {
-                                if (i != strs.Length - 1)
+                                if (i == 0)
                                 {
-                                    sb.AppendFormat("'{0}',", strs[i]);
+                                    str = " and c.ZPA018 in (:{0}";
+                                }
+                                else if (i == strs.Length)
+                                {
+                                    str = ":{0})";
                                 }
                                 else
                                 {
-                                    sb.AppendFormat("'{0}'", strs[i]);
+                                    str = ":{0}";
                                 }
+                                whereList.Add(new WhereParam()
+                                {
+                                    Where = str,
+                                    ParameterName = "place" + i.ToString(),
+                                    Value = strs[i]
+                                });
                             }
-                            whereList.Add(new WhereParam()
-                            {
-                                Where = "c.ZPA018 in (",
-                                ParameterName = "place)",
-                                Value = sb.ToString()
-                            });
                         }
                         else
                         {
                             whereList.Add(new WhereParam()
                             {
-                                Where = "c.ZPA018=",
+                                Where = " and c.ZPA018=:{0}",
                                 ParameterName = "place",
                                 Value = place
                             });

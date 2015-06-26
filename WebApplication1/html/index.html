@@ -533,19 +533,23 @@
                     <option value="6280000">普通工人</option>
                     <option value="7000000">其它</option>
                 </select>
-                <label>登记日期大于等于</label>
-                <input id="txtRegDate" type="text" />
-                <label>有效截止日期小于等于</label>
-                <input id="txtEffectDate" type="text" />
+                <div style="text-align:left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 20px; font-size: 1.4rem; ">
+                    <label>登记日期>=</label>
+                    <input id="txtRegDate" type="date" />
+                </div>
+                <div style="text-align: left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 20px; font-size: 1.4rem; ">
+                    <label>有效截止日期<=</label>
+                    <input id="txtEffectDate" type="date" />
+                </div>
                 <select name="ddlPlace" id="ddlPlace" class="slt">
                     <option value="0" selected="">工作地点--不限</option>
-                    <option value="350801、350802、350813、350898、350816">龙岩中心城市</option>
-                    <option value="350822、350812">永定</option>
-                    <option value="350823、350811">上杭</option>
+                    <option value="350801,350802,350813,350898,350816">龙岩中心城市</option>
+                    <option value="350822,350812">永定</option>
+                    <option value="350823,350811">上杭</option>
                     <option value="350824">武平</option>
                     <option value="350825">连城</option>
-                    <option value="350821、350814">长汀</option>
-                    <option value="350881、350815">漳平</option>
+                    <option value="350821,350814">长汀</option>
+                    <option value="350881,350815">漳平</option>
                 </select>
                 <input type="button" value="搜 索" class="btn_search" onclick="queryPage('','','','','','','1');">
 
