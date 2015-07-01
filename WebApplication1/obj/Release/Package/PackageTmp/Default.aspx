@@ -22,6 +22,13 @@
         截止日期
         <asp:TextBox ID="txtEffectDate" Text="" runat="server"></asp:TextBox>
         <asp:Button ID="btnQuery" Text="查询" runat="server" OnClick="btnQuery_Click" />
+    <br />
+        <div>
+            调度相关
+             <asp:Button ID="btnStar" runat="server"  OnClick="btnStar_Click" Text="重启" />
+           
+        </div>
     </form>
+
 </body>
 </html>

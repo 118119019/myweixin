@@ -18,8 +18,18 @@ namespace WebApplication1
             var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
             var result = new StringBuilder();
 
-            result.AppendLine("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】");
-            result.AppendLine("官网\r\n<a href=\"http://www.fjlylm.com\">点击</a>\r\n热门岗位查询\r\n<a href=\"http://rmb0595.gotoip3.com/cms/html/index.html\">点击</a>");
+            result.AppendLine("您好，欢迎关注龙岩就业微信公众平台！");
+            result.AppendLine("");
+            result.AppendLine("");
+            result.AppendLine("龙岩市人力资源市场网");
+            result.AppendLine("<a href=' www.fjlylm.com'>www.fjlylm.com</a>");
+            result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58356'>龙岩畅丰专用汽车有限公司 最新招聘信息</a>");
+            result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58301'>德泓（福建）光电科技有限公司 最新招聘信息</a>");
+            result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=57765'>福建绿河谷农牧有限公司  最新招聘信息</a>");
+            result.AppendLine("更多信息请点击下面菜单");
+            result.AppendLine("访问网站招聘求职就业资讯");       
+
+
             return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
         }
 
@@ -131,6 +141,11 @@ namespace WebApplication1
                         strongResponseMessage.Content = GetWelcomeInfo();
                         reponseMessage = strongResponseMessage;
                     }
+                    break;
+                case "GetPublish":
+                      var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
+                      strongResponseMessage.Content = "欢迎参加2015年2月26日正月初八龙岩体育公园“海西招聘—春风行动”大型招聘会";
+                        reponseMessage = strongResponseMessage;
                     break;
                 default:
                     {

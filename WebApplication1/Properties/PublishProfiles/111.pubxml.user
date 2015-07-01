@@ -39,6 +39,12 @@
     <File Include="bin/AspNet.ScriptManager.jQuery.UI.Combined.dll">
       <publishTime>02/15/2015 09:12:38</publishTime>
     </File>
+    <File Include="bin/Common.Logging.Core.dll">
+      <publishTime>06/26/2015 13:44:38</publishTime>
+    </File>
+    <File Include="bin/Common.Logging.dll">
+      <publishTime>06/26/2015 13:44:38</publishTime>
+    </File>
     <File Include="bin/CommonService.dll">
       <publishTime>05/18/2015 20:14:23</publishTime>
     </File>
@@ -81,17 +87,26 @@
     <File Include="bin/net91com.Core.dll">
       <publishTime>06/11/2014 15:16:21</publishTime>
     </File>
+    <File Include="bin/NLog.config">
+      <publishTime>06/26/2015 16:15:12</publishTime>
+    </File>
     <File Include="bin/NLog.dll">
       <publishTime>06/11/2014 15:16:21</publishTime>
     </File>
     <File Include="bin/Oracle.ManagedDataAccess.dll">
       <publishTime>12/16/2014 05:57:12</publishTime>
     </File>
+    <File Include="bin/Quartz.dll">
+      <publishTime>06/26/2015 13:44:38</publishTime>
+    </File>
+    <File Include="bin/quartz_jobs.xml">
+      <publishTime>06/26/2015 16:18:52</publishTime>
+    </File>
     <File Include="bin/Senparc.Weixin.dll">
-      <publishTime>02/15/2015 09:15:18</publishTime>
+      <publishTime>06/26/2015 10:03:28</publishTime>
     </File>
     <File Include="bin/Senparc.Weixin.MP.dll">
-      <publishTime>02/15/2015 09:15:18</publishTime>
+      <publishTime>06/26/2015 10:03:28</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>07/09/2013 11:04:48</publishTime>
@@ -100,7 +115,7 @@
       <publishTime>02/15/2015 09:12:37</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>06/18/2015 17:40:07</publishTime>
+      <publishTime>06/26/2015 17:09:32</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/15/2015 09:12:39</publishTime>
@@ -286,7 +301,7 @@
       <publishTime>02/15/2015 09:12:37</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>06/16/2015 16:32:12</publishTime>
+      <publishTime>06/26/2015 15:59:35</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>02/15/2015 09:12:34</publishTime>
@@ -369,8 +384,14 @@
     <File Include="myweixin.ashx">
       <publishTime>02/15/2015 09:14:05</publishTime>
     </File>
+    <File Include="NLog.config">
+      <publishTime>06/26/2015 16:15:12</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>02/15/2015 17:04:10</publishTime>
+      <publishTime>06/26/2015 13:44:40</publishTime>
+    </File>
+    <File Include="quartz_jobs.xml">
+      <publishTime>06/26/2015 16:18:52</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.js">
       <publishTime>02/15/2015 09:12:35</publishTime>
@@ -397,7 +418,7 @@
       <publishTime>02/15/2015 09:12:39</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/15/2015 18:39:53</publishTime>
+      <publishTime>06/26/2015 16:07:42</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>02/15/2015 16:08:29</publishTime>

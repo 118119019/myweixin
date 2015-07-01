@@ -23,14 +23,14 @@ namespace WebApplication1
 
 
 #if DEBUG
-        string agentUrl = "http://localhost:12222/App/Weixin/4";
-        string agentToken = "27C455F496044A87";
-        string wiweihiKey = "CNadjJuWzyX5bz5Gn+/XoyqiqMa5DjXQ";
+        private virtual string agentUrl = "http://localhost:12222/App/Weixin/4";
+        private virtual string agentToken = "27C455F496044A87";
+        private virtual string wiweihiKey = "CNadjJuWzyX5bz5Gn+/XoyqiqMa5DjXQ";
 #else
         //下面的Url和Token可以用其他平台的消息，或者到www.weiweihi.com注册微信用户，将自动在“微信营销工具”下得到
-        private string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
-        private string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
-        private string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
+        private virtual string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
+        private virtual string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
+        private virtual string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
 #endif
 
         public CustomMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0)
@@ -63,24 +63,7 @@ namespace WebApplication1
         /// <returns></returns>
         public override IResponseMessageBase OnTextRequest(RequestMessageText requestMessage)
         {
-            //TODO:这里的逻辑可以交给Service处理具体信息，参考OnLocationRequest方法或/Service/LocationSercice.cs
-
-            //方法一（v0.1），此方法调用太过繁琐，已过时（但仍是所有方法的核心基础），建议使用方法二到四
-            //var responseMessage =
-            //    ResponseMessageBase.CreateFromRequestMessage(RequestMessage, ResponseMsgType.Text) as
-            //    ResponseMessageText;
-
-            //方法二（v0.4）
-            //var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(RequestMessage);
-
-            //方法三（v0.4），扩展方法，需要using Senparc.Weixin.MP.Helpers;
-            //var responseMessage = RequestMessage.CreateResponseMessage<ResponseMessageText>();
-
-            //方法四（v0.6+），仅适合在HandlerMessage内部使用，本质上是对方法三的封装
-            //注意：下面泛型ResponseMessageText即返回给客户端的类型，可以根据自己的需要填写ResponseMessageNews等不同类型。
-
-
-
+           
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
             if (requestMessage.Content != "")
             {
