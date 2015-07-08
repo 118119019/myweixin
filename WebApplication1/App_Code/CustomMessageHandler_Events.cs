@@ -27,7 +27,7 @@ namespace WebApplication1
             result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58301'>德泓（福建）光电科技有限公司 最新招聘信息</a>");
             result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=57765'>福建绿河谷农牧有限公司  最新招聘信息</a>");
             result.AppendLine("更多信息请点击下面菜单");
-            result.AppendLine("访问网站招聘求职就业资讯");       
+            result.AppendLine("访问网站招聘求职就业资讯");
 
 
             return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
@@ -143,9 +143,11 @@ namespace WebApplication1
                     }
                     break;
                 case "GetPublish":
-                      var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
-                      strongResponseMessage.Content = "欢迎参加2015年2月26日正月初八龙岩体育公园“海西招聘—春风行动”大型招聘会";
+                    {
+                        var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
+                        strongResponseMessage.Content = "欢迎参加2015年2月26日正月初八龙岩体育公园“海西招聘—春风行动”大型招聘会";
                         reponseMessage = strongResponseMessage;
+                    }
                     break;
                 default:
                     {
@@ -205,13 +207,8 @@ namespace WebApplication1
         {
             var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
             responseMessage.Content = GetWelcomeInfo();
-
-
-
-
             return responseMessage;
         }
-
         /// <summary>
         /// 退订
         /// 实际上用户无法收到非订阅账号的消息，所以这里可以随便写。
@@ -224,7 +221,6 @@ namespace WebApplication1
             responseMessage.Content = "有空再来";
             return responseMessage;
         }
-
         /// <summary>
         /// 事件之扫码推事件(scancode_push)
         /// </summary>
@@ -236,7 +232,6 @@ namespace WebApplication1
             responseMessage.Content = "事件之扫码推事件";
             return responseMessage;
         }
-
         /// <summary>
         /// 事件之扫码推事件且弹出“消息接收中”提示框(scancode_waitmsg)
         /// </summary>

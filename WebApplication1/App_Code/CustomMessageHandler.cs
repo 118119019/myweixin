@@ -23,14 +23,14 @@ namespace WebApplication1
 
 
 #if DEBUG
-        private virtual string agentUrl = "http://localhost:12222/App/Weixin/4";
-        private virtual string agentToken = "27C455F496044A87";
-        private virtual string wiweihiKey = "CNadjJuWzyX5bz5Gn+/XoyqiqMa5DjXQ";
+        private   string agentUrl = "http://localhost:12222/App/Weixin/4";
+        private   string agentToken = "27C455F496044A87";
+        private   string wiweihiKey = "CNadjJuWzyX5bz5Gn+/XoyqiqMa5DjXQ";
 #else
         //下面的Url和Token可以用其他平台的消息，或者到www.weiweihi.com注册微信用户，将自动在“微信营销工具”下得到
-        private virtual string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
-        private virtual string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
-        private virtual string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
+        private   string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
+        private   string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
+        private   string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
 #endif
 
         public CustomMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0)

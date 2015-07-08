@@ -1,15 +1,20 @@
-﻿using System;
+﻿using Senparc.Weixin.MP.Entities;
+using Senparc.Weixin.MP.Entities.Request;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
+using System.Web.Configuration;
 
 namespace WebApplication1
 {
     public class ShortCustomHandler : CustomMessageHandler
     {
-        private override string agentUrl = WebConfigurationManager.AppSettings["ShortWeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
-        private override string agentToken = WebConfigurationManager.AppSettings["ShortWeixinAgentToken"];//Token
-        private override string wiweihiKey = WebConfigurationManager.AppSettings["ShortWeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
+        private   string agentUrl = WebConfigurationManager.AppSettings["ShortWeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
+        private   string agentToken = WebConfigurationManager.AppSettings["ShortWeixinAgentToken"];//Token
+        private   string wiweihiKey = WebConfigurationManager.AppSettings["ShortWeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
         /// <summary>
         /// 处理文字请求
         /// </summary>
@@ -110,6 +115,14 @@ namespace WebApplication1
             //    responseMessage.Content = result.ToString();
             //}
             return responseMessage;
+        }
+
+        public ShortCustomHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0)
+            : base(inputStream, postModel, maxRecordCount)
+        {
+            //这里设置仅用于测试，实际开发可以在外部更全局的地方设置，
+            //比如MessageHandler<MessageContext>.GlobalWeixinContext.ExpireMinutes = 3。
+            WeixinContext.ExpireMinutes = 3;
         }
     }
 }

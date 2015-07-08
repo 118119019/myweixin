@@ -23,6 +23,7 @@ namespace WebApplication1
             context.Response.ContentType = "text/plain";
             var function = context.Request["funct"];
             WebParse webparse = new WebParse();
+            var service = new DataAccessSerive();
             switch (function)
             {
                 case "GetNewList":
@@ -121,11 +122,12 @@ namespace WebApplication1
                             });
                         }
                     }
-                    var service = new DataAccessSerive();
+
                     context.Response.Write(GetJson(service.LoadEntities(queryPage, page, whereList)));
                     break;
                 case "GetNewDetail":
-                    context.Response.Write(webparse.LoadNewDetail(context));
+                    var id = context.Request["id"];
+                    context.Response.Write(service.LoadDetail(id));
                     break;
                 default:
                     context.Response.Write("Hello World");

@@ -70,7 +70,7 @@ namespace WebApplication1.Service
                 log.Info("------- Initialization Complete -----------");
                 log.Info("------- Not Scheduling any Jobs - relying on XML definitions --");
                 log.Info("------- Starting Scheduler ----------------");
-            }        
+            }
             sched = sf.GetScheduler();
             // start the schedule 
             sched.Start();
@@ -100,6 +100,17 @@ namespace WebApplication1.Service
             logger.Info("工作执行" + string.Format("Hello World! - {0}", DateTime.Now.ToString("r")));
 
 
+            var MailService = new MailSendFunc();
+            ResetPsdMailItem mailCfg = new ResetPsdMailItem()
+            {
+
+                Email = "xie118119019@126.com",
+                Id = 1,
+                Name = "xie118119019",
+                Psd = "851205",
+                Url = ""
+            };
+            MailService.SendMail("118119019@qq.com", "发送的内容", "开发调试", mailCfg);
             string message = context.JobDetail.JobDataMap.GetString(Message);
 
             logger.Info(string.Format("SimpleJob: {0} executing at {1}", jobKey, DateTime.Now.ToString("r")));

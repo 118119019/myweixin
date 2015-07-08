@@ -65,8 +65,7 @@ namespace WebApplication1
                     AppId = WebConfigurationManager.AppSettings["ShortWeixinAppId"]//根据自己后台的设置保持一致
                 };
                 var maxRecordCount = 10;
-                var messageHandler = new CustomMessageHandler(Request.InputStream, postModel, maxRecordCount);
-
+                var messageHandler = new ShortCustomHandler(Request.InputStream, postModel, maxRecordCount);
                 try
                 {
                     messageHandler.Execute();
