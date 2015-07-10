@@ -3,6 +3,11 @@ using NLog;
 using Oracle.ManagedDataAccess.Client;
 using Quartz;
 using Quartz.Impl;
+using Senparc.Weixin.MP.AdvancedAPIs;
+using Senparc.Weixin.MP.AdvancedAPIs.GroupMessage;
+using Senparc.Weixin.MP.AdvancedAPIs.Groups;
+using Senparc.Weixin.MP.AdvancedAPIs.User;
+using Senparc.Weixin.MP.CommonAPIs;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -10,6 +15,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.Service;
@@ -121,6 +127,34 @@ namespace WebApplication1
             myscheduler.ShutDown();
 
             txtResult.Text = "提交关闭服务";
+        }
+
+        protected void btnSendMessage_Click(object sender, EventArgs e)
+        {
+            //获取 accessToken
+            var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
+                WebConfigurationManager.AppSettings["LongNameAppSecret"]);
+
+
+            OpenIdResultJson json = Senparc.Weixin.MP.AdvancedAPIs.User.UserApi.Get(accessToken, "");
+
+            txtResult.Text += json.count;
+
+            foreach (var item in json.data.openid)
+            {
+                txtResult.Text += item + " ";
+            }
+
+            var result = GroupsApi.Get(accessToken);
+            List<GroupsJson_Group> list = result.groups;
+            string content = "文本内容<a href='http://www.baidu.com'>百度</a>";
+            string groupId = "100";//分组Id
+
+            //var accessToken = AccessTokenContainer.GetToken(_appId);
+            //发送给指定分组
+            var sendResult = GroupMessageApi.SendTextGroupMessageByGroupId(accessToken, groupId, content, false);
+
+
         }
     }
 }
