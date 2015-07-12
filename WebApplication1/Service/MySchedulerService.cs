@@ -104,10 +104,10 @@ namespace WebApplication1.Service
             ResetPsdMailItem mailCfg = new ResetPsdMailItem()
             {
 
-                Email = "xie118119019@126.com",
+                Email = "xcbrmbtest@126.com",
                 Id = 1,
-                Name = "xie118119019",
-                Psd = "851205",
+                Name = "xcbrmbtest",
+                Psd = "a3236459",
                 Url = ""
             };
             MailService.SendMail("118119019@qq.com", "发送的内容", "开发调试", mailCfg);
