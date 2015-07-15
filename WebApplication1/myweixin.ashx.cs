@@ -1,4 +1,5 @@
-﻿using Senparc.Weixin.MP;
+﻿using NLog;
+using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.Entities.Request;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace WebApplication1
             string timestamp = Request["timestamp"];
             string nonce = Request["nonce"];
             string echostr = Request["echostr"];
-            string Token = "myweixin";
+            string Token = WebConfigurationManager.AppSettings["WeixinAgentToken"];
             if (Request.HttpMethod == "GET")
             {
                 //get method - 仅在微信后台填写URL验证时触发
@@ -43,7 +44,7 @@ namespace WebApplication1
             }
             else
             {
-                
+
                 //post method - 当有用户向公众账号发送消息时触发
                 if (!CheckSignature.Check(signature, timestamp, nonce, Token))
                 {
@@ -60,8 +61,8 @@ namespace WebApplication1
                     Nonce = Request.QueryString["nonce"],
                     //以下保密信息不会（不应该）在网络上传播，请注意
                     Token = Token,
-                    EncodingAESKey = "T79NgH9wXHWta4dwPqcGxx1z92YAl4hSreDiIkZfRWo",//根据自己后台的设置保持一致
-                    AppId = WebConfigurationManager.AppSettings["WeixinAppId"]//根据自己后台的设置保持一致
+                    EncodingAESKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"],//根据自己后台的设置保持一致
+                    AppId = WebConfigurationManager.AppSettings["LongNameAppId"]//根据自己后台的设置保持一致
                 };
 
                 //v4.2.2之后的版本，可以设置每个人上下文消息储存的最大数量，防止内存占用过多，如果该参数小于等于0，则不限制
@@ -69,7 +70,7 @@ namespace WebApplication1
 
                 //自定义MessageHandler，对微信请求的详细判断操作都在这里面。
                 var messageHandler = new CustomMessageHandler(Request.InputStream, postModel, maxRecordCount);
-                
+
                 try
                 {
                     //测试时可开启此记录，帮助跟踪数据，使用前请确保App_Data文件夹存在，且有读写权限。
@@ -98,6 +99,7 @@ namespace WebApplication1
                         tw.Flush();
                         tw.Close();
                     }
+                    logger.DebugException(DateTime.Now.ToString(), ex);
                 }
                 finally
                 {
@@ -105,7 +107,7 @@ namespace WebApplication1
                 }
             }
         }
-
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private void WriteContent(string str)
         {
             Response.Output.Write(str);
