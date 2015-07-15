@@ -18,14 +18,14 @@ namespace WebApplication1
         void Application_Start(object sender, EventArgs e)
         {
             // 在应用程序启动时运行的代码
-            myscheduler.Run();
+          //  myscheduler.Run();
            
         }
 
         void Application_End(object sender, EventArgs e)
         {
             //  在应用程序关闭时运行的代码
-            myscheduler.ShutDown();
+          //  myscheduler.ShutDown();
         }
 
         void Application_Error(object sender, EventArgs e)

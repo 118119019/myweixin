@@ -35,7 +35,11 @@
         <div>
             群发消息接口测试
             <asp:Button ID="btnSendMessage" runat="server" OnClick="btnSendMessage_Click" Text="消息发送" />
+        
+              <asp:Button ID="btnSendAll" runat="server" OnClick="btnSendAll_Click" Text="全部消息发送" />
         </div>
+
+       
     </form>
 
 </body>

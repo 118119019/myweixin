@@ -9,6 +9,8 @@ using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MessageHandlers;
 using Senparc.Weixin.MP.Helpers;
+using WebApplication1.DataAccess;
+using NLog;
 
 
 namespace WebApplication1
@@ -23,9 +25,9 @@ namespace WebApplication1
 
 
 #if DEBUG
-        private   string agentUrl = "http://localhost:12222/App/Weixin/4";
-        private   string agentToken = "27C455F496044A87";
-        private   string wiweihiKey = "CNadjJuWzyX5bz5Gn+/XoyqiqMa5DjXQ";
+        private string agentUrl = "http://rmb0595.gotoip3.com/cms/myweixin.ashx";
+        private string agentToken = "myweixin";
+        private string wiweihiKey = "T79NgH9wXHWta4dwPqcGxx1z92YAl4hSreDiIkZfRWo";
 #else
         //下面的Url和Token可以用其他平台的消息，或者到www.weiweihi.com注册微信用户，将自动在“微信营销工具”下得到
         private   string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
@@ -56,25 +58,33 @@ namespace WebApplication1
             base.OnExecuted();
             CurrentMessageContext.StorageData = ((int)CurrentMessageContext.StorageData) + 1;
         }
-
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// 处理文字请求
         /// </summary>
         /// <returns></returns>
         public override IResponseMessageBase OnTextRequest(RequestMessageText requestMessage)
         {
-           
+
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
             if (requestMessage.Content != "")
             {
                 var result = new StringBuilder();
                 result.AppendLine("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】");
-                result.AppendLine("官网");
-                result.AppendLine("<a href=\"http://www.fjlylm.com\">点击</a>");
-                result.AppendLine("热门岗位查询");
-                result.AppendLine("<a href=\"http://rmb0595.gotoip3.com/cms/html/index.html\">点击</a>");
-         
-                responseMessage.Content = result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
+                result.AppendLine("龙岩市人力资源市场网");
+                result.AppendLine("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>");
+                var dataSevice = new DataAccessSerive();
+                var jobList = dataSevice.GetTopJobInfoList();
+                if (jobList.Count > 0)
+                {
+                    foreach (var job in jobList)
+                    {
+                        result.AppendLine(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>",
+                            WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                    }
+                }
+                logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
+                responseMessage.Content = result.ToString(); 
             }
             //if (requestMessage.Content == "约束")
             //{

@@ -17,6 +17,16 @@ namespace WebApplication1.DataAccess
 
 
     }
+
+
+    public class JobInfo
+    {
+        public string ComName { get; set; }
+        public string JobName { get; set; }
+        public string JobId { get; set; }
+
+    }
+
     public class DataAccessSerive
     {
         public TableJson LoadEntities(string queryPage, int currentPageIndex, List<WhereParam> whereList)
@@ -44,13 +54,29 @@ namespace WebApplication1.DataAccess
             }
             catch (Exception ex)
             {
-                 
+
             }
             int pageSize = 10;
-            sqlSelect = @"select * from (select rownum rn,w.ZPC001,w.ZPA001,w.ZPA002,w.ZPB003,w.ZPC002,w.ZPC004 from LYJYGD.ZP03 w  
-            inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 
-            where w.ZPC006=1 and w.ZPC010=0 {0}  order by w.ZPC004 desc,w.ZPA002)
-            where rn>{1} and rn<{2}";
+            sqlSelect = @"
+
+select *
+  from (select a.*, rownum rn
+          from (select w.ZPC001,
+                       w.ZPA001,
+                       w.ZPA002,
+                       w.ZPB003,
+                       w.ZPC002,
+                       w.ZPC004
+                  from LYJYGD.ZP03 w
+                 inner join LYJYGD.ZP01 c
+                    on w.ZPA001 = C.ZPA001
+                 where w.ZPC006 = 1
+                   and w.ZPC010 = 0 {0} 
+                 order by w.ZPC004 desc, w.ZPA002) a)
+ where rn >{1}
+   and rn <{2}
+ 
+ ";
             commandText = string.Format(sqlSelect, cmdWhere, (currentPageIndex - 1) * pageSize, currentPageIndex * pageSize + 1);
             var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, commandText, parameters);
             StringBuilder sb = new StringBuilder();
@@ -144,6 +170,49 @@ namespace WebApplication1.DataAccess
 
 
             return sb.ToString();
+        }
+
+
+        public List<JobInfo> GetTopJobInfoList()
+        {
+            List<JobInfo> jobList = new List<DataAccess.JobInfo>();
+            string sqlSelect = @" 
+select *
+  from (select *
+          from (select ZPC001,
+                       w.ZPA001,
+                       w.ZPA002,
+                       w.ZPB003,
+                       w.ZPC002,
+                       w.ZPC004,
+                       rank() over(partition by w.ZPA001 order by w.ZPC004 desc, ZPC001) rank
+                  from LYJYGD.ZP03 w
+                 where w.ZPC006 = 1
+                   and w.ZPC010 = 0) a
+         where rank = 1
+         order by ZPC004 desc) where rownum < 4  
+                ";
+            var reader = OracleHelper.ExecuteReader(sqlSelect);
+            while (reader.Read())
+            {
+                try
+                {
+                    jobList.Add(
+                        new JobInfo()
+                        {
+                            ComName = reader["ZPA002"].ToString(),
+                            JobName = reader["ZPB003"].ToString(),
+                            JobId = reader["ZPC001"].ToString()
+                        }
+                        );
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+            return jobList;
         }
 
         private string ShowVal(object val)

@@ -112,6 +112,9 @@
     <Content Include="html\index.html" />
     <Content Include="html\js\swiper.min.js" />
     <Content Include="html\list.html" />
+    <Content Include="image\0.jpg" />
+    <Content Include="image\1.jpg" />
+    <Content Include="image\2.jpg" />
     <Content Include="MyTool.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -134,7 +137,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\111.pubxml" />
-    <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -181,13 +183,6 @@
     <Compile Include="App_Code\ShortCustomHandler.cs" />
     <Compile Include="ShortHanlde.ashx.cs">
       <DependentUpon>ShortHanlde.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewSwitcher.ascx.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewSwitcher.ascx.designer.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

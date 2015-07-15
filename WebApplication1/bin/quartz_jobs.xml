@@ -34,7 +34,7 @@
         <group>simpleGroup</group>
         <job-name>jobName1</job-name>
         <job-group>jobGroup1</job-group>
-        <cron-expression>0/10 * * * * ?</cron-expression>
+        <cron-expression>0 1 9 ? * TUE,WED,THU</cron-expression>
       </cron>
     </trigger>
   </schedule>

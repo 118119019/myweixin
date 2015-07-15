@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Configuration;
+using WebApplication1.DataAccess;
 
 namespace WebApplication1
 {
@@ -18,16 +20,19 @@ namespace WebApplication1
             var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
             var result = new StringBuilder();
 
-            result.AppendLine("您好，欢迎关注龙岩就业微信公众平台！");
-            result.AppendLine("");
-            result.AppendLine("");
+            result.AppendLine("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】");
             result.AppendLine("龙岩市人力资源市场网");
-            result.AppendLine("<a href=' www.fjlylm.com'>www.fjlylm.com</a>");
-            result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58356'>龙岩畅丰专用汽车有限公司 最新招聘信息</a>");
-            result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58301'>德泓（福建）光电科技有限公司 最新招聘信息</a>");
-            result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=57765'>福建绿河谷农牧有限公司  最新招聘信息</a>");
-            result.AppendLine("更多信息请点击下面菜单");
-            result.AppendLine("访问网站招聘求职就业资讯");
+            result.AppendLine("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>");
+            var dataSevice = new DataAccessSerive();
+            var jobList = dataSevice.GetTopJobInfoList();
+            if (jobList.Count > 0)
+            {
+                foreach (var job in jobList)
+                {
+                    result.AppendLine(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>",
+                        WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                }
+            }
 
 
             return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";

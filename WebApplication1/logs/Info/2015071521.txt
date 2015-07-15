@@ -1,0 +1,37 @@
+------- Shutting Down ---------------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------
+------- Initialization Complete -----------
+------- Not Scheduling any Jobs - relying on XML definitions --
+------- Starting Scheduler ----------------
+------- Started Scheduler -----------------

@@ -188,6 +188,5 @@ E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\Microsoft.AspNet.Friendly
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\System.Web.Providers.resources.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.Membership.OpenAuth.resources.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.FriendlyUrls.resources.dll
-E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.pdb
