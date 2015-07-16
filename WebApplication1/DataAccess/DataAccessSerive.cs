@@ -118,7 +118,7 @@ namespace WebApplication1.DataAccess
             }
             catch (Exception ex)
             {
-
+                return null;
             }
             int pageSize = 10;
             sqlSelect = @"
@@ -159,7 +159,7 @@ select *
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    return null;
                 }
 
             }

@@ -96,13 +96,13 @@ namespace WebApplication1
                                 {
                                     str = " and c.ZPA018 in (:{0}";
                                 }
-                                else if (i == strs.Length)
+                                else if (i == strs.Length - 1)
                                 {
-                                    str = ":{0})";
+                                    str = ",:{0})";
                                 }
                                 else
                                 {
-                                    str = ":{0}";
+                                    str = ",:{0}";
                                 }
                                 whereList.Add(new WhereParam()
                                 {

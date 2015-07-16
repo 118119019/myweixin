@@ -35,16 +35,20 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
+                var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
+                WebConfigurationManager.AppSettings["LongNameAppSecret"]);
+                var json = GroupsApi.Get(accessToken);
+                foreach (var item in json.groups)
+                {
+                    ddlGropu.Items.Add(new ListItem(item.name, item.id.ToString()));
+                }
+                ddlGropu.Items.Add(new ListItem("全部", "-1"));
+
                 txtResult.Text = OracleHelper.CanConnect();
                 if (txtResult.Text != "连接成功")
                 {
-                    var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
-             WebConfigurationManager.AppSettings["LongNameAppSecret"]);
-                    var json = GroupsApi.Get(accessToken);
-                    //foreach (var item in json.groups)
-                    //{
-                    //     txtResult.Text += item.name + " " + item.id;
-                    //}
+
+
                     var groupId = json.groups.Find(p => p.name == "开发小组").id.ToString();
                     var content = " oracle数据库无法连接 异常信息为" + txtResult.Text;
                     var sendResult = GroupMessageApi.SendTextGroupMessageByGroupId(accessToken, groupId, content, false);
@@ -284,9 +288,17 @@ namespace WebApplication1
 
                 UploadForeverMediaResult mediaResult = MediaApi.UploadNews(accessToken, 100000, newsList);
 
+                if (ddlGropu.SelectedValue != "-1")
+                {
+                    GroupMessageApi.SendGroupMessageByGroupId
+                      (accessToken, ddlGropu.SelectedValue, mediaResult.media_id, GroupMessageType.mpnews);
+                }
+                else
+                {
+                    GroupMessageApi.SendGroupMessageByGroupId
+                     (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+                }
 
-                //Senparc.Weixin.MP.AdvancedAPIs.GroupMessage.GroupMessageApi.SendGroupMessageByGroupId
-                //    (accessToken,groupId,)
 
                 //foreach (var item in json.data.openid)
                 //{
