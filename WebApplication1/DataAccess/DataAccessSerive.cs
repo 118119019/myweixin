@@ -26,6 +26,70 @@ namespace WebApplication1.DataAccess
         public string JobId { get; set; }
 
     }
+    public class JobDetail : JobInfo
+    {
+        public string ComId { get; set; }
+        /// <summary>
+        /// 所属劳动部门
+        /// </summary>
+        public string FromPlace { get; set; }
+        /// <summary>
+        /// 单位类型
+        /// </summary>
+        public string ComType { get; set; }
+        /// <summary>
+        /// 企业介绍
+        /// </summary>
+        public string ComBrief { get; set; }
+        /// <summary>
+        /// 工作方式
+        /// </summary>
+        public string JobType { get; set; }
+        /// <summary>
+        /// 最低月薪
+        /// </summary>
+        public string LowMoney { get; set; }
+        /// <summary>
+        /// 招聘人数
+        /// </summary>
+        public string HrNum { get; set; }
+        /// <summary>
+        /// 年龄
+        /// </summary>
+        public string Age { get; set; }
+        /// <summary>
+        /// 文化要求
+        /// </summary>
+        public string Edu { get; set; }
+        /// <summary>
+        /// 登记日期
+        /// </summary>
+        public string RegisterDate { get; set; }
+        /// <summary>
+        /// 有效日期
+        /// </summary>
+        public string EffectDate { get; set; }
+        /// <summary>
+        /// 其他要求
+        /// </summary>
+        public string Other { get; set; }
+
+        /// <summary>
+        /// 联系电话
+        /// </summary>
+        public string Phone { get; set; }
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        public string LinkMan { get; set; }
+        /// <summary>
+        /// 联系地址
+        /// </summary>
+        public string DetailPalce { get; set; }
+        public string GetWorkOther { get; set; }
+
+        public string Contact { get; set; }
+    }
 
     public class DataAccessSerive
     {
@@ -120,24 +184,60 @@ select *
         }
 
 
+        public JobDetail GetJobDetail(string id)
+        {
+            List<OracleParameter> parameters = new List<OracleParameter>();
+            parameters.Add(new OracleParameter()
+            {
+                ParameterName = "id",
+                Value = id
+            });
+            string str = "";
+            string sqlSelect = @" select w.ZPA001, w.ZPC001,w.ZPA002,w.ZPC008,c.ZPA016,c.ZPA017,w.ZPB003,w.ZPB011,w.ZPC003,w.ZPC002,
+            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002            
+            from LYJYGD.ZP03 w inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 where w.ZPC001=:id";
+            var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, sqlSelect, parameters);
+            var jobDetail = new JobDetail();
+            while (reader.Read())
+            {
+                jobDetail.ComId = ShowVal(reader["ZPA001"]);
+                jobDetail.ComName = ShowVal(reader["ZPA002"]);
+                jobDetail.ComBrief = ShowVal(reader["ZPA017"]);
+                //联系人
+                jobDetail = GetJobDetailContact(jobDetail);
+                jobDetail.JobName = ShowVal(reader["ZPB003"]);
+                jobDetail.JobType = reader["ZPB011"] == null ? "&nbsp;&nbsp;" : "全职";
+
+                jobDetail.LowMoney = ShowVal(reader["ZPC003"]);
+                jobDetail.HrNum = reader["ZPC002"].ToString();
+
+                jobDetail.Edu = GetAA11Type(reader["ZPB005"].ToString(), "ZPB005");
+                jobDetail.RegisterDate = ((DateTime)reader["ZPC004"]).ToString("yyyy-MM-dd");
+                jobDetail.EffectDate = ((DateTime)reader["ZPC005"]).ToString("yyyy-MM-dd");
+                jobDetail.Other = ShowVal(reader["ZPB007"]);
+            }
+            return jobDetail;
+        }
+
         public string LoadDetail(string id)
         {
             //select ZPA034 from LYJYGD.ZP01A2 经济类型
             // 表ZP01A2  ZPA032   联系地址 ZPA030   联系人  ZPA031   联系电话
             // ZP01   ZPA017   企业简介
             StringBuilder sb = new StringBuilder();
-            List<OracleParameter> parameters = new List<OracleParameter>();
-            parameters.Add(new OracleParameter()
-           {
-               ParameterName = "id",
-               Value = id
-           });
-            string str = "";
-            string sqlSelect = @" select w.ZPA001, w.ZPC001,w.ZPA002,w.ZPC008,c.ZPA016,c.ZPA017,w.ZPB003,w.ZPB011,w.ZPC003,w.ZPC002,
-            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002            
-            from LYJYGD.ZP03 w inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 where w.ZPC001=:id";
+
             try
             {
+                List<OracleParameter> parameters = new List<OracleParameter>();
+                parameters.Add(new OracleParameter()
+                {
+                    ParameterName = "id",
+                    Value = id
+                });
+                string str = "";
+                string sqlSelect = @" select w.ZPA001, w.ZPC001,w.ZPA002,w.ZPC008,c.ZPA016,c.ZPA017,w.ZPB003,w.ZPB011,w.ZPC003,w.ZPC002,
+            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002            
+            from LYJYGD.ZP03 w inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 where w.ZPC001=:id";
                 var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, sqlSelect, parameters);
                 while (reader.Read())
                 {
@@ -253,9 +353,43 @@ select *
                 sb.AppendFormat("<p><label>详细地址:</label>{0}</p>", ShowVal(reader["ZPA032"]));
                 sb.AppendFormat("<p><label>联系人:</label>{0}</p>", ShowVal(reader["ZPA030"]));
                 sb.AppendFormat("<p><label>联系电话:</label>{0}</p>", ShowVal(reader["ZPA031"]));
-                return sb.ToString();
             }
-            return "";
+            return sb.ToString();
+        }
+
+        private JobDetail GetJobDetailContact(JobDetail job)
+        {
+            string sql = string.Format("select ZPA032,ZPA030,ZPA031 from  LYJYGD.ZP01A2  where ZPA001='{0}'", job.ComId);
+            var reader = OracleHelper.ExecuteReader(sql);
+            StringBuilder sb = new StringBuilder();
+            while (reader.Read())
+            {
+                job.DetailPalce = ShowVal(reader["ZPA032"]);
+                job.LinkMan = ShowVal(reader["ZPA030"]);
+                job.Phone = ShowVal(reader["ZPA031"]);
+            }
+            return job;
+        }
+
+        private JobDetail GetJobDetailWorkOther(JobDetail job)
+        {
+            return null;
+
+            //string sql = string.Format(" select * from LYJYGD.ZP03A1  where ZPC001='{0}'", wid);
+            /////招聘人数:	1人，其中：男0人，女1人，不限0人　	招聘对象:	　
+            ////年龄：	不限 　	身高:ZPC032   	 	视力:ZPC033   	 	户口要求:ZPC031    　
+            ////文化程度:	ZPB005   　	技术等级:	无/未说明 　	职业资格证书:
+            //var reader = OracleHelper.ExecuteReader(sql);
+            //while (reader.Read())
+            //{
+            //    job.
+            //    sb.AppendFormat("，其中：男{0}人，女{1}人，不限{2}人</p>", reader["ZPC024"], reader["ZPC025"], reader["ZPC026"]);
+            //    sb.AppendFormat("<p><label>身高:</label> {0} </p>", ShowVal(reader["ZPC032"]));
+            //    sb.AppendFormat("<p><label>视力:</label> {0} </p>", ShowVal(reader["ZPC033"]));
+            //    sb.AppendFormat("<p><label>户口要求:</label>{0}", GetAA11Type(reader["ZPC031"].ToString(), "ZPC031"));
+            //}
+            //sb.Append("</p>");
+            //return sb.ToString();
         }
 
         /// <summary>

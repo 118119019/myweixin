@@ -123,6 +123,7 @@
     <Content Include="quartz_jobs.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Temp.html" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Work\css\style.css" />
     <Content Include="Work\images\bullet.gif" />
@@ -181,6 +182,7 @@
     <Compile Include="Service\MailSendFunc.cs" />
     <Compile Include="Service\MySchedulerService.cs" />
     <Compile Include="App_Code\ShortCustomHandler.cs" />
+    <Compile Include="Service\WeixinHelpService.cs" />
     <Compile Include="ShortHanlde.ashx.cs">
       <DependentUpon>ShortHanlde.ashx</DependentUpon>
     </Compile>

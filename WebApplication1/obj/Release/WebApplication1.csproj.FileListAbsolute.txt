@@ -148,7 +148,6 @@ E:\ly\weixin\WebApplication1\WebApplication1\bin\Microsoft.AspNet.FriendlyUrls.x
 E:\ly\weixin\WebApplication1\WebApplication1\bin\zh-Hans\System.Web.Providers.resources.dll
 E:\ly\weixin\WebApplication1\WebApplication1\bin\zh-Hans\Microsoft.AspNet.Membership.OpenAuth.resources.dll
 E:\ly\weixin\WebApplication1\WebApplication1\bin\zh-Hans\Microsoft.AspNet.FriendlyUrls.resources.dll
-E:\ly\weixin\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb
 E:\ly\weixin\WebApplication1\WebApplication1\bin\quartz_jobs.xml
@@ -194,3 +193,4 @@ E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.FriendlyUrls.resources.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Release\WebApplication1.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Release\WebApplication1.pdb
+E:\ly\weixin\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
