@@ -38,11 +38,11 @@ namespace WebApplication1
                 var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
                 WebConfigurationManager.AppSettings["LongNameAppSecret"]);
                 var json = GroupsApi.Get(accessToken);
-                foreach (var item in json.groups)
-                {
-                    ddlGropu.Items.Add(new ListItem(item.name, item.id.ToString()));
-                }
-                ddlGropu.Items.Add(new ListItem("全部", "-1"));
+                //foreach (var item in json.groups)
+                //{
+                //    ddlGropu.Items.Add(new ListItem(item.name, item.id.ToString()));
+                //}
+                //ddlGropu.Items.Add(new ListItem("全部", "-1"));
 
                 txtResult.Text = OracleHelper.CanConnect();
                 if (txtResult.Text != "连接成功")
@@ -288,16 +288,28 @@ namespace WebApplication1
 
                 UploadForeverMediaResult mediaResult = MediaApi.UploadNews(accessToken, 100000, newsList);
 
-                if (ddlGropu.SelectedValue != "-1")
+                //if (ddlGropu.SelectedValue != "-1")
+                //{
+                //    GroupMessageApi.SendGroupMessageByGroupId
+                //      (accessToken, ddlGropu.SelectedValue, mediaResult.media_id, GroupMessageType.mpnews);
+                //}
+                //else
+                //{
+                try
                 {
                     GroupMessageApi.SendGroupMessageByGroupId
-                      (accessToken, ddlGropu.SelectedValue, mediaResult.media_id, GroupMessageType.mpnews);
+              (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+                    txtResult.Text += "提交成功一次服务号 推送成功";
                 }
-                else
+                catch (Exception ex)
                 {
-                    GroupMessageApi.SendGroupMessageByGroupId
-                     (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+
+                    txtResult.Text += "提交成功一次服务号 推送失败 " + ex.Message;
                 }
+
+
+
+                // }
 
 
                 //foreach (var item in json.data.openid)
@@ -313,6 +325,84 @@ namespace WebApplication1
                 //    }
 
                 //}
+            }
+        }
+
+        protected void btnShortSendAll_Click(object sender, EventArgs e)
+        {
+            string tempStr = new WeixinHelpService().GetTemp(Server);
+
+            var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["ShortWeixinAppId"],
+              WebConfigurationManager.AppSettings["ShortWeixinSecret"]);
+            OpenIdResultJson json = UserApi.Get(accessToken, "");
+
+            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 4);
+            for (int i = 0; i < 3; i++)
+            {
+                string imgName = i.ToString() + ".jpg";
+                if (imgResult.item.Find(p => p.name == imgName) == null)
+                {
+                    var filePath = Server.MapPath("~/image/" + imgName);
+                    var mediaId = MediaApi.UploadForeverMedia(accessToken, filePath).media_id;
+                }
+            }
+            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 4);
+
+            NewsModel[] newsList = new NewsModel[3];
+            var dataSevice = new DataAccessSerive();
+            var jobList = dataSevice.GetTopJobInfoList();
+            if (jobList.Count > 0)
+            {
+                List<Article> articles = new List<Article>();
+                int i = 0;
+                foreach (var job in jobList)
+                {
+                    string imgUrl = string.Format("{0}/image/{1}.jpg", WebConfigurationManager.AppSettings["domain"], i);
+
+                    var jobDetail = dataSevice.GetJobDetail(job.JobId);
+                    var news = new NewsModel()
+                  {
+                      author = "",
+                      content = tempStr.Replace("[ComName]", job.ComName)
+                      .Replace("[ComBrief]", jobDetail.ComBrief)
+                      .Replace("[DetailPalce]", jobDetail.DetailPalce)
+                      .Replace("[LinkMan]", jobDetail.LinkMan)
+                      .Replace("[Phone]", jobDetail.Phone)
+                      .Replace("[JobName]", jobDetail.JobName)
+                      .Replace("[JobType]", jobDetail.JobType)
+                      .Replace("[LowMoney]", jobDetail.LowMoney)
+                      .Replace("[HrNum]", jobDetail.HrNum)
+                      .Replace("[Edu]", jobDetail.Edu)
+                      .Replace("[RegisterDate]", jobDetail.RegisterDate)
+                      .Replace("[EffectDate]", jobDetail.EffectDate)
+                      .Replace("[Other]", jobDetail.Other)
+                      ,
+                      content_source_url = WebConfigurationManager.AppSettings["domain"] + "/html/detail.html?id=" + job.JobId,
+                      digest = job.ComName + "诚聘" + job.JobName,
+                      show_cover_pic = "0",
+                      thumb_media_id = imgResult.item.Find(p => p.name == i.ToString() + ".jpg").media_id,
+                      title = job.ComName + "诚聘" + job.JobName
+                  };
+                    newsList[i] = news;
+                    i++;
+                }
+
+
+                UploadForeverMediaResult mediaResult = MediaApi.UploadNews(accessToken, 100000, newsList);
+
+
+                try
+                {
+                    GroupMessageApi.SendGroupMessageByGroupId
+              (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+                    txtResult.Text += "提交成功一次订阅号 推送成功";
+                }
+                catch (Exception ex)
+                {
+
+                    txtResult.Text += "提交成功一次订阅号 推送失败 " + ex.Message;
+                }
+
             }
         }
     }

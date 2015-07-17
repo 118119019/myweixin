@@ -1,20 +1,25 @@
-﻿using Senparc.Weixin.MP.Entities;
+﻿using NLog;
+using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
+using WebApplication1.DataAccess;
 
 namespace WebApplication1
 {
     public class ShortCustomHandler : CustomMessageHandler
     {
-        private   string agentUrl = WebConfigurationManager.AppSettings["ShortWeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
-        private   string agentToken = WebConfigurationManager.AppSettings["ShortWeixinAgentToken"];//Token
-        private   string wiweihiKey = WebConfigurationManager.AppSettings["ShortWeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
+        private string agentUrl = WebConfigurationManager.AppSettings["ShortWeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
+        private string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
+        private string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
+
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// 处理文字请求
         /// </summary>
@@ -27,16 +32,20 @@ namespace WebApplication1
             {
                 var result = new StringBuilder();
                 result.AppendLine("您好，欢迎关注龙岩就业微信公众平台！");
-                result.AppendLine("");
-                result.AppendLine("");
                 result.AppendLine("龙岩市人力资源市场网");
-                result.AppendLine("<a href=' www.fjlylm.com'>www.fjlylm.com</a>");
-                result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58356'>龙岩畅丰专用汽车有限公司 最新招聘信息</a>");
-                result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=58301'>德泓（福建）光电科技有限公司 最新招聘信息</a>");
-                result.AppendLine("<a href='http://www.fjlylm.com/zwxq.asp?id=57765'>福建绿河谷农牧有限公司  最新招聘信息</a>");
-                result.AppendLine("更多信息请点击下面菜单");
-                result.AppendLine("访问网站招聘求职就业资讯");
-                responseMessage.Content = result.ToString(); 
+                result.AppendLine("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>");
+                var dataSevice = new DataAccessSerive();
+                var jobList = dataSevice.GetTopJobInfoList();
+                if (jobList.Count > 0)
+                {
+                    foreach (var job in jobList)
+                    {
+                        result.AppendLine(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>",
+                            WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                    }
+                }
+                logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
+                responseMessage.Content = result.ToString();
             }
             //if (requestMessage.Content == "约束")
             //{
@@ -123,6 +132,31 @@ namespace WebApplication1
             //这里设置仅用于测试，实际开发可以在外部更全局的地方设置，
             //比如MessageHandler<MessageContext>.GlobalWeixinContext.ExpireMinutes = 3。
             WeixinContext.ExpireMinutes = 3;
+        }
+
+        public override string GetWelcomeInfo()
+        {
+            //获取Senparc.Weixin.MP.dll版本信息
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
+            var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
+            var result = new StringBuilder();
+
+            result.AppendLine("您好，欢迎关注龙岩就业微信公众平台！");
+            result.AppendLine("龙岩市人力资源市场网");
+            result.AppendLine("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>");
+            var dataSevice = new DataAccessSerive();
+            var jobList = dataSevice.GetTopJobInfoList();
+            if (jobList.Count > 0)
+            {
+                foreach (var job in jobList)
+                {
+                    result.AppendLine(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>",
+                        WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                }
+            }
+
+
+            return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
         }
     }
 }

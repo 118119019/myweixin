@@ -190,4 +190,3 @@ E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.FriendlyUrls.resources.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.pdb
-E:\ly\weixin\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

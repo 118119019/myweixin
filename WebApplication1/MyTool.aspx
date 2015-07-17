@@ -42,10 +42,15 @@
             /// 2、虽然开发者使用高级群发接口的每日调用限制为100次，但是用户每月只能接收4条，请小心测试：<br />
             /// 3、无论在公众平台网站上，还是使用接口群发，用户每月只能接收4条群发消息，多于4条的群发将对该用户发送失败。
             <br />
-            分组列表
-            <asp:DropDownList ID="ddlGropu" runat="server">
-            </asp:DropDownList>
+          <%--   分组列表
+           <asp:DropDownList ID="ddlGropu" runat="server">
+            </asp:DropDownList>--%>
             <asp:Button ID="btnSendAll" runat="server" OnClick="btnSendAll_Click" Text="分组图文消息发送" />
+
+            <br />
+            <br /><br />
+            <asp:Button ID="btnShortSendAll" runat="server"  OnClick="btnShortSendAll_Click" Text="订阅号 图文消息 推送" />
+
         </div>
 
 

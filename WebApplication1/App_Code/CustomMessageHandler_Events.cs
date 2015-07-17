@@ -13,7 +13,7 @@ namespace WebApplication1
 {
     public partial class CustomMessageHandler
     {
-        private string GetWelcomeInfo()
+        public virtual string GetWelcomeInfo()
         {
             //获取Senparc.Weixin.MP.dll版本信息
             var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));

@@ -1,4 +1,5 @@
-﻿using Senparc.Weixin.MP;
+﻿using NLog;
+using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.Entities.Request;
 using System;
 using System.Collections.Generic;
@@ -74,17 +75,19 @@ namespace WebApplication1
                 }
                 catch (Exception ex)
                 {
-                    using (TextWriter tw = new StreamWriter(Server.MapPath("~/App_Data/Error_" + DateTime.Now.Ticks + ".txt")))
-                    {
-                        tw.WriteLine(ex.Message);
-                        tw.WriteLine(ex.InnerException.Message);
-                        if (messageHandler.ResponseDocument != null)
-                        {
-                            tw.WriteLine(messageHandler.ResponseDocument.ToString());
-                        }
-                        tw.Flush();
-                        tw.Close();
-                    }
+                       Logger log = LogManager.GetCurrentClassLogger();
+                       log.ErrorException("订阅号异常",ex);
+                    //using (TextWriter tw = new StreamWriter(Server.MapPath("~/App_Data/Error_" + DateTime.Now.Ticks + ".txt")))
+                    //{
+                    //    tw.WriteLine(ex.Message);
+                    //    tw.WriteLine(ex.InnerException.Message);
+                    //    if (messageHandler.ResponseDocument != null)
+                    //    {
+                    //        tw.WriteLine(messageHandler.ResponseDocument.ToString());
+                    //    }
+                    //    tw.Flush();
+                    //    tw.Close();
+                    //}
                 }
                 finally
                 {
