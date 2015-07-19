@@ -1,4 +1,5 @@
-﻿using Senparc.Weixin.MP.Agent;
+﻿using LongYanService;
+using Senparc.Weixin.MP.Agent;
 using Senparc.Weixin.MP.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
-using WebApplication1.DataAccess;
+ 
 
 namespace WebApplication1
 {

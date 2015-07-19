@@ -9,8 +9,9 @@ using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MessageHandlers;
 using Senparc.Weixin.MP.Helpers;
-using WebApplication1.DataAccess;
+ 
 using NLog;
+using LongYanService;
 
 
 namespace WebApplication1

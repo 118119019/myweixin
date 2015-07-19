@@ -190,3 +190,10 @@ E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\zh-Hans\Microsoft.AspNet.FriendlyUrls.resources.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.dll
 E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.pdb
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\CommonService.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\CommonUtility.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\LongYanService.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\net91com.Core.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\NLog.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\LongYanService.pdb
