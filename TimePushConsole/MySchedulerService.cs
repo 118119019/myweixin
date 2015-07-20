@@ -114,13 +114,16 @@ namespace TimePushConsole
               Email = "xcbrmbtest@126.com",
               Id = 1,
               Name = "xcbrmbtest",
-              Psd = "a3236459",
+              Psd = "vubupcmbsjktodbj",
               Url = ""
           };
         private string GetTemp(string url)
         {
             HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(File.ReadAllText(url));
+            string path = "quartz_jobs.xml";
+            //CommonUtility.HttpUtility.DownloadFile(url, path);
+            //File.ReadAllText(path)
+            doc.LoadHtml(CommonUtility.HttpUtility.Get(url));
             HtmlNode trNode = doc.DocumentNode.SelectSingleNode("//div[@id='content']");
             string str = trNode.InnerHtml;
             return trNode.InnerHtml;
@@ -133,8 +136,8 @@ namespace TimePushConsole
             logger.Info("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
             try
             {
-                string webPath = ConfigurationManager.AppSettings.Get("webPath");
-                string tempStr = GetTemp(webPath + "Temp.html");
+                string webPath = ConfigurationManager.AppSettings.Get("domain");
+                string tempStr = GetTemp(webPath + "/Temp.html");
 
                 var accessToken = AccessTokenContainer.TryGetToken(
                 ConfigurationManager.AppSettings.Get("ShortWeixinAppId"),
@@ -216,8 +219,8 @@ namespace TimePushConsole
                 UploadForeverMediaResult mediaResult = MediaApi.UploadNews(accessToken, 100000, newsList);
                 try
                 {
-                    //GroupMessageApi.SendGroupMessageByGroupId
-                    //(accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+                    GroupMessageApi.SendGroupMessageByGroupId
+                    (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
                     Console.WriteLine("提交一次  推送成功");
                     logger.Info(DateTime.Now.ToString() + " 提交一次  推送成功");
                 }

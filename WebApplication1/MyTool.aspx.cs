@@ -4,6 +4,7 @@ using NLog;
 using Oracle.ManagedDataAccess.Client;
 using Quartz;
 using Quartz.Impl;
+using Quartz.Xml.JobSchedulingData20;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.Custom;
@@ -25,7 +26,8 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
- 
+using System.Xml;
+using System.Xml.Serialization;
 using WebApplication1.Service;
 
 namespace WebApplication1
@@ -41,6 +43,31 @@ namespace WebApplication1
             }
             if (!IsPostBack)
             {
+                for (int i = 0; i < 23; i++)
+                {
+                    ddlHour.Items.Add(
+                        new ListItem(i.ToString() + "点", i.ToString())
+                        );
+                }
+                for (int i = 0; i < 60; i++)
+                {
+                    ddlMinute.Items.Add(
+                        new ListItem(i.ToString() + "分", i.ToString())
+                        );
+                }
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(Server.MapPath("quartz_jobs.xml"));
+                XmlNodeList elemList = xmlDoc.GetElementsByTagName("cron-expression");
+                var node = elemList[0];
+                string[] cronList = node.InnerText.Split(' ');//0 1 9 ? * TUE
+                ddlMinute.SelectedValue = cronList[1];
+                ddlHour.SelectedValue = cronList[2];
+                ddlWeek.SelectedValue = cronList[5];
+
+                //保存
+                //xmldoc.Save(@"E:\Test\Test\tt.xml");
+
+
                 var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
                 WebConfigurationManager.AppSettings["LongNameAppSecret"]);
                 var json = GroupsApi.Get(accessToken);
@@ -200,7 +227,7 @@ namespace WebApplication1
                     i++;
                 }
                 var rest = Senparc.Weixin.MP.AdvancedAPIs.Custom.CustomApi.SendNews(accessToken, "oJvzIt8go_mNhCAVE-M0D5EexLpU", articles);
-            }          
+            }
         }
 
         protected void btnSendAll_Click(object sender, EventArgs e)
@@ -451,6 +478,20 @@ namespace WebApplication1
             }
             else
                 return false;
+        }
+
+        protected void btnSaveQuartzCfg_Click(object sender, EventArgs e)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Server.MapPath("quartz_jobs.xml"));
+            XmlNodeList elemList = xmlDoc.GetElementsByTagName("cron-expression");
+            var node = elemList[0];
+            string[] cronList = node.InnerText.Split(' ');//0 1 9 ? * TUE
+            cronList[1] = ddlMinute.SelectedValue;
+            cronList[2] = ddlHour.SelectedValue;
+            cronList[5] = ddlWeek.SelectedValue;
+            node.InnerText = string.Join(" ", cronList);
+            xmlDoc.Save(Server.MapPath("quartz_jobs.xml"));
         }
     }
 }

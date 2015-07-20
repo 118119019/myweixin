@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,7 @@ namespace TimePushConsole
 {
     public class MailSendFunc
     {
+        private Logger log = LogManager.GetCurrentClassLogger();
         public void SendMail(string mail, string content, string title, ResetPsdMailItem emailConfig, bool isHtml = false)
         {
             try
@@ -33,7 +35,7 @@ namespace TimePushConsole
             }
             catch (Exception ex)
             {
-               
+                log.ErrorException(DateTime.Now.ToString() + " 邮箱发送失败 " + ex.Message, ex);
             }
         }
     }

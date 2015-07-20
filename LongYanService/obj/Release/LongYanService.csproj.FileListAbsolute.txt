@@ -1,0 +1,5 @@
+E:\ly\weixin\WebApplication1\LongYanService\bin\Release\LongYanService.dll
+E:\ly\weixin\WebApplication1\LongYanService\bin\Release\LongYanService.pdb
+E:\ly\weixin\WebApplication1\LongYanService\bin\Release\Oracle.ManagedDataAccess.dll
+E:\ly\weixin\WebApplication1\LongYanService\obj\Release\LongYanService.dll
+E:\ly\weixin\WebApplication1\LongYanService\obj\Release\LongYanService.pdb

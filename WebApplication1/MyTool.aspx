@@ -79,7 +79,23 @@
         </div>
         <div>
             <h2>定时任务配置</h2>
-         //   <asp:DropDownList ID="ddlWeek"
+            <asp:DropDownList ID="ddlWeek" runat="server">
+                <asp:ListItem Text="周一" Value="MON"></asp:ListItem>
+                <asp:ListItem Text="周二" Value="TUE"></asp:ListItem>
+                <asp:ListItem Text="周三" Value="WED"></asp:ListItem>
+                <asp:ListItem Text="周四" Value="THU"></asp:ListItem>
+                <asp:ListItem Text="周五" Value="FRI"></asp:ListItem>
+                <asp:ListItem Text="周六" Value="SAT"></asp:ListItem>
+                <asp:ListItem Text="周日" Value="SUN"></asp:ListItem>
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlHour" runat="server">
+            </asp:DropDownList>
+               <asp:DropDownList ID="ddlMinute" runat="server">
+            </asp:DropDownList>
+
+            <asp:Button ID="btnSaveQuartzCfg" OnClick="btnSaveQuartzCfg_Click" runat="server" Text="保存定时任务配置" />
+            <br />
+            <label style="color: red;">保存完之后 请手动重新启动 定时程序</label>
         </div>
 
 

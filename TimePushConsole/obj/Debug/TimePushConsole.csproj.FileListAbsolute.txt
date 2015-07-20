@@ -24,3 +24,16 @@ E:\2015work\LongYanWeiXin\myweixin\TimePushConsole\bin\Debug\NLog.config
 E:\2015work\LongYanWeiXin\myweixin\TimePushConsole\bin\Debug\CommonService.dll
 E:\2015work\LongYanWeiXin\myweixin\TimePushConsole\bin\Debug\CommonUtility.dll
 E:\2015work\LongYanWeiXin\myweixin\TimePushConsole\bin\Debug\net91com.Core.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\NLog.config
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\TimePushConsole.exe.config
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\TimePushConsole.exe
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\TimePushConsole.pdb
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\HtmlAgilityPack.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\LongYanService.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Senparc.Weixin.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Senparc.Weixin.MP.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\LongYanService.pdb
+E:\ly\weixin\WebApplication1\TimePushConsole\obj\Debug\TimePushConsole.csprojResolveAssemblyReference.cache
+E:\ly\weixin\WebApplication1\TimePushConsole\obj\Debug\TimePushConsole.exe
+E:\ly\weixin\WebApplication1\TimePushConsole\obj\Debug\TimePushConsole.pdb

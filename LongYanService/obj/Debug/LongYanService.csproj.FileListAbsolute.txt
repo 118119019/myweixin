@@ -3,3 +3,8 @@ E:\2015work\LongYanWeiXin\myweixin\LongYanService\bin\Debug\LongYanService.pdb
 E:\2015work\LongYanWeiXin\myweixin\LongYanService\bin\Debug\Oracle.ManagedDataAccess.dll
 E:\2015work\LongYanWeiXin\myweixin\LongYanService\obj\Debug\LongYanService.dll
 E:\2015work\LongYanWeiXin\myweixin\LongYanService\obj\Debug\LongYanService.pdb
+E:\ly\weixin\WebApplication1\LongYanService\bin\Debug\LongYanService.dll
+E:\ly\weixin\WebApplication1\LongYanService\bin\Debug\LongYanService.pdb
+E:\ly\weixin\WebApplication1\LongYanService\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\ly\weixin\WebApplication1\LongYanService\obj\Debug\LongYanService.dll
+E:\ly\weixin\WebApplication1\LongYanService\obj\Debug\LongYanService.pdb
