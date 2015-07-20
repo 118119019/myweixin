@@ -1,13 +1,12 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Web;
-
-namespace WebApplication1
+using System.Threading.Tasks;
+using System.Configuration;
+namespace LongYanService
 {
     public abstract class OracleHelper
     {

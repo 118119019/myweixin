@@ -1,12 +1,13 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using LongYanService.Model;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 
-namespace WebApplication1.DataAccess
+namespace LongYanService
 {
     public class WhereParam
     {
@@ -101,10 +102,10 @@ namespace WebApplication1.DataAccess
             {
                 cmdWhere += string.Format(p.Where, p.ParameterName);
                 parameters.Add(new OracleParameter()
-            {
-                ParameterName = p.ParameterName,
-                Value = p.Value
-            });
+                {
+                    ParameterName = p.ParameterName,
+                    Value = p.Value
+                });
             });
             string sqlSelect = @"select count(*) from LYJYGD.ZP03 w   inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 
             where w.ZPC006=1 and w.ZPC010=0 {0} ";
@@ -275,7 +276,7 @@ select *
 
         public List<JobInfo> GetTopJobInfoList()
         {
-            List<JobInfo> jobList = new List<DataAccess.JobInfo>();
+            List<JobInfo> jobList = new List<JobInfo>();
             string sqlSelect = @" 
 select *
   from (select *

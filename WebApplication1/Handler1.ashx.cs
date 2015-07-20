@@ -1,5 +1,7 @@
 ﻿using CommonService.Serilizer;
 using HtmlAgilityPack;
+using LongYanService;
+using LongYanService.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
-using WebApplication1.DataAccess;
+ 
 
 
 namespace WebApplication1
@@ -149,27 +151,6 @@ namespace WebApplication1
 
     }
 
-    public class TableJson
-    {
-        public List<MyLink> myLinkList { get; set; }
-        public MyPage mypage { get; set; }
-    }
-    public class MyLink
-    {
-        public string Company { get; set; }
-        public string Url { get; set; }
-        public string Work { get; set; }
-        public string Num { get; set; }
-        public string Time { get; set; }
-    }
-
-    public class MyPage
-    {
-        public string Previous { get; set; }
-        public string Next { get; set; }
-
-        public string Desc { get; set; }
-        public string SelPage { get; set; }
-    }
+   
 
 }

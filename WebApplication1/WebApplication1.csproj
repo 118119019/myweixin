@@ -45,20 +45,24 @@
       <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="CommonService">
-      <HintPath>..\..\..\..\后台管理\lib\CommonService.dll</HintPath>
+      <HintPath>..\..\..\Lib\CommonService.dll</HintPath>
     </Reference>
     <Reference Include="CommonUtility">
-      <HintPath>..\..\..\..\后台管理\lib\CommonUtility.dll</HintPath>
+      <HintPath>..\..\..\Lib\CommonUtility.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="net91com.Core">
-      <HintPath>..\..\..\..\服务端\产品项目底层库\通用DLL\常用DLL\net91com.Core.dll</HintPath>
+      <HintPath>..\..\..\Lib\net91com.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\..\..\..\服务端\产品项目底层库\通用DLL\常用DLL\NLog.dll</HintPath>
+      <HintPath>..\..\..\Lib\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>F:\ODP.NET_Managed121020\odp.net\managed\common\Oracle.ManagedDataAccess.dll</HintPath>
@@ -138,7 +142,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\111.pubxml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -159,7 +165,6 @@
     <Compile Include="App_Code\CustomMessageContext.cs" />
     <Compile Include="App_Code\CustomMessageHandler.cs" />
     <Compile Include="App_Code\CustomMessageHandler_Events.cs" />
-    <Compile Include="DataAccess\DataAccessSerive.cs" />
     <Compile Include="MyTool.aspx.cs">
       <DependentUpon>MyTool.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -177,7 +182,6 @@
     <Compile Include="myweixin.ashx.cs">
       <DependentUpon>myweixin.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\OracleHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\MailSendFunc.cs" />
     <Compile Include="Service\MySchedulerService.cs" />
@@ -197,6 +201,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="WebLog\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LongYanService\LongYanService.csproj">
+      <Project>{f20f417d-e907-4132-8d34-e1de278e621c}</Project>
+      <Name>LongYanService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

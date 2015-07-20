@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using LongYanService;
+using NLog;
 using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
 using System;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
-using WebApplication1.DataAccess;
+ 
 
 namespace WebApplication1
 {
