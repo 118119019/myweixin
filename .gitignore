@@ -50,3 +50,15 @@ WebApplication1/bin/WebApplication1.pdb
 WebApplication1/bin/WebApplication1.pdb
 WebApplication1/bin/quartz_jobs.xml
 WebApplication1.v12.suo
+LongYanService/bin/Debug/LongYanService.dll
+*.dll
+LongYanService/bin/Debug/LongYanService.dll
+*.pdb
+LongYanService/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+TimePushConsole/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.pdb
+TimePushConsole/obj/Debug/TimePushConsole.exe
+*.suo
+WebApplication1/obj/Release/_WPPLastBuildInfo.txt
+*.txt
+*.pdb

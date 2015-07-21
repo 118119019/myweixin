@@ -196,3 +196,10 @@ E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Release\WebApplication1.p
 E:\ly\weixin\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
 E:\ly\weixin\WebApplication1\WebApplication1\bin\LongYanService.dll
 E:\ly\weixin\WebApplication1\WebApplication1\bin\LongYanService.pdb
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\CommonService.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\CommonUtility.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\LongYanService.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\net91com.Core.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\NLog.dll
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\bin\LongYanService.pdb
+E:\2015work\LongYanWeiXin\myweixin\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
