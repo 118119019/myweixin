@@ -96,9 +96,9 @@ html, button, input, select, textarea { font-family: "Roboto","Helvetica Neue", 
 	.set_tab tr th:nth-child(3n),.set_tab tr td:nth-child(3n){ display: none;}
 }
 
-@media(max-width: 320px)  {
+/*@media(max-width: 320px)  {
 	.set_tab tr th:nth-child(2n),.set_tab tr td:nth-child(2n){ display: none;} 
-}
+}*/
 .modal {display: none;position: fixed;z-index: 1000;top: 0; left: 0;height: 100%;width: 100%;background: rgba( 255, 255, 255, .8 ) url('../images/FhHRx.gif')   50% 50% no-repeat; }
 body.loading {overflow: hidden;} 
 body.loading .modal { display: block; }

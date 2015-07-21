@@ -122,6 +122,10 @@
     <Content Include="MyTool.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="News\Information1.html" />
+    <Content Include="News\Information2.html" />
+    <Content Include="News\News1.html" />
+    <Content Include="News\News2.html" />
     <Content Include="packages.config" />
     <Content Include="myweixin.ashx" />
     <Content Include="quartz_jobs.xml">

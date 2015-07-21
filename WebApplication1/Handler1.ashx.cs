@@ -81,7 +81,7 @@ namespace WebApplication1
                     {
                         whereList.Add(new WhereParam()
                         {
-                            Where = " and w.ZPC005<=to_date(:{0}, 'yyyy-mm-dd')",
+                            Where = " and w.ZPC004<=to_date(:{0}, 'yyyy-mm-dd')",
                             ParameterName = "effectDate",
                             Value = effectDate
                         });

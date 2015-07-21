@@ -21,16 +21,16 @@ namespace WebApplication1
             var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
             var result = new StringBuilder();
 
-            result.AppendLine("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】");
-            result.AppendLine("龙岩市人力资源市场网");
-            result.AppendLine("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>");
+            result.Append("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】\r\n");
+            result.Append("龙岩市人力资源市场网\r\n");
+            result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>\r\n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
             if (jobList.Count > 0)
             {
                 foreach (var job in jobList)
                 {
-                    result.AppendLine(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>",
+                    result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>\r\n",
                         WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
                 }
             }
