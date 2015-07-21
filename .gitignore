@@ -62,3 +62,6 @@ TimePushConsole/obj/Debug/TimePushConsole.exe
 WebApplication1/obj/Release/_WPPLastBuildInfo.txt
 *.txt
 *.pdb
+TimePushConsole/bin/Debug/TimePushConsole.vshost.exe.manifest
+*.suo
+WebApplication1/bin/LongYanService.dll
