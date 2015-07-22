@@ -12,7 +12,7 @@
     <script src="js/swiper.min.js" type="text/javascript"></script>
 
 </head>
-<body>   
+<body>
     <div class="main">
         <div class="content">
             <div class="search">
@@ -516,11 +516,11 @@
                     <option value="6280000">普通工人</option>
                     <option value="7000000">其它</option>
                 </select>
-                <div style="text-align:left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 20px; font-size: 1.4rem; ">
+                <div style="text-align:left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 10px; font-size: 1.4rem; ">
                     <label>登记日期>=</label>
                     <input id="txtRegDate" type="date" />
                 </div>
-                <div style="text-align: left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 20px; font-size: 1.4rem; ">
+                <div style="text-align: left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 10px; font-size: 1.4rem; ">
                     <label>登记日期<=</label>
                     <input id="txtEffectDate" type="date" />
                 </div>
@@ -562,6 +562,37 @@
         <!-- Place at bottom of page -->
     </div>
     <script>
+        $(function () {
+            var strpage = sessionStorage.lastname;
+            if (strpage) {
+                var objJSON = eval("(" + strpage + ")");
+                var Links = objJSON.myLinkList;
+                var strHtml = "";
+                for (var i = 0; i < Links.length; i++) {
+                    strHtml += "<tr><th scope='row'>" + Links[i].Url + "</th><td>" + Links[i].Work + "</td><td>" + Links[i].Num + "</td><td>" + Links[i].Time + "</td></tr>";
+                }
+                $('#listTr').html(strHtml);
+                var page = objJSON.mypage;
+                strHtml = "";
+                if (page != null) {
+                    var str = "";
+                    if (page.Previous != null) {
+                        str = "onclick=\"queryPage(" + page.Previous + ");\"";
+                    }
+                    strHtml += "<a href='#' " + str + ">上一页</a>";
+                    str = "";
+                    if (page.Next != null) {
+                        str = "onclick=\"queryPage(" + page.Next + ");\"";
+                    }
+                    strHtml += "<a href='#' " + str + ">下一页</a>";
+                    strHtml += page.Desc;
+                    $('#mypage').html(strHtml);
+                }
+            }
+
+        });
+
+
         var $body = $("body");
         var addMask = function () {
             $body.addClass("loading");
@@ -596,6 +627,7 @@
                         strHtml += page.Desc;
                         $('#mypage').html(strHtml);
                     }
+                    sessionStorage.lastname = data;
                 }
             }
             deleteMask();

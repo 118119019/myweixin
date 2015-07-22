@@ -150,8 +150,8 @@ select *
             {
                 try
                 {
-                    MyLink mylink = new MyLink();
-                    mylink.Url = string.Format("<a href=\"detail.html?id={0}\">{1}</a>", reader["ZPC001"].ToString(), reader["ZPA002"]);
+                    MyLink mylink = new MyLink();  //target=\"_blank\"
+                    mylink.Url = string.Format("<a   href=\"detail.html?id={0}\">{1}</a>", reader["ZPC001"].ToString(), reader["ZPA002"]);
                     mylink.Work = reader["ZPB003"].ToString();
                     mylink.Company = reader["ZPA002"].ToString();
                     mylink.Num = reader["ZPC002"].ToString();
@@ -237,7 +237,7 @@ select *
                 });
                 string str = "";
                 string sqlSelect = @" select w.ZPA001, w.ZPC001,w.ZPA002,w.ZPC008,c.ZPA016,c.ZPA017,w.ZPB003,w.ZPB011,w.ZPC003,w.ZPC002,
-            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002            
+            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002,c.ZPA010            
             from LYJYGD.ZP03 w inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 where w.ZPC001=:id";
                 var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, sqlSelect, parameters);
                 while (reader.Read())
@@ -247,6 +247,8 @@ select *
                         ShowVal(reader["ZPA002"]));
                     sb.AppendFormat("<p><label>所属劳动部门:</label>{0}</p>", ShowVal(reader["ZPC008"]));
                     sb.AppendFormat("<p><label>单位类型:</label>{0}</p>", GetAA11Type(reader["ZPA016"].ToString(), "ZPA016"));
+                    sb.AppendFormat("<p><label>所属行业:</label>{0}</p>", GetAA11Type(reader["ZPA010"].ToString(), "ZPA010"));
+
                     sb.Append(GetContack(reader["ZPA001"].ToString()));
                     sb.AppendFormat("<p><label>企业介绍:</label>{0}</p>", ShowVal(reader["ZPA017"]));
                     sb.Append("</dd></dl>");
