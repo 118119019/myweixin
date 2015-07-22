@@ -12,3 +12,13 @@ E:\ly\weixin\WebApplication1\TimePushConsole\obj\Debug\TimePushConsole.csprojRes
 E:\ly\weixin\WebApplication1\TimePushConsole\obj\Debug\TimePushConsole.exe
 E:\ly\weixin\WebApplication1\TimePushConsole\obj\Debug\TimePushConsole.pdb
 E:\2015work\LongYanWeiXin\myweixin\TimePushConsole\bin\Debug\TimePushConsole.exe.config
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Common.Logging.Core.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Common.Logging.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\CommonService.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\CommonUtility.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\LiteDB.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\log4net.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\net91com.Core.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Newtonsoft.Json.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\NLog.dll
+E:\ly\weixin\WebApplication1\TimePushConsole\bin\Debug\Quartz.dll

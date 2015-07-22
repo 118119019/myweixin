@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
- 
+using WebApplication1.News;
+
 
 namespace WebApplication1
 {
@@ -155,6 +156,24 @@ namespace WebApplication1
                         reponseMessage = strongResponseMessage;
                     }
                     break;
+                case "GetNewsType1":
+                    {
+                         
+                        var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
+                    
+                        strongResponseMessage.Content = new NewsCfgOp().GetHrefStr(1);
+                        reponseMessage = strongResponseMessage;
+                    }
+                    break;
+                case "GetNewsType2":
+                    {
+                        var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
+                        strongResponseMessage.Content = new NewsCfgOp().GetHrefStr(2);
+                        reponseMessage = strongResponseMessage;
+                    }
+                    break;
+
+
                 default:
                     {
                         //var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
