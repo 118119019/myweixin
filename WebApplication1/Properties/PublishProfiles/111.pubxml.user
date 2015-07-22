@@ -121,7 +121,7 @@
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>07/20/2015 22:05:00</publishTime>
+      <publishTime>07/21/2015 23:22:58</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/15/2015 09:12:39</publishTime>
@@ -319,10 +319,10 @@
       <publishTime>07/11/2015 23:36:02</publishTime>
     </File>
     <File Include="html/css/style.css">
-      <publishTime>07/11/2015 23:36:03</publishTime>
+      <publishTime>07/21/2015 21:28:53</publishTime>
     </File>
     <File Include="html/detail.html">
-      <publishTime>07/11/2015 23:36:03</publishTime>
+      <publishTime>07/21/2015 23:21:47</publishTime>
     </File>
     <File Include="html/images/bullet.gif">
       <publishTime>07/11/2015 23:36:03</publishTime>
@@ -340,7 +340,7 @@
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="html/index.html">
-      <publishTime>07/11/2015 23:36:03</publishTime>
+      <publishTime>07/21/2015 23:21:43</publishTime>
     </File>
     <File Include="html/js/swiper.min.js">
       <publishTime>07/11/2015 23:36:03</publishTime>
@@ -401,6 +401,9 @@
     </File>
     <File Include="myweixin.ashx">
       <publishTime>07/11/2015 23:36:03</publishTime>
+    </File>
+    <File Include="News/News1.html">
+      <publishTime>07/21/2015 22:49:12</publishTime>
     </File>
     <File Include="NLog.config">
       <publishTime>07/12/2015 16:40:54</publishTime>
