@@ -38,17 +38,17 @@
         <div>
             <h1>推送相关图片列表</h1>
             <ul>
-                <li>第一条图片                   
+                <li style="margin-bottom: 20px;">第一条图片                   
                     <asp:Image ID="img0" runat="server" />
                     <asp:FileUpload ID="uploadImgUrl0" runat="server" />
                     <asp:Label ID="labImgError0" runat="server"></asp:Label>
                 </li>
-                <li>第二条图片
+                <li style="margin-bottom: 20px;">第二条图片
                     <asp:Image ID="img1" runat="server" />
                     <asp:FileUpload ID="uploadImgUrl1" runat="server" />
                     <asp:Label ID="labImgError1" runat="server"></asp:Label>
                 </li>
-                <li>第三条图片                  
+                <li style="margin-bottom: 20px;">第三条图片                  
                     <asp:Image ID="img2" runat="server" />
                     <asp:FileUpload ID="uploadImgUrl2" runat="server" />
                     <asp:Label ID="labImgError2" runat="server"></asp:Label>
@@ -90,7 +90,7 @@
             </asp:DropDownList>
             <asp:DropDownList ID="ddlHour" runat="server">
             </asp:DropDownList>
-               <asp:DropDownList ID="ddlMinute" runat="server">
+            <asp:DropDownList ID="ddlMinute" runat="server">
             </asp:DropDownList>
 
             <asp:Button ID="btnSaveQuartzCfg" OnClick="btnSaveQuartzCfg_Click" runat="server" Text="保存定时任务配置" />

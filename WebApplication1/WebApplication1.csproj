@@ -134,6 +134,7 @@
     <Content Include="News\News1.html" />
     <Content Include="News\News2.html" />
     <Content Include="News\newsconfig.xml" />
+    <Content Include="News\NewsIndex.aspx" />
     <Content Include="packages.config" />
     <Content Include="myweixin.ashx" />
     <Content Include="quartz_jobs.xml">
@@ -429,6 +430,13 @@
       <DependentUpon>NewsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="News\NewsCfg.cs" />
+    <Compile Include="News\NewsIndex.aspx.cs">
+      <DependentUpon>NewsIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News\NewsIndex.aspx.designer.cs">
+      <DependentUpon>NewsIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\MailSendFunc.cs" />
     <Compile Include="Service\MySchedulerService.cs" />

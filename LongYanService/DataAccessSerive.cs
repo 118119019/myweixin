@@ -151,7 +151,7 @@ select *
                 try
                 {
                     MyLink mylink = new MyLink();
-                    mylink.Url = string.Format("<a href=\"detail.html?id={0}\">{1}</a>", reader["ZPC001"].ToString(), reader["ZPA002"]);
+                    mylink.Url = string.Format("<a target=\"_blank\" href=\"detail.html?id={0}\">{1}</a>", reader["ZPC001"].ToString(), reader["ZPA002"]);
                     mylink.Work = reader["ZPB003"].ToString();
                     mylink.Company = reader["ZPA002"].ToString();
                     mylink.Num = reader["ZPC002"].ToString();

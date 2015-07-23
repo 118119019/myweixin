@@ -28,7 +28,7 @@ namespace WebApplication1.News
 
         public string GetHrefStr(int type)
         {
-            var list = GetNewsCfgList().FindAll(p => p.Type == type);
+            var list = GetNewsCfgListByType(type);
             StringBuilder sb = new StringBuilder();
             foreach (var item in list)
             {
@@ -36,6 +36,11 @@ namespace WebApplication1.News
                 WebConfigurationManager.AppSettings["domain"], item.Id, item.Name);
             }
             return sb.ToString();
+        }
+
+        public List<NewsCfg> GetNewsCfgListByType(int type)
+        {
+            return GetNewsCfgList().FindAll(p => p.Type == type);
         }
 
     }
