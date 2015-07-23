@@ -38,11 +38,11 @@ html, button, input, select, textarea { font-family: "Roboto","Helvetica Neue", 
 
 .main{ padding: 6px; overflow: hidden;}
 .content{}
-.content h1{ font-size: 2.5rem; font-weight:bold; padding-bottom: 6px; margin: 10px 0; text-align: center; color: #1545ab; font-weight: bold;}
+.content h1{ font-size: 2.5rem; font-weight:bold; padding-bottom: 0px; margin: 0; text-align: center; color: #1545ab; font-weight: bold; line-height:1;}
 
 
 .search{ padding: 0; text-align: center; max-width: 720px; margin:0 auto 10px; padding-top: 20px; }
-.search .slt{ background: #fff; padding: 10px 0; border:2px solid #fff;  box-shadow: 0 0 10px rgba(0,0,0,.5);width: 100%; margin-bottom: 20px; font-size: 1.4rem;}
+.search .slt{ background: #fff; padding: 10px 0; border:2px solid #fff;  box-shadow: 0 0 10px rgba(0,0,0,.5);width: 100%; margin-bottom: 10px; font-size: 1.4rem;}
 .search .btn_search{ cursor: pointer; border:2px solid #fff; background:-webkit-gradient(linear, 0 0,0 bottom, from(#34abff), to(#0a4976)); color: #fff; text-shadow:0 0 5px #000;  padding: 12px; font-size: 1.5rem; font-weight: bold; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%;}
 .search .btn_search:active{background:-webkit-gradient(linear, 0 0,0 bottom, from(#ff0f0f), to(#a70f0f));}
 
@@ -102,4 +102,5 @@ html, button, input, select, textarea { font-family: "Roboto","Helvetica Neue", 
 .modal {display: none;position: fixed;z-index: 1000;top: 0; left: 0;height: 100%;width: 100%;background: rgba( 255, 255, 255, .8 ) url('../images/FhHRx.gif')   50% 50% no-repeat; }
 body.loading {overflow: hidden;} 
 body.loading .modal { display: block; }
+ 
    
