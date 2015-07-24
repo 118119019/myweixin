@@ -150,8 +150,13 @@ select *
             {
                 try
                 {
+<<<<<<< HEAD
+                    MyLink mylink = new MyLink();
+                    mylink.Url = string.Format("<a target=\"_blank\" href=\"detail.html?id={0}\">{1}</a>", reader["ZPC001"].ToString(), reader["ZPA002"]);
+=======
                     MyLink mylink = new MyLink();  //target=\"_blank\"
                     mylink.Url = string.Format("<a   href=\"detail.html?id={0}\">{1}</a>", reader["ZPC001"].ToString(), reader["ZPA002"]);
+>>>>>>> origin/master
                     mylink.Work = reader["ZPB003"].ToString();
                     mylink.Company = reader["ZPA002"].ToString();
                     mylink.Num = reader["ZPC002"].ToString();
@@ -348,7 +353,7 @@ select *
 
         private string GetContack(string cid)
         {
-            string sql = string.Format("select ZPA032,ZPA030,ZPA031,ZPA043 from  LYJYGD.ZP01A2  where ZPA001='{0}'", cid);
+            string sql = string.Format("select ZPA032,ZPA030,ZPA031 from  LYJYGD.ZP01A2  where ZPA001='{0}'", cid);
             var reader = OracleHelper.ExecuteReader(sql);
             StringBuilder sb = new StringBuilder();
             while (reader.Read())
@@ -356,7 +361,6 @@ select *
                 sb.AppendFormat("<p><label>详细地址:</label>{0}</p>", ShowVal(reader["ZPA032"]));
                 sb.AppendFormat("<p><label>联系人:</label>{0}</p>", ShowVal(reader["ZPA030"]));
                 sb.AppendFormat("<p><label>联系电话:</label>{0}</p>", ShowVal(reader["ZPA031"]));
-                sb.AppendFormat("<p><label>电子邮件:</label>{0}</p>", ShowVal(reader["ZPA043"]));
             }
             return sb.ToString();
         }

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
- 
+
 
 namespace WebApplication1
 {
@@ -29,22 +29,35 @@ namespace WebApplication1
         {
 
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
-            if (requestMessage.Content != "")
+            if (requestMessage.Content != "" && requestMessage.Content != "调试")
             {
                 var result = new StringBuilder();
-                result.Append("您好，欢迎关注龙岩就业微信公众平台！\r\n");
-                result.Append("龙岩市人力资源市场网\r\n");
-                result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>\r\n");
+                result.Append("您好，欢迎关注龙岩就业微信公众平台！ \n");
+                result.Append("龙岩市人力资源市场网 \n");
+                result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
                 var dataSevice = new DataAccessSerive();
                 var jobList = dataSevice.GetTopJobInfoList();
                 if (jobList.Count > 0)
                 {
                     foreach (var job in jobList)
                     {
-                        result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>\r\n",
+                        result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
                             WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
                     }
                 }
+                logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
+                responseMessage.Content = result.ToString();
+            }
+
+            if (requestMessage.Content == "调试")
+            {
+                var result = new StringBuilder();
+                result.Append("1您好，欢迎关注龙岩就业微信公众平台！\n");
+                result.Append("2单独n的\n");
+                result.Append("3<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \\n");
+                result.Append("4单独r的\r");
+                result.Append("5<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \\r");
+
                 logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
                 responseMessage.Content = result.ToString();
             }
@@ -142,16 +155,16 @@ namespace WebApplication1
             var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
             var result = new StringBuilder();
 
-            result.Append("您好，欢迎关注龙岩就业微信公众平台！\r\n");
-            result.Append("龙岩市人力资源市场网\r\n");
-            result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a>\r\n");
+            result.Append("您好，欢迎关注龙岩就业微信公众平台！\n");
+            result.Append("龙岩市人力资源市场网 \n");
+            result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
             if (jobList.Count > 0)
             {
                 foreach (var job in jobList)
                 {
-                    result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a>\r\n",
+                    result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
                         WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
                 }
             }
