@@ -165,15 +165,17 @@ select *
 
             }
             MyPage page = new MyPage();
+            int pageTotals = (int)(count / pageSize) + 1;
+
             if (currentPageIndex - 1 > 0)
             {
                 page.Previous = string.Format("{0},'{1}'", queryPage, currentPageIndex - 1);
             }
-            if (currentPageIndex + 1 < ((int)(count / pageSize)))
+            if (currentPageIndex + 1 <= pageTotals)
             {
                 page.Next = string.Format("{0},'{1}'", queryPage, currentPageIndex + 1);
             }
-            page.SelPage = ((int)(count / pageSize)).ToString();
+            page.SelPage = pageTotals.ToString();
             page.Desc = string.Format("&nbsp;&nbsp;页次：<strong><font color=\"red\">{0}</font>/{1}</strong>页" +
                         " &nbsp;共<b>{2}</b>条信息<b>{3}</b>条信息/页  &nbsp;</div>",
                         currentPageIndex, page.SelPage, count, pageSize
