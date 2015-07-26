@@ -517,7 +517,7 @@
                 </select>
                 <div style="text-align:left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 10px; font-size: 1.4rem; ">
                     <label>登记日期>=</label>
-                    <input id="txtRegDate" type="date" />
+                    <input id="txtRegDate"  type="date" />
                 </div>
                 <div style="text-align: left; background: #fff; padding: 10px 0; border: 2px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,.5); width: 100%; margin-bottom: 10px; font-size: 1.4rem; ">
                     <label>登记日期<=</label>
@@ -562,7 +562,29 @@
     </div>
     <script>
         $(function () {
+            $("#txtRegDate").change(function () {
+                sessionStorage.RegDate = $('#txtRegDate').val();
+                alert(sessionStorage.RegDate)
+            });
+            $("#txtEffectDate").change(function () {
+                sessionStorage.EffectDate = $('#txtEffectDate').val();
+                alert(sessionStorage.EffectDate)
+            });
+
+
+            var RegDate = sessionStorage.RegDate;
+            alert(sessionStorage.RegDate)
+            if (RegDate) {
+                $('#txtRegDate').val(RegDate);
+            }
+            var EffectDate = sessionStorage.EffectDate;
+            if (EffectDate) {
+                $('#txtEffectDate').val(EffectDate);
+            }
+
+
             var strpage = sessionStorage.lastname;
+           
             if (strpage) {
                 var objJSON = eval("(" + strpage + ")");
                 var Links = objJSON.myLinkList;

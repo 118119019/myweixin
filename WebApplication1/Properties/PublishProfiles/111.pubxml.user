@@ -76,7 +76,7 @@
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="bin/LongYanService.dll">
-      <publishTime>07/26/2015 13:43:01</publishTime>
+      <publishTime>07/26/2015 15:06:10</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>07/11/2015 23:36:03</publishTime>
@@ -121,7 +121,7 @@
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>07/26/2015 13:43:07</publishTime>
+      <publishTime>07/26/2015 15:10:05</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/15/2015 09:12:39</publishTime>
@@ -357,8 +357,11 @@
     <File Include="html/images/slider2.jpg">
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
+    <File Include="html/Index.aspx">
+      <publishTime>07/26/2015 14:30:10</publishTime>
+    </File>
     <File Include="html/index.html">
-      <publishTime>07/26/2015 13:12:13</publishTime>
+      <publishTime>07/26/2015 14:44:20</publishTime>
     </File>
     <File Include="html/js/swiper.min.js">
       <publishTime>07/11/2015 23:36:03</publishTime>
@@ -1132,7 +1135,7 @@
       <publishTime>07/11/2015 23:36:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/26/2015 13:43:07</publishTime>
+      <publishTime>07/26/2015 15:06:14</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>07/11/2015 23:36:02</publishTime>

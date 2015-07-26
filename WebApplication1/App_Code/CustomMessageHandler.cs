@@ -9,7 +9,7 @@ using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MessageHandlers;
 using Senparc.Weixin.MP.Helpers;
- 
+
 using NLog;
 using LongYanService;
 
@@ -31,9 +31,9 @@ namespace WebApplication1
         private string wiweihiKey = "T79NgH9wXHWta4dwPqcGxx1z92YAl4hSreDiIkZfRWo";
 #else
         //下面的Url和Token可以用其他平台的消息，或者到www.weiweihi.com注册微信用户，将自动在“微信营销工具”下得到
-        private   string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
-        private   string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
-        private   string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
+        private string agentUrl = WebConfigurationManager.AppSettings["WeixinAgentUrl"];//这里使用了www.weiweihi.com微信自动托管平台
+        private string agentToken = WebConfigurationManager.AppSettings["WeixinAgentToken"];//Token
+        private string wiweihiKey = WebConfigurationManager.AppSettings["WeixinAgentWeiweihiKey"];//WeiweihiKey专门用于对接www.Weiweihi.com平台，获取方式见：http://www.weiweihi.com/ApiDocuments/Item/25#51
 #endif
 
         public CustomMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0)
@@ -72,8 +72,11 @@ namespace WebApplication1
             {
                 var result = new StringBuilder();
                 result.Append("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】 \n");
+                result.Append("        \n");
                 result.Append("龙岩市人力资源市场网 \n");
+                result.Append("        \n");
                 result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+                result.Append("        \n");
                 var dataSevice = new DataAccessSerive();
                 var jobList = dataSevice.GetTopJobInfoList();
                 if (jobList.Count > 0)
@@ -82,10 +85,11 @@ namespace WebApplication1
                     {
                         result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
                             WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                        result.Append("        \n");
                     }
                 }
                 logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
-                responseMessage.Content = result.ToString(); 
+                responseMessage.Content = result.ToString();
             }
             //if (requestMessage.Content == "约束")
             //{

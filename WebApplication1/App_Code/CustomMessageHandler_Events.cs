@@ -23,8 +23,11 @@ namespace WebApplication1
             var result = new StringBuilder();
 
             result.Append("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】 \n");
+            result.Append("        \n");
             result.Append("龙岩市人力资源市场网 \n");
+            result.Append("        \n");
             result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+            result.Append("        \n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
             if (jobList.Count > 0)
@@ -33,6 +36,7 @@ namespace WebApplication1
                 {
                     result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
                         WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                    result.Append("        \n");
                 }
             }
 
@@ -158,9 +162,9 @@ namespace WebApplication1
                     break;
                 case "GetNewsType1":
                     {
-                         
+
                         var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
-                    
+
                         strongResponseMessage.Content = new NewsCfgOp().GetHrefStr(1);
                         reponseMessage = strongResponseMessage;
                     }

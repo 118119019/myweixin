@@ -33,8 +33,11 @@ namespace WebApplication1
             {
                 var result = new StringBuilder();
                 result.Append("您好，欢迎关注龙岩就业微信公众平台！ \n");
+                result.Append("        \n");
                 result.Append("龙岩市人力资源市场网 \n");
+                result.Append("        \n");
                 result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+                result.Append("        \n");
                 var dataSevice = new DataAccessSerive();
                 var jobList = dataSevice.GetTopJobInfoList();
                 if (jobList.Count > 0)
@@ -43,6 +46,7 @@ namespace WebApplication1
                     {
                         result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
                             WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                        result.Append("        \n");
                     }
                 }
                 logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
@@ -52,11 +56,11 @@ namespace WebApplication1
             if (requestMessage.Content == "调试")
             {
                 var result = new StringBuilder();
-                result.Append("1您好，欢迎关注龙岩就业微信公众平台！\n");
-                result.Append("2单独n的\n");
-                result.Append("3<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \\n");
-                result.Append("4单独r的\r");
-                result.Append("5<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \\r");
+                result.Append("1您好，欢迎关注龙岩就业微信公众平台！ \r");
+           
+                result.Append("2单独r的 \r");
+              
+                result.Append("3<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \r");
 
                 logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
                 responseMessage.Content = result.ToString();
@@ -156,8 +160,11 @@ namespace WebApplication1
             var result = new StringBuilder();
 
             result.Append("您好，欢迎关注龙岩就业微信公众平台！\n");
+            result.Append("        \n");
             result.Append("龙岩市人力资源市场网 \n");
+            result.Append("        \n");
             result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+            result.Append("        \n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
             if (jobList.Count > 0)
@@ -166,10 +173,9 @@ namespace WebApplication1
                 {
                     result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
                         WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
+                    result.Append("        \n");
                 }
             }
-
-
             return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
         }
     }

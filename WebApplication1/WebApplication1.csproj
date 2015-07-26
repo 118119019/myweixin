@@ -118,6 +118,7 @@
     <Content Include="html\images\FhHRx.gif" />
     <Content Include="html\images\slider1.jpg" />
     <Content Include="html\images\slider2.jpg" />
+    <Content Include="html\Index.aspx" />
     <Content Include="html\index.html" />
     <Content Include="html\js\swiper.min.js" />
     <Content Include="html\list.html" />
@@ -395,6 +396,13 @@
     <Compile Include="App_Code\CustomMessageContext.cs" />
     <Compile Include="App_Code\CustomMessageHandler.cs" />
     <Compile Include="App_Code\CustomMessageHandler_Events.cs" />
+    <Compile Include="html\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="html\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MyWebPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
