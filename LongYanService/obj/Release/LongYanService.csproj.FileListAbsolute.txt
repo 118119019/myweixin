@@ -9,3 +9,4 @@ E:\2015work\LongYanWeiXin\myweixin\LongYanService\bin\Release\Oracle.ManagedData
 E:\2015work\LongYanWeiXin\myweixin\LongYanService\obj\Release\LongYanService.dll
 E:\2015work\LongYanWeiXin\myweixin\LongYanService\obj\Release\LongYanService.pdb
 E:\ly\weixin\WebApplication1\LongYanService\obj\Release\LongYanService.csprojResolveAssemblyReference.cache
+E:\2015work\LongYanWeiXin\myweixin\LongYanService\obj\Release\LongYanService.csprojResolveAssemblyReference.cache

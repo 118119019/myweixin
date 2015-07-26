@@ -76,7 +76,7 @@
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="bin/LongYanService.dll">
-      <publishTime>07/26/2015 15:06:10</publishTime>
+      <publishTime>07/26/2015 16:22:28</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>07/11/2015 23:36:03</publishTime>
@@ -121,7 +121,7 @@
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>07/26/2015 15:10:05</publishTime>
+      <publishTime>07/26/2015 16:22:29</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>02/15/2015 09:12:39</publishTime>
@@ -378,6 +378,9 @@
     <File Include="image/2.jpg">
       <publishTime>07/26/2015 13:12:13</publishTime>
     </File>
+    <File Include="image/news.jpg">
+      <publishTime>07/26/2015 16:19:16</publishTime>
+    </File>
     <File Include="Images/accent.png">
       <publishTime>02/15/2015 09:12:34</publishTime>
     </File>
@@ -418,25 +421,25 @@
       <publishTime>02/15/2015 09:12:34</publishTime>
     </File>
     <File Include="MyTool.aspx">
-      <publishTime>07/26/2015 13:12:13</publishTime>
+      <publishTime>07/26/2015 16:23:04</publishTime>
     </File>
     <File Include="myweixin.ashx">
       <publishTime>07/11/2015 23:36:03</publishTime>
     </File>
     <File Include="News/News1.html">
-      <publishTime>07/22/2015 21:43:57</publishTime>
+      <publishTime>07/26/2015 16:28:57</publishTime>
     </File>
     <File Include="News/News2.html">
-      <publishTime>07/22/2015 21:43:57</publishTime>
+      <publishTime>07/26/2015 16:29:26</publishTime>
     </File>
     <File Include="News/News3.html">
-      <publishTime>07/22/2015 21:43:57</publishTime>
+      <publishTime>07/26/2015 16:29:32</publishTime>
     </File>
     <File Include="News/News4.html">
-      <publishTime>07/22/2015 21:43:57</publishTime>
+      <publishTime>07/26/2015 16:29:37</publishTime>
     </File>
     <File Include="News/newsconfig.xml">
-      <publishTime>07/26/2015 13:12:13</publishTime>
+      <publishTime>07/26/2015 16:06:12</publishTime>
     </File>
     <File Include="News/NewsIndex.aspx">
       <publishTime>07/26/2015 13:12:13</publishTime>
@@ -445,7 +448,7 @@
       <publishTime>07/22/2015 21:43:57</publishTime>
     </File>
     <File Include="NewsList.aspx">
-      <publishTime>07/22/2015 21:43:57</publishTime>
+      <publishTime>07/26/2015 15:46:03</publishTime>
     </File>
     <File Include="NLog.config">
       <publishTime>07/12/2015 16:40:54</publishTime>

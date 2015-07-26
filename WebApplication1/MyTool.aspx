@@ -36,7 +36,7 @@
         </div>
 
         <div>
-            <h1>推送相关图片列表</h1>
+            <h1>推送相关图片列表 （推荐480*300）</h1>
             <ul>
                 <li style="margin-bottom: 20px;">第一条图片                   
                     <asp:Image ID="img0" runat="server" />
