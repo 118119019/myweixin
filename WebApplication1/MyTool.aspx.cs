@@ -32,8 +32,9 @@ using WebApplication1.Service;
 
 namespace WebApplication1
 {
-    public partial class _Default : Page
+    public partial class MyTool : BaseAuthPage
     {
+        protected string WelcomePath = HttpContext.Current.Server.MapPath("~/Welcome.txt");
         protected void Page_Load(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
@@ -68,9 +69,7 @@ namespace WebApplication1
                 //xmldoc.Save(@"E:\Test\Test\tt.xml");
 
 
-                var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
-                WebConfigurationManager.AppSettings["LongNameAppSecret"]);
-                var json = GroupsApi.Get(accessToken);
+
                 //foreach (var item in json.groups)
                 //{
                 //    ddlGropu.Items.Add(new ListItem(item.name, item.id.ToString()));
@@ -80,11 +79,23 @@ namespace WebApplication1
                 txtResult.Text = OracleHelper.CanConnect();
                 if (txtResult.Text != "连接成功")
                 {
+                    var accessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
+                    WebConfigurationManager.AppSettings["LongNameAppSecret"]);
+                    var json = GroupsApi.Get(accessToken);
                     var groupId = json.groups.Find(p => p.name == "开发小组").id.ToString();
                     var content = " oracle数据库无法连接 异常信息为" + txtResult.Text;
                     var sendResult = GroupMessageApi.SendTextGroupMessageByGroupId(accessToken, groupId, content, false);
                 }
+                try
+                {
+                    txtWelcome.Text = File.ReadAllText(WelcomePath);
+                }
+                catch (Exception ex)
+                {
 
+                    File.WriteAllText(WelcomePath, "您好，欢迎关注龙岩就业微信公众平台！");
+                    txtWelcome.Text = "您好，欢迎关注龙岩就业微信公众平台！";
+                }
             }
 
 
@@ -492,6 +503,11 @@ namespace WebApplication1
             cronList[5] = ddlWeek.SelectedValue;
             node.InnerText = string.Join(" ", cronList);
             xmlDoc.Save(Server.MapPath("quartz_jobs.xml"));
+        }
+
+        protected void btnSaveWelcome_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText(WelcomePath, txtWelcome.Text.Trim());
         }
     }
 }

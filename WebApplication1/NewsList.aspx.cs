@@ -10,7 +10,7 @@ using WebApplication1.News;
 
 namespace WebApplication1
 {
-    public partial class NewsList : MyWebPage
+    public partial class NewsList : BaseAuthPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

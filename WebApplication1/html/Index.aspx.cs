@@ -13,7 +13,7 @@ namespace WebApplication1.html
         {
             if (!IsPostBack)
             {
-                txtRegDate.Text = DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd");
+                txtRegDate.Text = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd");
                 txtEffectDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
         }

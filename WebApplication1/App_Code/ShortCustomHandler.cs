@@ -31,35 +31,16 @@ namespace WebApplication1
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
             if (requestMessage.Content != "" && requestMessage.Content != "调试")
             {
-                var result = new StringBuilder();
-                result.Append("您好，欢迎关注龙岩就业微信公众平台！ \n");
-                result.Append("        \n");
-                result.Append("龙岩市人力资源市场网 \n");
-                result.Append("        \n");
-                result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
-                result.Append("        \n");
-                var dataSevice = new DataAccessSerive();
-                var jobList = dataSevice.GetTopJobInfoList();
-                if (jobList.Count > 0)
-                {
-                    foreach (var job in jobList)
-                    {
-                        result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
-                            WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
-                        result.Append("        \n");
-                    }
-                }
-                logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
-                responseMessage.Content = result.ToString();
+                responseMessage.Content = GetWelcomeInfo();
             }
 
             if (requestMessage.Content == "调试")
             {
                 var result = new StringBuilder();
                 result.Append("1您好，欢迎关注龙岩就业微信公众平台！ \r");
-           
+
                 result.Append("2单独r的 \r");
-              
+
                 result.Append("3<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \r");
 
                 logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
@@ -155,15 +136,15 @@ namespace WebApplication1
         public override string GetWelcomeInfo()
         {
             //获取Senparc.Weixin.MP.dll版本信息
-            var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
-            var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
-            var result = new StringBuilder();
+            //var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
+            //var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
 
-            result.Append("您好，欢迎关注龙岩就业微信公众平台！\n");
+            var txtContent = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Welcome.txt"));
+            var result = new StringBuilder();
+            //  result.Append("您好，欢迎关注龙岩就业微信公众平台！ " + "\n");
+            result.Append(txtContent.Trim().Replace("\n", "").Replace("\r", "") + "\n");
             result.Append("        \n");
-            result.Append("龙岩市人力资源市场网 \n");
-            result.Append("        \n");
-            result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+            result.Append("龙岩市人力资源市场网<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
             result.Append("        \n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
@@ -178,5 +159,7 @@ namespace WebApplication1
             }
             return result.ToString();//"欢迎关注【福建龙岩市人力资源市场 微信公众平台Demo】<br/><img src=\"http://fjlylm.com/imagesnews/tb1.gif\" />";
         }
+
+
     }
 }

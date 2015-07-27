@@ -11,7 +11,7 @@ using WebApplication1.News;
 
 namespace WebApplication1
 {
-    public partial class NewsEdit : MyWebPage
+    public partial class NewsEdit : BaseAuthPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,9 +47,6 @@ namespace WebApplication1
                     txtTitle.Text = cfg.Name;
                 }
             }
-
-
-
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

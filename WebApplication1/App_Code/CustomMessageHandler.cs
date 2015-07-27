@@ -70,26 +70,7 @@ namespace WebApplication1
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
             if (requestMessage.Content != "")
             {
-                var result = new StringBuilder();
-                result.Append("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】 \n");
-                result.Append("        \n");
-                result.Append("龙岩市人力资源市场网 \n");
-                result.Append("        \n");
-                result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
-                result.Append("        \n");
-                var dataSevice = new DataAccessSerive();
-                var jobList = dataSevice.GetTopJobInfoList();
-                if (jobList.Count > 0)
-                {
-                    foreach (var job in jobList)
-                    {
-                        result.Append(string.Format("<a href=\"{0}/html/detail.html?id={1}\">{2} 最新招聘信息</a> \n",
-                            WebConfigurationManager.AppSettings["domain"], job.JobId, job.ComName));
-                        result.Append("        \n");
-                    }
-                }
-                logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
-                responseMessage.Content = result.ToString();
+                responseMessage.Content = GetWelcomeInfo();
             }
             //if (requestMessage.Content == "约束")
             //{

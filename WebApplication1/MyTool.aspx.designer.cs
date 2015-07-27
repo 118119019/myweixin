@@ -10,7 +10,7 @@
 namespace WebApplication1 {
     
     
-    public partial class _Default {
+    public partial class MyTool {
         
         /// <summary>
         /// form1 控件。
@@ -272,5 +272,23 @@ namespace WebApplication1 {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveQuartzCfg;
+        
+        /// <summary>
+        /// txtWelcome 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWelcome;
+        
+        /// <summary>
+        /// btnSaveWelcome 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveWelcome;
     }
 }

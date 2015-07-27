@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" AutoEventWireup="true" CodeBehind="MyTool.aspx.cs" Inherits="WebApplication1._Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" AutoEventWireup="true" CodeBehind="MyTool.aspx.cs" Inherits="WebApplication1.MyTool" %>
 
 <!DOCTYPE html>
 
@@ -6,6 +6,19 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <style>
+        .mydiv {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            margin-right: 0;
+            margin-left: 0;
+            background-color: #fff;
+            border-width: 1px;
+            border-radius: 4px 4px 0 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -35,7 +48,7 @@
             </div>
         </div>
 
-        <div>
+        <div class="mydiv">
             <h1>推送相关图片列表 （推荐480*300）</h1>
             <ul>
                 <li style="margin-bottom: 20px;">第一条图片                   
@@ -58,7 +71,7 @@
                 </li>
             </ul>
         </div>
-        <div>
+        <div class="mydiv">
             <h2>群发消息接口测试</h2>
             <asp:Button ID="btnSendMessage" runat="server" Style="display: none;" OnClick="btnSendMessage_Click" Text="消息发送" />
             <br />
@@ -77,7 +90,7 @@
             <br />
             <asp:Button ID="btnShortSendAll" runat="server" OnClick="btnShortSendAll_Click" Text="订阅号 图文消息 推送" />
         </div>
-        <div>
+        <div class="mydiv">
             <h2>定时任务配置</h2>
             <asp:DropDownList ID="ddlWeek" runat="server">
                 <asp:ListItem Text="周一" Value="MON"></asp:ListItem>
@@ -96,6 +109,13 @@
             <asp:Button ID="btnSaveQuartzCfg" OnClick="btnSaveQuartzCfg_Click" runat="server" Text="保存定时任务配置" />
             <br />
             <label style="color: red;">保存完之后 请手动重新启动 定时程序</label>
+        </div>
+        <div class="mydiv">
+            <h2>关注消息开头文字</h2>
+            <asp:TextBox ID="txtWelcome" Width="400" Height="100" runat="server" TextMode="MultiLine">
+            </asp:TextBox>
+            <br />
+            <asp:Button ID="btnSaveWelcome" runat="server" Text="保存修改关注信息系" OnClick="btnSaveWelcome_Click" />
         </div>
 
 

@@ -14,6 +14,9 @@
 <body>
     <form id="form1" runat="server">
         <div class="main">
+            <div style="margin: auto; text-align: center; width: 100%;">
+                <img src="../image/news.jpg" style="height: 300px; width: 100%;" />
+            </div>
             <div class="content">
                 <div class="tab_list">
                     <table class="set_tab" style="width: 100%;">
@@ -25,7 +28,7 @@
                         <tbody>
                             <asp:Repeater ID="rptList1" runat="server">
                                 <ItemTemplate>
-                                    <tr  >
+                                    <tr>
                                         <td><a href="News<%#Eval("Id") %>.html"><%#Eval("Name") %></a></td>
                                     </tr>
                                 </ItemTemplate>

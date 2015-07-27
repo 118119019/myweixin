@@ -239,7 +239,7 @@ select *
                 });
                 string str = "";
                 string sqlSelect = @" select w.ZPA001, w.ZPC001,w.ZPA002,w.ZPC008,c.ZPA016,c.ZPA017,w.ZPB003,w.ZPB011,w.ZPC003,w.ZPC002,
-            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002,c.ZPA010            
+            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002,c.ZPA010,w.ZPB004            
             from LYJYGD.ZP03 w inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 where w.ZPC001=:id";
                 var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, sqlSelect, parameters);
                 while (reader.Read())
@@ -258,7 +258,10 @@ select *
                     sb.AppendFormat("<p><label>招聘职位:</label><font color='#FF0000'>{0}</font></p>", ShowVal(reader["ZPB003"]));
                     sb.AppendFormat("<p><label>工作方式:</label>{0}</p>", reader["ZPB011"] == null ? "&nbsp;&nbsp;" : "全职");
                     sb.AppendFormat("<p><label>最低月薪:</label>{0}</p>", ShowVal(reader["ZPC003"]));
-                    sb.Append(GetWorkOther(reader["ZPC002"].ToString(), id));
+                    sb.AppendFormat("<p><label>招聘人数:</label>{0}</p>", reader["ZPC002"].ToString());
+                    sb.AppendFormat("<p><label>性别要求:</label>{0}</p>", getSex(reader["ZPB004"].ToString()));
+                    //getSex(reader["ZPB004"].ToString()
+                    //sb.Append(GetWorkOther(reader["ZPC002"].ToString(), id));
                     sb.AppendFormat("<p><label>年龄:</label>{0}</p>", ShowVal(reader["ZPB006"]));
                     sb.AppendFormat("<p><label>文化要求:</label>{0}</p>", GetAA11Type(reader["ZPB005"].ToString(), "ZPB005"));
                     sb.AppendFormat("<p><label>登记日期:</label>{0}</p>", ((DateTime)reader["ZPC004"]).ToString("yyyy-MM-dd"));
@@ -277,6 +280,19 @@ select *
             return sb.ToString();
         }
 
+
+        protected string getSex(string str)
+        {
+            switch (str)
+            {
+                case "1":
+                    return "男";
+                case "2":
+                    return "女";
+                //9不限
+            }
+            return "不限";
+        }
 
         public List<JobInfo> GetTopJobInfoList()
         {

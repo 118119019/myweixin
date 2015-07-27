@@ -4,6 +4,7 @@ using Senparc.Weixin.MP.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -18,15 +19,14 @@ namespace WebApplication1
         public virtual string GetWelcomeInfo()
         {
             //获取Senparc.Weixin.MP.dll版本信息
-            var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
-            var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
-            var result = new StringBuilder();
 
-            result.Append("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】 \n");
+
+            //result.Append("感谢您关注了【福建龙岩市人力资源市场 微信公众平台】 \n");
+            var txtContent = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Welcome.txt"));
+            var result = new StringBuilder();
+            result.Append(txtContent.Trim().Replace("\n", "").Replace("\r", "") + "\n");
             result.Append("        \n");
-            result.Append("龙岩市人力资源市场网 \n");
-            result.Append("        \n");
-            result.Append("<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+            result.Append("龙岩市人力资源市场网<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
             result.Append("        \n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
