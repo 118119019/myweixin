@@ -15,7 +15,7 @@
     <script src="js/swiper.min.js" type="text/javascript"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server">       
         <div class="main">
             <div class="content">
                 <div class="search">

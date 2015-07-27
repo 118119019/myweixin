@@ -10,13 +10,30 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no, email=no" />
     <link href="../html/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="../html/1_files/jquery.min.js"></script>
+    <script src="../html/js/swiper.min.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="main">
-            <div style="margin: auto; text-align: center; width: 100%;">
-                <img src="../image/news.jpg" style="height: 300px; width: 100%;" />
+            <div class="focusPic">
+                <div class="views">
+                    <ul class="warp" id="fd">
+                        <li class="li">
+                            <img src="../image/news1.jpg"></li>
+                        <li class="li">
+                            <img src="../image/news2.jpg"></li>
+                    </ul>
+                </div>
+                <ul class="tabs">
+                    <li class="li">1</li>
+                    <li class="li">2</li>
+                </ul>
             </div>
+            <script>
+                var focusPic = new Swiper('.focusPic .views', { pagination: '.focusPic .tabs', autoplay: 3000 })
+            </script>
+            <!--轮播结束-->
             <div class="content">
                 <div class="tab_list">
                     <table class="set_tab" style="width: 100%;">

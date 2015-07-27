@@ -224,7 +224,8 @@
     <Content Include="image\0.jpg" />
     <Content Include="image\1.jpg" />
     <Content Include="image\2.jpg" />
-    <Content Include="image\news.jpg" />
+    <Content Include="image\news1.jpg" />
+    <Content Include="image\news2.jpg" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="MyTool.aspx" />
