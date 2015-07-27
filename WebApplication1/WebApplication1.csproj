@@ -224,6 +224,7 @@
     <Content Include="image\0.jpg" />
     <Content Include="image\1.jpg" />
     <Content Include="image\2.jpg" />
+    <Content Include="image\icon1.jpg" />
     <Content Include="image\news1.jpg" />
     <Content Include="image\news2.jpg" />
     <Content Include="Login.aspx" />
@@ -461,8 +462,6 @@
     <Content Include="Welcome.txt" />
     <Content Include="Handler1.ashx" />
     <Content Include="html\1_files\browserLink" />
-    <Content Include="assets\avatars\Thumbs.db" />
-    <Content Include="assets\css\images\Thumbs.db" />
     <Content Include="assets\font\fontawesome-webfont.woff" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>

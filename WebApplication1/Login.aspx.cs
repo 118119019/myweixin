@@ -44,6 +44,10 @@ namespace WebApplication1
                 Response.Cookies.Add(cookie);
                 Response.Write("<script>window.top.location='Main.aspx';</script>");
             }
+            else
+            {
+                lbError.Text = "用户名或密码错误！";
+            }
         }
 
         private bool CheckValid()

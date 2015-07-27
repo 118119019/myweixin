@@ -11,47 +11,77 @@
     <meta name="format-detection" content="telephone=no, email=no" />
     <link href="../html/css/style.css" rel="stylesheet" type="text/css" />
     <script src="../html/1_files/jquery.min.js"></script>
-    <script src="../html/js/swiper.min.js" type="text/javascript"></script>
+
+    <style>
+        .news_list {
+            overflow: hidden;
+            width: 100%;
+        }
+
+            .news_list h4 {
+                text-align: center;
+                border: 1px solid #ddd;
+                border-bottom-width: 2px;
+                padding: 4px;
+                line-height: 1.2;
+                background: #0b3aa2;
+                background: -webkit-gradient(linear, 0 0,0 bottom, from(#4b83ff), to(#0b3aa2));
+                color: #fff;
+                font-size: 1.5rem;
+            }
+
+            .news_list li {
+                border-bottom: 1px solid #ddd;
+                width: 100%;
+            }
+
+                .news_list li a {
+                    display: block;
+                    padding: 2% 3%;
+                    color: #333;
+                    font-size: 1.4rem;
+                    overflow: hidden;
+                    background: #fff;
+                    display: table;
+                    table-layout: fixed;
+                }
+
+                    .news_list li a span {
+                        display: table-cell;
+                        vertical-align: middle;
+                        width: 100%;
+                    }
+
+                    .news_list li a img {
+                        width: 50px;
+                        height: 50px;
+                        display: block;
+                        margin-left: 10px;
+                    }
+
+                    .news_list li a:active {
+                        background: #f9f9f9;
+                    }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="main">
-            <div class="focusPic">
-                <div class="views">
-                    <ul class="warp" id="fd">
-                        <li class="li">
-                            <img src="../image/news1.jpg"></li>
-                        <li class="li">
-                            <img src="../image/news2.jpg"></li>
-                    </ul>
-                </div>
-                <ul class="tabs">
-                    <li class="li">1</li>
-                    <li class="li">2</li>
-                </ul>
-            </div>
-            <script>
-                var focusPic = new Swiper('.focusPic .views', { pagination: '.focusPic .tabs', autoplay: 3000 })
-            </script>
-            <!--轮播结束-->
             <div class="content">
-                <div class="tab_list">
-                    <table class="set_tab" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th><%=TitleName %>信息</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div class="news_list">
+                 <h4><%=TitleName %>信息</h4>
+                          <ul>
                             <asp:Repeater ID="rptList1" runat="server">
                                 <ItemTemplate>
-                                    <tr>
-                                        <td><a href="News<%#Eval("Id") %>.html"><%#Eval("Name") %></a></td>
-                                    </tr>
+                                    <li>
+                                       <a href="News<%#Eval("Id") %>.html"><span><%#Eval("Name") %>
+                                           </span> <img src="../image/icon1.jpg" alt="" /></a> 
+                                    </li>
                                 </ItemTemplate>
                             </asp:Repeater>
-                        </tbody>
-                    </table>
+                              </ul>
+                       
+                     
                 </div>
             </div>
         </div>
