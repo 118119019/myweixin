@@ -340,10 +340,10 @@
       <publishTime>07/27/2015 16:27:49</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>07/27/2015 18:43:11</publishTime>
+      <publishTime>07/27/2015 18:50:03</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>07/27/2015 18:43:11</publishTime>
+      <publishTime>07/27/2015 18:50:03</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>02/15/2015 09:12:38</publishTime>
@@ -751,7 +751,7 @@
       <publishTime>02/15/2015 09:14:05</publishTime>
     </File>
     <File Include="News/News1.html">
-      <publishTime>07/27/2015 18:42:24</publishTime>
+      <publishTime>07/27/2015 18:49:56</publishTime>
     </File>
     <File Include="News/News2.html">
       <publishTime>07/27/2015 18:42:32</publishTime>
@@ -784,7 +784,7 @@
       <publishTime>06/26/2015 13:44:40</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/27/2015 18:43:10</publishTime>
+      <publishTime>07/27/2015 18:50:02</publishTime>
     </File>
     <File Include="quartz_jobs.xml">
       <publishTime>07/20/2015 11:51:00</publishTime>
