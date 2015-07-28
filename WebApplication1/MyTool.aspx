@@ -24,6 +24,55 @@
     <form id="form1" runat="server">
         <asp:TextBox ID="txtResult" runat="server" TextMode="MultiLine"></asp:TextBox>
         <br />
+        <div class="mydiv">
+            <h2>推送消息管理</h2>
+            <label>消息条数</label>
+            <asp:DropDownList ID="ddlSendCount" runat="server">
+                <asp:ListItem Text="3条" Value="3"></asp:ListItem>
+                <asp:ListItem Text="4条" Value="4"></asp:ListItem>
+                <asp:ListItem Text="5条" Value="5"></asp:ListItem>
+                <asp:ListItem Text="6条" Value="6"></asp:ListItem>
+            </asp:DropDownList>
+            <br />
+            /// 请注意：<br />
+            /// 选择完消息条数之后请点保存条数：<br />
+            <asp:Button runat="server" ID="btnSaveSendCount" OnClick="btnSaveSendCount_Click" Text="保存每次推送消息条数" />
+            <br />
+            <br />
+            /// 请注意：<br />
+            /// 1、该接口暂时仅提供给已微信认证的服务号：<br />
+            /// 2、虽然开发者使用高级群发接口的每日调用限制为100次，但是用户每月只能接收4条，请小心测试：<br />
+            /// 3、无论在公众平台网站上，还是使用接口群发，用户每月只能接收4条群发消息，多于4条的群发将对该用户发送失败。
+            <br />
+            <asp:Button ID="btnSendAll" runat="server" OnClick="btnSendAll_Click" Text="服务号 图文消息 推送" />
+            <br />
+            <br />
+            <br />
+            <asp:Button ID="btnShortSendAll" runat="server" OnClick="btnShortSendAll_Click" Text="订阅号 图文消息 推送" />
+        </div>
+        <div class="mydiv">
+            <h2>定时任务配置</h2>
+            <asp:DropDownList ID="ddlWeek" runat="server">
+                <asp:ListItem Text="周一" Value="MON"></asp:ListItem>
+                <asp:ListItem Text="周二" Value="TUE"></asp:ListItem>
+                <asp:ListItem Text="周三" Value="WED"></asp:ListItem>
+                <asp:ListItem Text="周四" Value="THU"></asp:ListItem>
+                <asp:ListItem Text="周五" Value="FRI"></asp:ListItem>
+                <asp:ListItem Text="周六" Value="SAT"></asp:ListItem>
+                <asp:ListItem Text="周日" Value="SUN"></asp:ListItem>
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlHour" runat="server">
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlMinute" runat="server">
+            </asp:DropDownList>
+            <asp:Button ID="btnSaveQuartzCfg" OnClick="btnSaveQuartzCfg_Click" runat="server" Text="保存定时任务配置" />
+            <br />
+            <label style="color: red;">保存完定时任务配置之后 请手动重新启动 定时程序</label>
+        </div>
+
+
+
+
         <div style="display: none;">
             行业
         <asp:TextBox ID="txtIndustry" Text="01" runat="server"></asp:TextBox>
@@ -48,75 +97,6 @@
             </div>
         </div>
 
-        <div class="mydiv">
-            <h1>推送相关图片列表 （推荐480*300）</h1>
-            <ul>
-                <li style="margin-bottom: 20px;">第一条图片                   
-                    <asp:Image ID="img0" runat="server" />
-                    <asp:FileUpload ID="uploadImgUrl0" runat="server" />
-                    <asp:Label ID="labImgError0" runat="server"></asp:Label>
-                </li>
-                <li style="margin-bottom: 20px;">第二条图片
-                    <asp:Image ID="img1" runat="server" />
-                    <asp:FileUpload ID="uploadImgUrl1" runat="server" />
-                    <asp:Label ID="labImgError1" runat="server"></asp:Label>
-                </li>
-                <li style="margin-bottom: 20px;">第三条图片                  
-                    <asp:Image ID="img2" runat="server" />
-                    <asp:FileUpload ID="uploadImgUrl2" runat="server" />
-                    <asp:Label ID="labImgError2" runat="server"></asp:Label>
-                </li>
-                <li>
-                    <asp:Button ID="btnSaveImg" runat="server" OnClick="btnSaveImg_Click" Text="上传图片到微信服务端" />
-                </li>
-            </ul>
-        </div>
-        <div class="mydiv">
-            <h2>群发消息接口测试</h2>
-            <asp:Button ID="btnSendMessage" runat="server" Style="display: none;" OnClick="btnSendMessage_Click" Text="消息发送" />
-            <br />
-            <br />
-            /// 请注意：<br />
-            /// 1、该接口暂时仅提供给已微信认证的服务号：<br />
-            /// 2、虽然开发者使用高级群发接口的每日调用限制为100次，但是用户每月只能接收4条，请小心测试：<br />
-            /// 3、无论在公众平台网站上，还是使用接口群发，用户每月只能接收4条群发消息，多于4条的群发将对该用户发送失败。
-            <br />
-            <%--   分组列表
-           <asp:DropDownList ID="ddlGropu" runat="server">
-            </asp:DropDownList>--%>
-            <asp:Button ID="btnSendAll" runat="server" OnClick="btnSendAll_Click" Text="服务号 图文消息 推送" />
-            <br />
-            <br />
-            <br />
-            <asp:Button ID="btnShortSendAll" runat="server" OnClick="btnShortSendAll_Click" Text="订阅号 图文消息 推送" />
-        </div>
-        <div class="mydiv">
-            <h2>定时任务配置</h2>
-            <asp:DropDownList ID="ddlWeek" runat="server">
-                <asp:ListItem Text="周一" Value="MON"></asp:ListItem>
-                <asp:ListItem Text="周二" Value="TUE"></asp:ListItem>
-                <asp:ListItem Text="周三" Value="WED"></asp:ListItem>
-                <asp:ListItem Text="周四" Value="THU"></asp:ListItem>
-                <asp:ListItem Text="周五" Value="FRI"></asp:ListItem>
-                <asp:ListItem Text="周六" Value="SAT"></asp:ListItem>
-                <asp:ListItem Text="周日" Value="SUN"></asp:ListItem>
-            </asp:DropDownList>
-            <asp:DropDownList ID="ddlHour" runat="server">
-            </asp:DropDownList>
-            <asp:DropDownList ID="ddlMinute" runat="server">
-            </asp:DropDownList>
-
-            <asp:Button ID="btnSaveQuartzCfg" OnClick="btnSaveQuartzCfg_Click" runat="server" Text="保存定时任务配置" />
-            <br />
-            <label style="color: red;">保存完之后 请手动重新启动 定时程序</label>
-        </div>
-        <div class="mydiv">
-            <h2>关注消息开头文字</h2>
-            <asp:TextBox ID="txtWelcome" Width="400" Height="100" runat="server" TextMode="MultiLine">
-            </asp:TextBox>
-            <br />
-            <asp:Button ID="btnSaveWelcome" runat="server" Text="保存修改关注信息系" OnClick="btnSaveWelcome_Click" />
-        </div>
 
 
     </form>

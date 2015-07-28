@@ -10,7 +10,7 @@
 namespace WebApplication1 {
     
     
-    public partial class MyTool {
+    public partial class SendImgList {
         
         /// <summary>
         /// form1 控件。
@@ -31,165 +31,174 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox txtResult;
         
         /// <summary>
-        /// ddlSendCount 控件。
+        /// img0 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSendCount;
+        protected global::System.Web.UI.WebControls.Image img0;
         
         /// <summary>
-        /// btnSaveSendCount 控件。
+        /// uploadImgUrl0 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveSendCount;
+        protected global::System.Web.UI.WebControls.FileUpload uploadImgUrl0;
         
         /// <summary>
-        /// btnSendAll 控件。
+        /// labImgError0 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSendAll;
+        protected global::System.Web.UI.WebControls.Label labImgError0;
         
         /// <summary>
-        /// btnShortSendAll 控件。
+        /// img1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnShortSendAll;
+        protected global::System.Web.UI.WebControls.Image img1;
         
         /// <summary>
-        /// ddlWeek 控件。
+        /// uploadImgUrl1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlWeek;
+        protected global::System.Web.UI.WebControls.FileUpload uploadImgUrl1;
         
         /// <summary>
-        /// ddlHour 控件。
+        /// labImgError1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHour;
+        protected global::System.Web.UI.WebControls.Label labImgError1;
         
         /// <summary>
-        /// ddlMinute 控件。
+        /// img2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMinute;
+        protected global::System.Web.UI.WebControls.Image img2;
         
         /// <summary>
-        /// btnSaveQuartzCfg 控件。
+        /// uploadImgUrl2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveQuartzCfg;
+        protected global::System.Web.UI.WebControls.FileUpload uploadImgUrl2;
         
         /// <summary>
-        /// txtIndustry 控件。
+        /// labImgError2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIndustry;
+        protected global::System.Web.UI.WebControls.Label labImgError2;
         
         /// <summary>
-        /// txtDegree 控件。
+        /// img3 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDegree;
+        protected global::System.Web.UI.WebControls.Image img3;
         
         /// <summary>
-        /// txtWork 控件。
+        /// uploadImgUrl3 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWork;
+        protected global::System.Web.UI.WebControls.FileUpload uploadImgUrl3;
         
         /// <summary>
-        /// txtRegDate 控件。
+        /// labImgError3 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRegDate;
+        protected global::System.Web.UI.WebControls.Label labImgError3;
         
         /// <summary>
-        /// txtEffectDate 控件。
+        /// img4 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEffectDate;
+        protected global::System.Web.UI.WebControls.Image img4;
         
         /// <summary>
-        /// btnQuery 控件。
+        /// uploadImgUrl4 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQuery;
+        protected global::System.Web.UI.WebControls.FileUpload uploadImgUrl4;
         
         /// <summary>
-        /// btnStar 控件。
+        /// labImgError4 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStar;
+        protected global::System.Web.UI.WebControls.Label labImgError4;
         
         /// <summary>
-        /// btnClose 控件。
+        /// img5 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClose;
+        protected global::System.Web.UI.WebControls.Image img5;
         
         /// <summary>
-        /// lbStatus 控件。
+        /// uploadImgUrl5 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbStatus;
+        protected global::System.Web.UI.WebControls.FileUpload uploadImgUrl5;
         
         /// <summary>
-        /// btnQueryService 控件。
+        /// labImgError5 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQueryService;
+        protected global::System.Web.UI.WebControls.Label labImgError5;
+        
+        /// <summary>
+        /// btnSaveImg 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveImg;
     }
 }

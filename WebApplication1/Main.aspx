@@ -65,7 +65,7 @@
                             <span style="max-width: 200px; display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; vertical-align: top; line-height: 15px; position: relative; top: 6px;">
                                 <small>欢迎光临</small>
 
-                                <asp:Button class="btn btn-app btn-pink btn-sm" style="line-height:0.6" Text="退出" runat="server" ID="btnQuit" OnClick="btnQuit_Click" />
+                                <asp:Button class="btn btn-app btn-pink btn-sm" Style="line-height: 0.6" Text="退出" runat="server" ID="btnQuit" OnClick="btnQuit_Click" />
                             </span>
                         </li>
                     </ul>
@@ -82,14 +82,26 @@
                     <!-- #sidebar-shortcuts -->
                     <ul class="nav nav-list">
                         <li>
-                            <a href="#" onclick="AddTab('MyTool')">
+                            <a href="#" onclick="AddTab('SendImgList')">
 
-                                <span class="menu-text">后台工具 </span>
+                                <span class="menu-text">推送相关图片列表管理
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="AddTab('MyTool')">
+                                <span class="menu-text">推送消息管理</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="AddTab('WelcomeEdit')">
+
+                                <span class="menu-text">关注消息开头文字管理
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="#" onclick="AddTab('NewsList')">
-
                                 <span class="menu-text">就业资讯</span>
                             </a>
                         </li>

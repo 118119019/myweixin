@@ -167,9 +167,9 @@ namespace TimePushConsole
         {
             OpenIdResultJson json = UserApi.Get(accessToken, "");
             var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 6; i++)
             {
-                string imgName = i.ToString() + ".jpg";
+                string imgName = string.Format("send{0}.jpg", i);
                 if (imgResult.item.Find(p => p.name == imgName) == null)
                 {
                     var filePath = webPath + "image\\" + imgName;
@@ -178,17 +178,30 @@ namespace TimePushConsole
             }
             imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
 
-            NewsModel[] newsList = new NewsModel[3];
+            NewsModel[] newsList = new NewsModel[6];
+
+
+
+            string sendCountTxtUrl = webPath + "\\" + "sendcount.txt";
+            var sendCountTxt = CommonUtility.HttpUtility.Get(sendCountTxtUrl);
+            var sendCount = int.Parse(sendCountTxt);
+
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
             if (jobList.Count > 0)
             {
                 List<Article> articles = new List<Article>();
                 int i = 0;
+                string imgName;
                 foreach (var job in jobList)
                 {
+                    if (i == sendCount)
+                    {
+                        break;
+                    }
                     string domain = ConfigurationManager.AppSettings.Get("domain");
-                    string imgUrl = string.Format("{0}/image/{1}.jpg", domain, i);
+                    imgName = "send" + i.ToString() + ".jpg";
+                    string imgUrl = string.Format("{0}/image/{1}", domain, imgName);
                     var jobDetail = dataSevice.GetJobDetail(job.JobId);
                     var news = new NewsModel()
                     {
@@ -210,7 +223,7 @@ namespace TimePushConsole
                         content_source_url = domain + "/html/detail.html?id=" + job.JobId,
                         digest = job.ComName + "诚聘" + job.JobName,
                         show_cover_pic = "0",
-                        thumb_media_id = imgResult.item.Find(p => p.name == i.ToString() + ".jpg").media_id,
+                        thumb_media_id = imgResult.item.Find(p => p.name == imgName).media_id,
                         title = job.ComName + "诚聘" + job.JobName
                     };
                     newsList[i] = news;

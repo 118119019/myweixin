@@ -311,7 +311,7 @@ select *
                  where w.ZPC006 = 1
                    and w.ZPC010 = 0) a
          where rank = 1
-         order by ZPC004 desc) where rownum < 4  
+         order by ZPC004 desc) where rownum < 7  
                 ";
             var reader = OracleHelper.ExecuteReader(sqlSelect);
             while (reader.Read())
