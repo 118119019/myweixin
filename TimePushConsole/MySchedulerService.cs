@@ -166,7 +166,7 @@ namespace TimePushConsole
         public void PushNews(string accessToken, string webPath, string tempStr)
         {
             OpenIdResultJson json = UserApi.Get(accessToken, "");
-            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 1000);
+            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
             for (int i = 0; i < 3; i++)
             {
                 string imgName = i.ToString() + ".jpg";
@@ -176,7 +176,7 @@ namespace TimePushConsole
                     var mediaId = MediaApi.UploadForeverMedia(accessToken, filePath).media_id;
                 }
             }
-            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 4);
+            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
 
             NewsModel[] newsList = new NewsModel[3];
             var dataSevice = new DataAccessSerive();
