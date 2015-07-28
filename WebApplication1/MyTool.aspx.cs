@@ -249,7 +249,7 @@ namespace WebApplication1
               WebConfigurationManager.AppSettings["LongNameAppSecret"]);
             OpenIdResultJson json = UserApi.Get(accessToken, "");
 
-            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 4);
+            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
             for (int i = 0; i < 3; i++)
             {
                 string imgName = i.ToString() + ".jpg";
@@ -259,7 +259,7 @@ namespace WebApplication1
                     var mediaId = MediaApi.UploadForeverMedia(accessToken, filePath).media_id;
                 }
             }
-            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 4);
+            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
 
             NewsModel[] newsList = new NewsModel[3];
             var dataSevice = new DataAccessSerive();
@@ -351,7 +351,7 @@ namespace WebApplication1
               WebConfigurationManager.AppSettings["ShortWeixinSecret"]);
             OpenIdResultJson json = UserApi.Get(accessToken, "");
 
-            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 1000);
+            var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
             for (int i = 0; i < 3; i++)
             {
                 string imgName = i.ToString() + ".jpg";
@@ -361,7 +361,7 @@ namespace WebApplication1
                     var mediaId = MediaApi.UploadForeverMedia(accessToken, filePath).media_id;
                 }
             }
-            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 4);
+            imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
 
             NewsModel[] newsList = new NewsModel[3];
             var dataSevice = new DataAccessSerive();
@@ -375,29 +375,27 @@ namespace WebApplication1
                     string imgUrl = string.Format("{0}/image/{1}.jpg", WebConfigurationManager.AppSettings["domain"], i);
 
                     var jobDetail = dataSevice.GetJobDetail(job.JobId);
-                    var news = new NewsModel()
-                  {
-                      author = "",
-                      content = tempStr.Replace("[ComName]", job.ComName)
-                      .Replace("[ComBrief]", jobDetail.ComBrief)
-                      .Replace("[DetailPalce]", jobDetail.DetailPalce)
-                      .Replace("[LinkMan]", jobDetail.LinkMan)
-                      .Replace("[Phone]", jobDetail.Phone)
-                      .Replace("[JobName]", jobDetail.JobName)
-                      .Replace("[JobType]", jobDetail.JobType)
-                      .Replace("[LowMoney]", jobDetail.LowMoney)
-                      .Replace("[HrNum]", jobDetail.HrNum)
-                      .Replace("[Edu]", jobDetail.Edu)
-                      .Replace("[RegisterDate]", jobDetail.RegisterDate)
-                      .Replace("[EffectDate]", jobDetail.EffectDate)
-                      .Replace("[Other]", jobDetail.Other)
-                      ,
-                      content_source_url = WebConfigurationManager.AppSettings["domain"] + "/html/detail.html?id=" + job.JobId,
-                      digest = job.ComName + "诚聘" + job.JobName,
-                      show_cover_pic = "0",
-                      thumb_media_id = imgResult.item.Find(p => p.name == i.ToString() + ".jpg").media_id,
-                      title = job.ComName + "诚聘" + job.JobName
-                  };
+
+                    var news = new NewsModel();
+                    news.author = "";
+                    news.content = tempStr.Replace("[ComName]", job.ComName)
+                          .Replace("[ComBrief]", jobDetail.ComBrief)
+                       .Replace("[DetailPalce]", jobDetail.DetailPalce)
+                       .Replace("[LinkMan]", jobDetail.LinkMan)
+                       .Replace("[Phone]", jobDetail.Phone)
+                       .Replace("[JobName]", jobDetail.JobName)
+                       .Replace("[JobType]", jobDetail.JobType)
+                       .Replace("[LowMoney]", jobDetail.LowMoney)
+                       .Replace("[HrNum]", jobDetail.HrNum)
+                       .Replace("[Edu]", jobDetail.Edu)
+                       .Replace("[RegisterDate]", jobDetail.RegisterDate)
+                       .Replace("[EffectDate]", jobDetail.EffectDate)
+                       .Replace("[Other]", jobDetail.Other);
+                    news.content_source_url = WebConfigurationManager.AppSettings["domain"] + "/html/detail.html?id=" + job.JobId;
+                    news.digest = job.ComName + "诚聘" + job.JobName;
+                    news.show_cover_pic = "0";
+                    news.thumb_media_id = imgResult.item.Find(p => p.name == i.ToString() + ".jpg").media_id;
+                    news.title = job.ComName + "诚聘" + job.JobName;
                     newsList[i] = news;
                     i++;
                 }
