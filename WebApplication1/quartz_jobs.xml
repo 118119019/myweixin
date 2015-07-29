@@ -32,7 +32,7 @@
         <group>simpleGroup</group>
         <job-name>jobName1</job-name>
         <job-group>jobGroup1</job-group>
-        <cron-expression>0 51 11 ? * MON</cron-expression>
+        <cron-expression>0 51 11 ? * *</cron-expression>
       </cron>
     </trigger>
   </schedule>

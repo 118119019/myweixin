@@ -72,7 +72,7 @@ namespace WebApplication1
                 string[] cronList = node.InnerText.Split(' ');//0 1 9 ? * TUE
                 ddlMinute.SelectedValue = cronList[1];
                 ddlHour.SelectedValue = cronList[2];
-                ddlWeek.SelectedValue = cronList[5];
+              
 
 
 
@@ -199,7 +199,7 @@ namespace WebApplication1
             string[] cronList = node.InnerText.Split(' ');//0 1 9 ? * TUE
             cronList[1] = ddlMinute.SelectedValue;
             cronList[2] = ddlHour.SelectedValue;
-            cronList[5] = ddlWeek.SelectedValue;
+          
             node.InnerText = string.Join(" ", cronList);
             xmlDoc.Save(Server.MapPath("quartz_jobs.xml"));
         }

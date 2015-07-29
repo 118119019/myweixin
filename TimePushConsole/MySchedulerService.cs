@@ -129,10 +129,9 @@ namespace TimePushConsole
             return trNode.InnerHtml;
         }
 
-
-        public virtual void Execute(IJobExecutionContext context)
-        {
-            JobKey jobKey = context.JobDetail.Key;
+        public void Test() {
+           
+            Console.WriteLine("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
             logger.Info("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
             try
             {
@@ -143,23 +142,61 @@ namespace TimePushConsole
                 ConfigurationManager.AppSettings.Get("ShortWeixinAppId"),
                 ConfigurationManager.AppSettings.Get("ShortWeixinSecret"));
                 PushNews(accessToken, webPath, tempStr);
-
-                accessToken = AccessTokenContainer.TryGetToken(
-                ConfigurationManager.AppSettings.Get("LongNameAppId"),
-                ConfigurationManager.AppSettings.Get("LongNameAppSecret"));
-                PushNews(accessToken, webPath, tempStr);
-                var MailService = new MailSendFunc();
-                MailService.SendMail("118119019@qq.com", "正常运行推送一次", "运行推送正常", mailCfg);
+                Console.WriteLine("提交" + string.Format("推送成功! - {0}", DateTime.Now.ToString()));
+                logger.Info("提交" + string.Format("推送成功! - {0}", DateTime.Now.ToString()));
+                //accessToken = AccessTokenContainer.TryGetToken(
+                //ConfigurationManager.AppSettings.Get("LongNameAppId"),
+                //ConfigurationManager.AppSettings.Get("LongNameAppSecret"));
+                //PushNews(accessToken, webPath, tempStr);
+                //var MailService = new MailSendFunc();
+                //MailService.SendMail("118119019@qq.com", "正常运行推送一次", "运行推送正常", mailCfg);
             }
             catch (Exception ex)
             {
                 var MailService = new MailSendFunc();
                 MailService.SendMail("118119019@qq.com", ex.Message, " 定时运行推送异常", mailCfg);
+                Console.WriteLine(DateTime.Now.ToString() + " 定时执行推送失败 异常信息为" + ex.Message);
                 logger.ErrorException(DateTime.Now.ToString() + " 定时执行推送失败 " + ex.Message, ex);
+
+            }
+          
+        }
+
+        public virtual void Execute(IJobExecutionContext context)
+        {
+            JobKey jobKey = context.JobDetail.Key;
+            Console.WriteLine("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
+            logger.Info("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
+            try
+            {
+                string webPath = ConfigurationManager.AppSettings.Get("domain");
+                string tempStr = GetTemp(webPath + "/Temp.html");
+
+                var accessToken = AccessTokenContainer.TryGetToken(
+                ConfigurationManager.AppSettings.Get("ShortWeixinAppId"),
+                ConfigurationManager.AppSettings.Get("ShortWeixinSecret"));
+                PushNews(accessToken, webPath, tempStr);
+                Console.WriteLine("提交" + string.Format("推送成功! - {0}", DateTime.Now.ToString()));
+                logger.Info("提交" + string.Format("推送成功! - {0}", DateTime.Now.ToString()));
+                //accessToken = AccessTokenContainer.TryGetToken(
+                //ConfigurationManager.AppSettings.Get("LongNameAppId"),
+                //ConfigurationManager.AppSettings.Get("LongNameAppSecret"));
+                //PushNews(accessToken, webPath, tempStr);
+                //var MailService = new MailSendFunc();
+                //MailService.SendMail("118119019@qq.com", "正常运行推送一次", "运行推送正常", mailCfg);
+            }
+            catch (Exception ex)
+            {
+                var MailService = new MailSendFunc();
+                MailService.SendMail("118119019@qq.com", ex.Message, " 定时运行推送异常", mailCfg);
+                Console.WriteLine(DateTime.Now.ToString() + " 定时执行推送失败 异常信息为" + ex.Message);
+                logger.ErrorException(DateTime.Now.ToString() + " 定时执行推送失败 " + ex.Message, ex);
+
             }
             string message = context.JobDetail.JobDataMap.GetString(Message);
-            logger.Info(string.Format("SimpleJob: {0} executing at {1}", jobKey, DateTime.Now.ToString()));
-            logger.Info(string.Format("SimpleJob: msg: {0}", message));
+            Console.WriteLine(string.Format("执行完成: {0} executing at {1}", jobKey, DateTime.Now.ToString()));
+            logger.Info(string.Format("执行完成: {0} executing at {1}", jobKey, DateTime.Now.ToString()));
+            logger.Info(string.Format("执行完成: msg: {0}", message));
         }
 
 
@@ -180,9 +217,7 @@ namespace TimePushConsole
 
             NewsModel[] newsList = new NewsModel[6];
 
-
-
-            string sendCountTxtUrl = webPath + "\\" + "sendcount.txt";
+            string sendCountTxtUrl = webPath + "/" + "sendcount.txt";
             var sendCountTxt = CommonUtility.HttpUtility.Get(sendCountTxtUrl);
             var sendCount = int.Parse(sendCountTxt);
 
@@ -234,15 +269,15 @@ namespace TimePushConsole
                 {
                     GroupMessageApi.SendGroupMessageByGroupId
                     (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
-                    Console.WriteLine("提交一次  推送成功");
-                    logger.Info(DateTime.Now.ToString() + " 提交一次  推送成功");
+                    Console.WriteLine("素材提交推送  推送成功");
+                    logger.Info(DateTime.Now.ToString() + " 素材提交推送  推送成功");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("提交一次  推送失败 " + ex.Message);
+                    Console.WriteLine("素材提交推送  推送失败 " + ex.Message);
                     var MailService = new MailSendFunc();
-                    MailService.SendMail("118119019@qq.com", ex.Message, "提交一次推送异常", mailCfg);
-                    logger.ErrorException(DateTime.Now.ToString() + " 提交一次  推送失败 " + ex.Message, ex);
+                    MailService.SendMail("118119019@qq.com", ex.Message, "素材提交推送异常", mailCfg);
+                    logger.ErrorException(DateTime.Now.ToString() + "素材提交推送失败 " + ex.Message, ex);
                 }
             }
         }

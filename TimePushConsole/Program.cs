@@ -21,13 +21,16 @@ namespace TimePushConsole
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static MySchedulerService myscheduler = MySchedulerService.GetInstance();
-        
+
         static void Main(string[] args)
         {
-          
+
             try
             {
                 SetConsoleCtrlHandler(cancelHandler, true);
+
+                //SimpleJob job = new SimpleJob();
+                //job.Test();
                 myscheduler.Run();
             }
             catch (Exception ex)
