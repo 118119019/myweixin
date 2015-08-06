@@ -90,6 +90,7 @@ namespace LongYanService
         public string GetWorkOther { get; set; }
 
         public string Contact { get; set; }
+        public string Sex { get; set; }
     }
 
     public class DataAccessSerive
@@ -197,7 +198,7 @@ select *
             });
             string str = "";
             string sqlSelect = @" select w.ZPA001, w.ZPC001,w.ZPA002,w.ZPC008,c.ZPA016,c.ZPA017,w.ZPB003,w.ZPB011,w.ZPC003,w.ZPC002,
-            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002            
+            w.ZPB006,w.ZPB005,w.ZPC004,w.ZPC005,w.ZPB007,w.ZPC002,w.ZPB004            
             from LYJYGD.ZP03 w inner join LYJYGD.ZP01 c on w.ZPA001=C.ZPA001 where w.ZPC001=:id";
             var reader = OracleHelper.ExecuteReader(OracleHelper.ConnectionString, CommandType.Text, sqlSelect, parameters);
             var jobDetail = new JobDetail();
@@ -218,6 +219,7 @@ select *
                 jobDetail.RegisterDate = ((DateTime)reader["ZPC004"]).ToString("yyyy-MM-dd");
                 jobDetail.EffectDate = ((DateTime)reader["ZPC005"]).ToString("yyyy-MM-dd");
                 jobDetail.Other = ShowVal(reader["ZPB007"]);
+                jobDetail.Sex = getSex(reader["ZPB004"].ToString());
             }
             return jobDetail;
         }

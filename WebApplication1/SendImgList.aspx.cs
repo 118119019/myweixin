@@ -24,13 +24,15 @@ namespace WebApplication1
         }
         protected void btnSaveImg_Click(object sender, EventArgs e)
         {
-            var shortAccessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["ShortWeixinAppId"],
-                                 WebConfigurationManager.AppSettings["ShortWeixinSecret"]);
-            var longAccessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
-                                 WebConfigurationManager.AppSettings["LongNameAppSecret"]);
-            var shortImgResult = MediaApi.GetOthersMediaList(shortAccessToken, UploadMediaFileType.image, 0, 1000);
-            var longImgResult = MediaApi.GetOthersMediaList(longAccessToken, UploadMediaFileType.image, 0, 1000);
 
+            //var longAccessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["LongNameAppId"],
+            //                     WebConfigurationManager.AppSettings["LongNameAppSecret"]);
+
+            //var longImgResult = MediaApi.GetOthersMediaList(longAccessToken, UploadMediaFileType.image, 0, 1000);
+
+            var shortAccessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["ShortWeixinAppId"],
+                             WebConfigurationManager.AppSettings["ShortWeixinSecret"]);
+            var shortImgResult = MediaApi.GetOthersMediaList(shortAccessToken, UploadMediaFileType.image, 0, 1000);
             for (int i = 0; i < 6; i++)
             {
                 string handleNum = i.ToString();
@@ -43,15 +45,17 @@ namespace WebApplication1
                     {
                         try
                         {
-                            string saveName = "Send" + handleNum + ".jpg";
+                            string saveName = "send" + handleNum + ".jpg";
                             string filePath = Server.MapPath("image") + "\\" + saveName;
                             //保存图片
                             fileUpload.SaveAs(filePath);
                             lab.Text = "本地图片更新OK：〈br>";
+                            shortAccessToken = AccessTokenContainer.TryGetToken(WebConfigurationManager.AppSettings["ShortWeixinAppId"],
+                             WebConfigurationManager.AppSettings["ShortWeixinSecret"]);
                             //上传微信公众号后台
                             UploadImgToWeixin(shortAccessToken, shortImgResult, saveName, filePath);
 
-                            UploadImgToWeixin(longAccessToken, longImgResult, saveName, filePath);
+                            //UploadImgToWeixin(longAccessToken, longImgResult, saveName, filePath);
 
                             lab.Text += "微信公众号后台图片更新OK";
                         }

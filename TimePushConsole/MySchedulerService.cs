@@ -105,6 +105,7 @@ namespace TimePushConsole
     }
     public class SimpleJob : IJob
     {
+        private static string isDebug = ConfigurationManager.AppSettings.Get("isdebug") ?? "0";
         public const string Message = "msg";
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -129,8 +130,9 @@ namespace TimePushConsole
             return trNode.InnerHtml;
         }
 
-        public void Test() {
-           
+        public void Test()
+        {
+
             Console.WriteLine("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
             logger.Info("工作执行" + string.Format("推送! - {0}", DateTime.Now.ToString()));
             try
@@ -159,7 +161,7 @@ namespace TimePushConsole
                 logger.ErrorException(DateTime.Now.ToString() + " 定时执行推送失败 " + ex.Message, ex);
 
             }
-          
+
         }
 
         public virtual void Execute(IJobExecutionContext context)
@@ -204,22 +206,30 @@ namespace TimePushConsole
         {
             OpenIdResultJson json = UserApi.Get(accessToken, "");
             var imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
+            var DircetPath = Environment.CurrentDirectory + "/image/";
+            if (!Directory.Exists(DircetPath))
+            {
+                Directory.CreateDirectory(DircetPath);
+            }
+
             for (int i = 0; i < 6; i++)
             {
                 string imgName = string.Format("send{0}.jpg", i);
                 if (imgResult.item.Find(p => p.name == imgName) == null)
                 {
-                    var filePath = webPath + "image\\" + imgName;
+                    var imgPath = webPath + "/image/" + imgName;
+                    var filePath = DircetPath + "/image/" + imgName;
+                    CommonUtility.HttpUtility.DownloadFile(imgPath, filePath);
                     var mediaId = MediaApi.UploadForeverMedia(accessToken, filePath).media_id;
                 }
             }
             imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
 
-            NewsModel[] newsList = new NewsModel[6];
-
+           
             string sendCountTxtUrl = webPath + "/" + "sendcount.txt";
             var sendCountTxt = CommonUtility.HttpUtility.Get(sendCountTxtUrl);
             var sendCount = int.Parse(sendCountTxt);
+            NewsModel[] newsList = new NewsModel[sendCount];
 
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();
@@ -254,6 +264,7 @@ namespace TimePushConsole
                         .Replace("[RegisterDate]", jobDetail.RegisterDate)
                         .Replace("[EffectDate]", jobDetail.EffectDate)
                         .Replace("[Other]", jobDetail.Other)
+                        .Replace("[Sex]", jobDetail.Sex)
                         ,
                         content_source_url = domain + "/html/detail.html?id=" + job.JobId,
                         digest = job.ComName + "诚聘" + job.JobName,
@@ -267,8 +278,10 @@ namespace TimePushConsole
                 UploadForeverMediaResult mediaResult = MediaApi.UploadNews(accessToken, 100000, newsList);
                 try
                 {
-                    GroupMessageApi.SendGroupMessageByGroupId
-                    (accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+                    if (isDebug != "1")
+                    {
+                        GroupMessageApi.SendGroupMessageByGroupId(accessToken, "-1", mediaResult.media_id, GroupMessageType.mpnews, true);
+                    }
                     Console.WriteLine("素材提交推送  推送成功");
                     logger.Info(DateTime.Now.ToString() + " 素材提交推送  推送成功");
                 }

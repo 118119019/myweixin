@@ -165,7 +165,9 @@ namespace WebApplication1
                        .Replace("[Edu]", jobDetail.Edu)
                        .Replace("[RegisterDate]", jobDetail.RegisterDate)
                        .Replace("[EffectDate]", jobDetail.EffectDate)
-                       .Replace("[Other]", jobDetail.Other);
+                       .Replace("[Other]", jobDetail.Other)
+                       .Replace("[Sex]", jobDetail.Sex)
+                       ;
                     news.content_source_url = WebConfigurationManager.AppSettings["domain"] + "/html/detail.html?id=" + job.JobId;
                     news.digest = job.ComName + "诚聘" + job.JobName;
                     news.show_cover_pic = "0";
