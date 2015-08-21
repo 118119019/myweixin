@@ -8,6 +8,8 @@ using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Senparc.Weixin.MP.Entities;
+using LiteDB;
+using LY.DataAccess;
 
 namespace WebApplication1
 {
@@ -15,10 +17,30 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
 
-            //openId.data.openid
-
+            using (LiteDatabase database = new LiteDatabase(LiteDbService.dbFilePath))
+            {
+                LiteCollection<NewsType> collection = database.GetCollection<NewsType>("NewsType");
+                if (collection.Count() == 0)
+                {
+                    NewsType document = new NewsType
+                    {
+                        Id = 1,
+                        Name = "培训信息"
+                    };
+                    collection.Insert(document);
+                    document = new NewsType
+                    {
+                        Id = 2,
+                        Name = "资讯信息"
+                    };
+                    collection.Insert(document);
+                }
+                else
+                {
+                    collection.FindAll();
+                }
+            }
         }
 
         protected void sendmsg_Click(object sender, EventArgs e)

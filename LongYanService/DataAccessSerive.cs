@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using net91com.Core.Util;
 
 namespace LongYanService
 {
@@ -291,7 +293,7 @@ select *
                     return "男";
                 case "2":
                     return "女";
-                //9不限
+                    //9不限
             }
             return "不限";
         }
@@ -315,26 +317,32 @@ select *
          where rank = 1
          order by ZPC004 desc) where rownum < 7  
                 ";
-            var reader = OracleHelper.ExecuteReader(sqlSelect);
-            while (reader.Read())
+            for (int i = 0; i < 5; i++)
             {
                 try
                 {
-                    jobList.Add(
-                        new JobInfo()
-                        {
-                            ComName = reader["ZPA002"].ToString(),
-                            JobName = reader["ZPB003"].ToString(),
-                            JobId = reader["ZPC001"].ToString()
-                        }
-                        );
+                    var reader = OracleHelper.ExecuteReader(sqlSelect);
+                    while (reader.Read())
+                    {
+                        jobList.Add(
+                            new JobInfo()
+                            {
+                                ComName = reader["ZPA002"].ToString(),
+                                JobName = reader["ZPB003"].ToString(),
+                                JobId = reader["ZPC001"].ToString()
+                            });
+                    }
+                    reader.Close();
+                    break;
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine("请求orcal数据库异常 {0}", ex);
+                    LogHelper.WriteException("请求orcal数据库异常 ", ex);
+                    Thread.Sleep(60000);
                 }
-
             }
+
             return jobList;
         }
 

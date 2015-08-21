@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +53,9 @@
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LiteDB">
+      <HintPath>..\Lib\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -246,6 +250,7 @@
     <Content Include="News\News1.html" />
     <Content Include="News\News2.html" />
     <Content Include="News\newsconfig.xml" />
+    <Content Include="News\NewsDetail.aspx" />
     <Content Include="News\NewsIndex.aspx" />
     <Content Include="packages.config" />
     <Content Include="myweixin.ashx" />
@@ -491,6 +496,7 @@
     <Content Include="ueditor\net\controller.ashx" />
     <Content Include="ueditor\net\Web.config" />
     <Content Include="ueditor\third-party\jquery-1.10.2.min.map" />
+    <Content Include="sample.db" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -564,6 +570,13 @@
       <DependentUpon>NewsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="News\NewsCfg.cs" />
+    <Compile Include="News\NewsDetail.aspx.cs">
+      <DependentUpon>NewsDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News\NewsDetail.aspx.designer.cs">
+      <DependentUpon>NewsDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="News\NewsIndex.aspx.cs">
       <DependentUpon>NewsIndex.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -617,6 +630,10 @@
     <ProjectReference Include="..\LongYanService\LongYanService.csproj">
       <Project>{f20f417d-e907-4132-8d34-e1de278e621c}</Project>
       <Name>LongYanService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LY.DataAccess\LY.DataAccess.csproj">
+      <Project>{82f7a2fb-2260-4b2a-93d6-aa9eb2818871}</Project>
+      <Name>LY.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -28,7 +28,6 @@ namespace TimePushConsole
             try
             {
                 SetConsoleCtrlHandler(cancelHandler, true);
-
                 //SimpleJob job = new SimpleJob();
                 //job.Test();
                 myscheduler.Run();

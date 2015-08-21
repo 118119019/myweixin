@@ -52,8 +52,13 @@
         <div>
             文章名称:
             <asp:TextBox ID="txtTitle" Width="400" MaxLength="100" runat="server"></asp:TextBox>
-            (用在链接名称上)
+            (用在链接名称上)<br />
+            文章分类:
+            <asp:DropDownList ID="ddlType" runat="server">
+            </asp:DropDownList>
         </div>
+
+
         <div id="myEditor" style="margin-top: 20px; width: 1024px; height: 300px; cursor: text;">
         </div>
         <script type="text/javascript">

@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.News;
+using LY.DataAccess;
+using LiteDB;
 
 namespace WebApplication1
 {
@@ -15,67 +17,64 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!base.IsPostBack)
             {
-                var id = Request["id"] ?? "0";
-                if (id == "0")
+                List<NewsItem> list = new List<NewsItem>();
+                using (LiteDatabase database = new LiteDatabase(LiteDbService.dbFilePath))
                 {
-                    return;
+                    list = database.GetCollection<NewsItem>("NewsItem").FindAll().ToList<NewsItem>();
+                    List<NewsType> list2 = database.GetCollection<NewsType>("NewsType").FindAll().ToList<NewsType>();
+                    ddlType.DataSource = list2;
+                    ddlType.DataTextField = "Name";
+                    ddlType.DataValueField = "Id";
+                    ddlType.DataBind();
                 }
-                this.ViewState.Add("id", id);
-                var path = Server.MapPath(string.Format("~/News/News{0}.html", id));
-                string pageContent = File.ReadAllText(path);
-                HtmlDocument pageDoc = new HtmlDocument();
-                pageDoc.LoadHtml(pageContent);
-
-                var node = pageDoc.DocumentNode.SelectSingleNode("//div[@id=\"content\"]");
-
-                if (node != null)
+                string id = base.Request["id"] ?? "0";
+                ViewState.Add("id", id);
+                if (id != "0")
                 {
-                    hidContent.Value = node.InnerHtml.Replace("<", "&lt;")
-                        .Replace(">", "&gt;")
-                        .Replace("#", "%23");
-                }
-
-                path = Server.MapPath("~/News/newsconfig.xml");
-                List<NewsCfg> cfgList =
-                SerilizeService<List<NewsCfg>>.CreateSerilizer(Serilize_Type.Xml).Deserilize(
-               File.ReadAllText(path));
-                var cfg = cfgList.Find(p => p.Id == int.Parse(id));
-                if (cfg != null)
-                {
-                    txtTitle.Text = cfg.Name;
+                    NewsItem item = list.Find(p => p.Id == int.Parse(id));
+                    if (item != null)
+                    {
+                        txtTitle.Text = item.Name;
+                        if (!string.IsNullOrEmpty(item.HmtlContent))
+                        {
+                            hidContent.Value = item.HmtlContent.Replace("<", "&lt;").Replace(">", "&gt;").Replace("#", "%23");
+                        }
+                    }
                 }
             }
         }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var id = this.ViewState["id"].ToString();
-            if (!string.IsNullOrEmpty(id))
+            string id = this.ViewState["id"].ToString();
+            if (string.IsNullOrEmpty(id))
             {
-                var path = Server.MapPath(string.Format("~/News/News{0}.html", id));
-                string pageContent = File.ReadAllText(path);
-                HtmlDocument pageDoc = new HtmlDocument();
-                pageDoc.LoadHtml(pageContent);
-                var node = pageDoc.DocumentNode.SelectSingleNode("//div[@id=\"content\"]");
-                string str = hidContent.Value.Replace("&lt;", "<").Replace("&gt;", ">").Replace("%23", "#");
-                node.InnerHtml = str;
-                pageDoc.Save(path);
-
-                path = Server.MapPath("~/News/newsconfig.xml");
-                List<NewsCfg> cfgList = SerilizeService<List<NewsCfg>>.CreateSerilizer(Serilize_Type.Xml).Deserilize(
-                File.ReadAllText(path));
-                var cfg = cfgList.Find(p => p.Id == int.Parse(id));
-                if (cfg != null)
+                return;
+            }            
+            NewsItem item = new NewsItem
+            {
+                HmtlContent = hidContent.Value.Replace("&lt;", "<").Replace("&gt;", ">").Replace("%23", "#"),
+                Type = int.Parse(this.ddlType.SelectedValue),
+                Name = this.txtTitle.Text.Trim(),
+                Id = int.Parse(id)
+            };
+            if (id == "0")
+            {
+                using (LiteDatabase db = new LiteDatabase(LiteDbService.dbFilePath))
                 {
-                    cfg.Name = txtTitle.Text.Trim();
+                    db.GetCollection<NewsItem>("NewsItem").Insert(item);
+                  
                 }
-                string cfgContent = SerilizeService<List<NewsCfg>>.CreateSerilizer(Serilize_Type.Xml).Serilize
-                    (cfgList);
-                File.WriteAllText(path, cfgContent);
-                RedirectUrl("NewsList.aspx");
             }
+            else
+            {
+                using (LiteDatabase db = new LiteDatabase(LiteDbService.dbFilePath))
+                {
+                    db.GetCollection<NewsItem>("NewsItem").Update(int.Parse(id), item);
+                }
+            }             
+            RedirectUrl("NewsList.aspx");
         }
     }
 }

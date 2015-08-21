@@ -69,19 +69,20 @@
         <div class="main">
             <div class="content">
                 <div class="news_list">
-                 <h4><%=TitleName %>信息</h4>
-                          <ul>
-                            <asp:Repeater ID="rptList1" runat="server">
-                                <ItemTemplate>
-                                    <li>
-                                       <a href="News<%#Eval("Id") %>.html"><span><%#Eval("Name") %>
-                                           </span> <img src="../image/icon1.jpg" alt="" /></a> 
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                              </ul>
-                       
-                     
+                    <h4><%=TitleName %>信息</h4>
+                    <ul>
+                        <asp:Repeater ID="rptList1" runat="server">
+                            <ItemTemplate>
+                                <li>
+                                    <a href="NewsDetail.aspx?id=<%#Eval("Id") %>"><span><%#Eval("Name") %>
+                                    </span>
+                                        <img src="../image/icon1.jpg" alt="" /></a>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>
+
+
                 </div>
             </div>
         </div>

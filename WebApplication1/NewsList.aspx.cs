@@ -7,27 +7,27 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.News;
+using LY.DataAccess;
+using LiteDB;
 
 namespace WebApplication1
 {
     public partial class NewsList : BaseAuthPage
     {
+        protected List<NewsType> typeList;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //NewsCfg cfg = new NewsCfg() { Id = 1, Name = "2014年龙岩市直城乡劳动力职业技能培训定点机构公示", Type = 1 };
-            //List<NewsCfg> cfgList = new List<NewsCfg>();
-            //cfgList.Add(cfg);
-            //cfg = new NewsCfg() { Id = 2, Name = "2014 年龙岩市直SIYB创业培训定点机构公示", Type = 1 };
-            //cfgList.Add(cfg);
-            // 
-            //  File.WriteAllText(path, SerilizeService<List<NewsCfg>>.CreateSerilizer(Serilize_Type.Xml).Serilize(cfgList));
-            string path = Server.MapPath("~/News/newsconfig.xml");
-            List<NewsCfg> cfgList =
-            SerilizeService<List<NewsCfg>>.CreateSerilizer(Serilize_Type.Xml).Deserilize(
-           File.ReadAllText(path));
-            rptList1.DataSource = cfgList;
-            rptList1.DataBind();
-
+            if (!base.IsPostBack)
+            {
+                List<NewsItem> list = new List<NewsItem>();
+                using (LiteDatabase database = new LiteDatabase(LiteDbService.dbFilePath))
+                {
+                    list = database.GetCollection<NewsItem>("NewsItem").FindAll().ToList<NewsItem>();
+                    typeList = database.GetCollection<NewsType>("NewsType").FindAll().ToList<NewsType>();
+                }
+                rptList1.DataSource = list;
+                rptList1.DataBind();
+            }
         }
         protected void rptList1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -37,12 +37,38 @@ namespace WebApplication1
         {
             if (command == "Edit")
             {
-                RedirectUrl("NewsEdit.aspx?id=" + id);
+                base.RedirectUrl("NewsEdit.aspx?id=" + id);
             }
+            if (command == "Del")
+            {
+                List<NewsItem> list = new List<NewsItem>();
+                using (LiteDatabase database = new LiteDatabase(LiteDbService.dbFilePath))
+                {
+                    LiteCollection<NewsItem> collection = database.GetCollection<NewsItem>("NewsItem");
+                    collection.Delete(int.Parse(id));
+                    list = collection.FindAll().ToList();
+                    typeList = database.GetCollection<NewsType>("NewsType").FindAll().ToList();
+                }
+                rptList1.DataSource = list;
+                rptList1.DataBind();
+            }
+
         }
         protected string showTypeName(string type)
         {
-            return type == "1" ? "培训信息" : "资讯信息";
+            NewsType type2 = this.typeList.Find(P => P.Id == int.Parse(type));
+            if (type2 != null)
+            {
+                return type2.Name;
+            }
+            return "";
+
         }
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            RedirectUrl("NewsEdit.aspx");
+        }
+
+
     }
 }

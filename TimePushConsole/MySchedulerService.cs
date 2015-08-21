@@ -159,7 +159,6 @@ namespace TimePushConsole
                 MailService.SendMail("118119019@qq.com", ex.Message, " 定时运行推送异常", mailCfg);
                 Console.WriteLine(DateTime.Now.ToString() + " 定时执行推送失败 异常信息为" + ex.Message);
                 logger.ErrorException(DateTime.Now.ToString() + " 定时执行推送失败 " + ex.Message, ex);
-
             }
 
         }
