@@ -72,7 +72,7 @@ namespace WebApplication1
                 string[] cronList = node.InnerText.Split(' ');//0 1 9 ? * TUE
                 ddlMinute.SelectedValue = cronList[1];
                 ddlHour.SelectedValue = cronList[2];
-              
+
 
 
 
@@ -168,7 +168,8 @@ namespace WebApplication1
                        .Replace("[Other]", jobDetail.Other)
                        .Replace("[Sex]", jobDetail.Sex)
                        ;
-                    news.content_source_url = WebConfigurationManager.AppSettings["domain"] + "/html/detail.html?id=" + job.JobId;
+                    //news.content_source_url = WebConfigurationManager.AppSettings["domain"] + "/html/detail.html?id=" + job.JobId;
+                    news.content_source_url = WebConfigurationManager.AppSettings["website"];
                     news.digest = job.ComName + "诚聘" + job.JobName;
                     news.show_cover_pic = "0";
                     news.thumb_media_id = imgResult.item.Find(p => p.name == imgName).media_id;
@@ -201,7 +202,7 @@ namespace WebApplication1
             string[] cronList = node.InnerText.Split(' ');//0 1 9 ? * TUE
             cronList[1] = ddlMinute.SelectedValue;
             cronList[2] = ddlHour.SelectedValue;
-          
+
             node.InnerText = string.Join(" ", cronList);
             xmlDoc.Save(Server.MapPath("quartz_jobs.xml"));
         }

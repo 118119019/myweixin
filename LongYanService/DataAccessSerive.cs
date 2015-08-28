@@ -317,32 +317,40 @@ select *
          where rank = 1
          order by ZPC004 desc) where rownum < 7  
                 ";
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 try
                 {
-                    var reader = OracleHelper.ExecuteReader(sqlSelect);
-                    while (reader.Read())
+                    OracleConnection conn = new OracleConnection("");
+                    var reader = OracleHelper.ExecuteReader(sqlSelect, out conn);
+                    if (reader != null)
                     {
-                        jobList.Add(
-                            new JobInfo()
-                            {
-                                ComName = reader["ZPA002"].ToString(),
-                                JobName = reader["ZPB003"].ToString(),
-                                JobId = reader["ZPC001"].ToString()
-                            });
+                        while (reader.Read())
+                        {
+                            jobList.Add(
+                                new JobInfo()
+                                {
+                                    ComName = reader["ZPA002"].ToString(),
+                                    JobName = reader["ZPB003"].ToString(),
+                                    JobId = reader["ZPC001"].ToString()
+                                });
+                        }
+                        reader.Close();
+                        conn.Close();
+                        break;
                     }
-                    reader.Close();
-                    break;
+                    else
+                    {
+                        Thread.Sleep(120000);
+                    }                
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("请求orcal数据库异常 {0}", ex);
                     LogHelper.WriteException("请求orcal数据库异常 ", ex);
-                    Thread.Sleep(60000);
+                    Thread.Sleep(120000);
                 }
             }
-
             return jobList;
         }
 

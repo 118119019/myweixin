@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
-
+using System.Configuration;
 
 namespace WebApplication1
 {
@@ -36,12 +36,13 @@ namespace WebApplication1
 
             if (requestMessage.Content == "调试")
             {
+                string website = ConfigurationManager.AppSettings.Get("website");
                 var result = new StringBuilder();
-                result.Append("1您好，欢迎关注龙岩就业微信公众平台！ \r");
+                result.Append("您好，欢迎关注龙岩就业微信公众平台！ \r");
 
-                result.Append("2单独r的 \r");
+                result.Append("单独r的 \r");
 
-                result.Append("3<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \r");
+                result.AppendFormat("<a href=\"{0}\">{1}</a> \r", website, website.Replace("http://", ""));
 
                 logger.Info(result.ToString() + " dt:" + DateTime.Now.ToString());
                 responseMessage.Content = result.ToString();
@@ -138,13 +139,13 @@ namespace WebApplication1
             //获取Senparc.Weixin.MP.dll版本信息
             //var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
             //var version = string.Format("{0}.{1}", fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart);
-
+            string website = ConfigurationManager.AppSettings.Get("website");
             var txtContent = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Welcome.txt"));
             var result = new StringBuilder();
             //  result.Append("您好，欢迎关注龙岩就业微信公众平台！ " + "\n");
             result.Append(txtContent.Trim().Replace("\n", "").Replace("\r", "") + "\n");
             result.Append("        \n");
-            result.Append("龙岩市人力资源市场网<a href=\"http://www.fjlylm.com\">www.fjlylm.com</a> \n");
+            result.AppendFormat ("龙岩市人力资源市场网<a href=\"{0}\">{1}</a> \n",website,website.Replace("http://", ""));
             result.Append("        \n");
             var dataSevice = new DataAccessSerive();
             var jobList = dataSevice.GetTopJobInfoList();

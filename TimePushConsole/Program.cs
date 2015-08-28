@@ -21,20 +21,27 @@ namespace TimePushConsole
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static MySchedulerService myscheduler = MySchedulerService.GetInstance();
-
+        private static string isDebug = ConfigurationManager.AppSettings.Get("isdebug") ?? "0";
         static void Main(string[] args)
         {
 
             try
             {
                 SetConsoleCtrlHandler(cancelHandler, true);
-                //SimpleJob job = new SimpleJob();
-                //job.Test();
-                myscheduler.Run();
+                if (isDebug=="1")
+                {
+                    SimpleJob job = new SimpleJob();
+                    job.Test();
+                }
+                else
+                {
+                    myscheduler.Run();
+                }                
             }
             catch (Exception ex)
             {
                 logger.ErrorException(DateTime.Now.ToString() + " 推送失败 " + ex.Message, ex);
+                net91com.Core.Util.LogHelper.WriteException("", ex);
             }
             Console.ReadLine();
         }
