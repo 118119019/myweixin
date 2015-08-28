@@ -262,6 +262,24 @@ namespace LongYanService
             }
         }
 
+        public static OracleDataReader ExecuteReader(string commandText, out OracleConnection conn)
+        {
+            OracleCommand cmd = new OracleCommand();
+            conn = new OracleConnection(ConnectionString);
+            try
+            {
+                PrepareCommand(cmd, conn, null, CommandType.Text, commandText, null);
+                OracleDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return rdr;
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                net91com.Core.Util.LogHelper.WriteException("数据库执行一次", ex);
+                return null;
+            }
+        }
+
         /// <summary>
         /// 执行查询，并将查询返回的结果集中第一行的第一列作为.Net的数据类型返回。忽略额外的列或行。
         /// Execute an OracleCommand that returns the first column of the first record against the database specified in the connection string 

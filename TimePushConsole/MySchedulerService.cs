@@ -110,14 +110,14 @@ namespace TimePushConsole
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private ResetPsdMailItem mailCfg = new ResetPsdMailItem()
-          {
+        {
 
-              Email = "xcbrmbtest@126.com",
-              Id = 1,
-              Name = "xcbrmbtest",
-              Psd = "vubupcmbsjktodbj",
-              Url = ""
-          };
+            Email = "xcbrmbtest@126.com",
+            Id = 1,
+            Name = "xcbrmbtest",
+            Psd = "vubupcmbsjktodbj",
+            Url = ""
+        };
         private string GetTemp(string url)
         {
             HtmlDocument doc = new HtmlDocument();
@@ -224,7 +224,7 @@ namespace TimePushConsole
             }
             imgResult = MediaApi.GetOthersMediaList(accessToken, UploadMediaFileType.image, 0, 10000);
 
-           
+
             string sendCountTxtUrl = webPath + "/" + "sendcount.txt";
             var sendCountTxt = CommonUtility.HttpUtility.Get(sendCountTxtUrl);
             var sendCount = int.Parse(sendCountTxt);
@@ -244,6 +244,7 @@ namespace TimePushConsole
                         break;
                     }
                     string domain = ConfigurationManager.AppSettings.Get("domain");
+                    string website = ConfigurationManager.AppSettings.Get("website");
                     imgName = "send" + i.ToString() + ".jpg";
                     string imgUrl = string.Format("{0}/image/{1}", domain, imgName);
                     var jobDetail = dataSevice.GetJobDetail(job.JobId);
@@ -265,7 +266,8 @@ namespace TimePushConsole
                         .Replace("[Other]", jobDetail.Other)
                         .Replace("[Sex]", jobDetail.Sex)
                         ,
-                        content_source_url = domain + "/html/detail.html?id=" + job.JobId,
+                        //content_source_url = domain + "/html/detail.html?id=" + job.JobId,
+                        content_source_url = website,
                         digest = job.ComName + "诚聘" + job.JobName,
                         show_cover_pic = "0",
                         thumb_media_id = imgResult.item.Find(p => p.name == imgName).media_id,
